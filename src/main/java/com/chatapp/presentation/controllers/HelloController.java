@@ -1,4 +1,4 @@
-package com.chatapp;
+package com.chatapp.presentation.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
