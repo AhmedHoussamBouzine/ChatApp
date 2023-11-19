@@ -1,0 +1,435 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"fbbece3f-26c5-45a6-bc5d-8659ba58e500\" name=\"Changes\" comment=\"`fix` : HelloApplication.java remove mysql conn test\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/chatapp/beans/Conversation.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/chatapp/beans/Conversation.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/chatapp/beans/Message.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/chatapp/beans/Message.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/chatapp/beans/User.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/chatapp/beans/User.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Interface\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"MavenImportPreferences\">\r\n    <option name=\"generalSettings\">\r\n      <MavenGeneralSettings>\r\n        <option name=\"mavenHome\" value=\"Use Maven wrapper\" />\r\n      </MavenGeneralSettings>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 6\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2YLglKz3Boh8NZmI6aqLQLJYmvm\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"ASKED_ADD_EXTERNAL_FILES\": \"true\",\r\n    \"ASKED_SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"WebServerToolWindowFactoryState\": \"false\",\r\n    \"git-widget-placeholder\": \"master\",\r\n    \"ignore.virus.scanning.warn.message\": \"true\",\r\n    \"last_opened_file_path\": \"/home/houssam/Downloads/mysql-connector-j_8.0.33-1ubuntu22.04_all/usr/share/java/mysql-connector-java-8.0.33.jar\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"nodejs_package_manager_path\": \"npm\",\r\n    \"project.structure.last.edited\": \"Modules\",\r\n    \"project.structure.proportion\": \"0.15\",\r\n    \"project.structure.side.proportion\": \"0.2\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"$PROJECT_DIR$/src/main/resources/com/chatapp/fxml\" />\r\n      <recent name=\"$PROJECT_DIR$/src/main/resources/com/chatapp\" />\r\n      <recent name=\"$PROJECT_DIR$/src/main/java/com/chatapp/presentation\" />\r\n      <recent name=\"$PROJECT_DIR$/src/main/java/com/chatapp/presentation/controllers\" />\r\n      <recent name=\"$PROJECT_DIR$/src/main/java/com/chatapp\" />\r\n    </key>\r\n    <key name=\"MoveClassesOrPackagesDialog.RECENTS_KEY\">\r\n      <recent name=\"com.chatapp\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"fbbece3f-26c5-45a6-bc5d-8659ba58e500\" name=\"Changes\" comment=\"\" />\r\n      <created>1700310426536</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1700310426536</updated>\r\n      <workItem from=\"1700310427691\" duration=\"11604000\" />\r\n      <workItem from=\"1700385975343\" duration=\"4139000\" />\r\n      <workItem from=\"1700406187031\" duration=\"79000\" />\r\n      <workItem from=\"1700406284442\" duration=\"3014000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"setup projects\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1700310665757</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1700310665757</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"test branches\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1700311255964</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1700311255964</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"`feat` : setup architecture\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1700321534098</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1700321534098</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"`feat` : add connection to database\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1700335273909</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1700335273909</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"`fix` : update README.md\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1700335514580</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1700335514580</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"`fix` : HelloApplication.java remove mysql conn test\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1700335880789</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1700335880789</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"`feat` : DefaultServices's implementation using singleton added\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1700386249867</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1700386249867</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"8\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\r\n    <MESSAGE value=\"setup projects\" />\r\n    <MESSAGE value=\"test branches\" />\r\n    <MESSAGE value=\"`feat` : setup architecture\" />\r\n    <MESSAGE value=\"`feat` : add connection to database\" />\r\n    <MESSAGE value=\"`fix` : update README.md\" />\r\n    <MESSAGE value=\"`fix` : HelloApplication.java remove mysql conn test\" />\r\n    <MESSAGE value=\"`feat` : DefaultServices's implementation using singleton added\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"`feat` : DefaultServices's implementation using singleton added\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 952e0680c48b83201aa049607fc77e717816fd75)
++++ b/.idea/workspace.xml	(date 1700409949537)
+@@ -4,12 +4,16 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="fbbece3f-26c5-45a6-bc5d-8659ba58e500" name="Changes" comment="`fix` : HelloApplication.java remove mysql conn test">
+-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++    <list default="true" id="fbbece3f-26c5-45a6-bc5d-8659ba58e500" name="Changes" comment="`feat` : add files to dao package">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/Conversation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/Conversation.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/Message.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/User.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/business/DefaultServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/business/DefaultServices.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/business/IServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/business/IServices.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/ConversationDaoJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/ConversationDaoJDBC.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IConversation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IConversation.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IMessage.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IUser.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/MessageDaoJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/MessageDaoJDBC.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/UserDaoJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/UserDaoJDBC.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -48,28 +52,27 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "ASKED_ADD_EXTERNAL_FILES": "true",
+-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+-    "WebServerToolWindowFactoryState": "false",
+-    "git-widget-placeholder": "master",
+-    "ignore.virus.scanning.warn.message": "true",
+-    "last_opened_file_path": "/home/houssam/Downloads/mysql-connector-j_8.0.33-1ubuntu22.04_all/usr/share/java/mysql-connector-java-8.0.33.jar",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.detected.package.tslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)",
+-    "nodejs_package_manager_path": "npm",
+-    "project.structure.last.edited": "Modules",
+-    "project.structure.proportion": "0.15",
+-    "project.structure.side.proportion": "0.2",
+-    "vue.rearranger.settings.migration": "true"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
++    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
++    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
++    &quot;last_opened_file_path&quot;: &quot;/home/houssam/Downloads/mysql-connector-j_8.0.33-1ubuntu22.04_all/usr/share/java/mysql-connector-java-8.0.33.jar&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
++    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
++    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
++    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="RecentsManager">
+     <key name="MoveFile.RECENT_KEYS">
+       <recent name="$PROJECT_DIR$/src/main/resources/com/chatapp/fxml" />
+@@ -91,9 +94,7 @@
+       <option name="presentableId" value="Default" />
+       <updated>1700310426536</updated>
+       <workItem from="1700310427691" duration="11604000" />
+-      <workItem from="1700385975343" duration="4139000" />
+-      <workItem from="1700406187031" duration="79000" />
+-      <workItem from="1700406284442" duration="3014000" />
++      <workItem from="1700385975343" duration="6015000" />
+     </task>
+     <task id="LOCAL-00001" summary="setup projects">
+       <option name="closed" value="true" />
+@@ -151,7 +152,31 @@
+       <option name="project" value="LOCAL" />
+       <updated>1700386249867</updated>
+     </task>
+-    <option name="localTasksCounter" value="8" />
++    <task id="LOCAL-00008" summary="`fix` : change models to beans">
++      <option name="closed" value="true" />
++      <created>1700403982571</created>
++      <option name="number" value="00008" />
++      <option name="presentableId" value="LOCAL-00008" />
++      <option name="project" value="LOCAL" />
++      <updated>1700403982571</updated>
++    </task>
++    <task id="LOCAL-00009" summary="`feat` : add files to dao package">
++      <option name="closed" value="true" />
++      <created>1700404742728</created>
++      <option name="number" value="00009" />
++      <option name="presentableId" value="LOCAL-00009" />
++      <option name="project" value="LOCAL" />
++      <updated>1700404742728</updated>
++    </task>
++    <task id="LOCAL-00010" summary="`feat` : add files to dao package">
++      <option name="closed" value="true" />
++      <created>1700404784812</created>
++      <option name="number" value="00010" />
++      <option name="presentableId" value="LOCAL-00010" />
++      <option name="project" value="LOCAL" />
++      <updated>1700404784812</updated>
++    </task>
++    <option name="localTasksCounter" value="11" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -177,6 +202,8 @@
+     <MESSAGE value="`fix` : update README.md" />
+     <MESSAGE value="`fix` : HelloApplication.java remove mysql conn test" />
+     <MESSAGE value="`feat` : DefaultServices's implementation using singleton added" />
+-    <option name="LAST_COMMIT_MESSAGE" value="`feat` : DefaultServices's implementation using singleton added" />
++    <MESSAGE value="`fix` : change models to beans" />
++    <MESSAGE value="`feat` : add files to dao package" />
++    <option name="LAST_COMMIT_MESSAGE" value="`feat` : add files to dao package" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: src/main/java/com/chatapp/dao/IMessageDao.java
+===================================================================
+diff --git a/src/main/java/com/chatapp/dao/IMessageDao.java b/src/main/java/com/chatapp/dao/IMessageDao.java
+deleted file mode 100644
+--- a/src/main/java/com/chatapp/dao/IMessageDao.java	(revision 952e0680c48b83201aa049607fc77e717816fd75)
++++ /dev/null	(revision 952e0680c48b83201aa049607fc77e717816fd75)
+@@ -1,4 +0,0 @@
+-package com.chatapp.dao;
+-
+-public interface IMessageDao {
+-}
+Index: src/main/java/com/chatapp/dao/IUser.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/chatapp/dao/IUser.java b/src/main/java/com/chatapp/dao/IUser.java
+new file mode 100644
+--- /dev/null	(date 1700409438324)
++++ b/src/main/java/com/chatapp/dao/IUser.java	(date 1700409438324)
+@@ -0,0 +1,13 @@
++package com.chatapp.dao;
++
++import com.chatapp.beans.User;
++
++import java.util.List;
++
++public interface IUser {
++    public User addUser(User user) throws  Exception;
++    public User deleteUser(User user) throws Exception;
++    public User updateUser(User user) throws Exception;
++    public List<User> getUsers() throws Exception;
++
++}
+Index: src/main/java/com/chatapp/dao/UserDaoJDBC.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/chatapp/dao/UserDaoJDBC.java b/src/main/java/com/chatapp/dao/UserDaoJDBC.java
+new file mode 100644
+--- /dev/null	(date 1700409438326)
++++ b/src/main/java/com/chatapp/dao/UserDaoJDBC.java	(date 1700409438326)
+@@ -0,0 +1,34 @@
++package com.chatapp.dao;
++
++import com.chatapp.beans.User;
++import com.chatapp.utils.MysqlSession;
++
++import java.util.List;
++
++public class UserDaoJDBC implements IUser {
++    private MysqlSession mysqlsession ;
++
++    public UserDaoJDBC() {
++        mysqlsession = MysqlSession.getInstance();
++    }
++
++    @Override
++    public User addUser(User user) throws Exception {
++        return null;
++    }
++
++    @Override
++    public User deleteUser(User user) throws Exception {
++        return null;
++    }
++
++    @Override
++    public User updateUser(User user) throws Exception {
++        return null;
++    }
++
++    @Override
++    public List<User> getUsers() throws Exception {
++        return null;
++    }
++}
+Index: src/main/java/com/chatapp/dao/IConversation.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/chatapp/dao/IConversation.java b/src/main/java/com/chatapp/dao/IConversation.java
+new file mode 100644
+--- /dev/null	(date 1700409438320)
++++ b/src/main/java/com/chatapp/dao/IConversation.java	(date 1700409438320)
+@@ -0,0 +1,9 @@
++package com.chatapp.dao;
++
++import com.chatapp.beans.Conversation;
++
++public interface IConversation {
++
++    public Conversation addConversation(Conversation conversation) throws  Exception;
++    public Conversation deleteConversation(Conversation conversation) throws Exception;
++}
+Index: src/main/java/com/chatapp/dao/ConversationDaoJDBC.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/chatapp/dao/ConversationDaoJDBC.java b/src/main/java/com/chatapp/dao/ConversationDaoJDBC.java
+new file mode 100644
+--- /dev/null	(date 1700409438318)
++++ b/src/main/java/com/chatapp/dao/ConversationDaoJDBC.java	(date 1700409438318)
+@@ -0,0 +1,23 @@
++package com.chatapp.dao;
++
++import com.chatapp.beans.Conversation;
++import com.chatapp.utils.MysqlSession;
++
++public class ConversationDaoJDBC implements IConversation{
++
++    private MysqlSession mysqlSession;
++
++    public ConversationDaoJDBC() {
++        mysqlSession = MysqlSession.getInstance();
++    }
++
++    @Override
++    public Conversation addConversation(Conversation conversation) throws Exception {
++        return null;
++    }
++
++    @Override
++    public Conversation deleteConversation(Conversation conversation) throws Exception {
++        return null;
++    }
++}
+Index: src/main/java/com/chatapp/dao/IMessage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/chatapp/dao/IMessage.java b/src/main/java/com/chatapp/dao/IMessage.java
+new file mode 100644
+--- /dev/null	(date 1700409438321)
++++ b/src/main/java/com/chatapp/dao/IMessage.java	(date 1700409438321)
+@@ -0,0 +1,9 @@
++package com.chatapp.dao;
++
++
++import com.chatapp.beans.Message;
++
++public interface IMessage {
++    public Message addMessage(Message message) throws  Exception;
++    public Message deleteMessage(Message message) throws Exception;
++}
+Index: src/main/java/com/chatapp/dao/MessageDaoJDBC.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.chatapp.dao;\r\n\r\npublic class MessageDaoJDBC {\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/chatapp/dao/MessageDaoJDBC.java b/src/main/java/com/chatapp/dao/MessageDaoJDBC.java
+--- a/src/main/java/com/chatapp/dao/MessageDaoJDBC.java	(revision 952e0680c48b83201aa049607fc77e717816fd75)
++++ b/src/main/java/com/chatapp/dao/MessageDaoJDBC.java	(date 1700409438325)
+@@ -1,4 +1,22 @@
+ package com.chatapp.dao;
+ 
+-public class MessageDaoJDBC {
++import com.chatapp.beans.Message;
++import com.chatapp.utils.MysqlSession;
++
++public class MessageDaoJDBC implements IMessage {
++    private MysqlSession mysqlsession ;
++
++    public MessageDaoJDBC() {
++        mysqlsession = MysqlSession.getInstance();
++    }
++
++    @Override
++    public Message addMessage(Message message) throws Exception {
++        return null;
++    }
++
++    @Override
++    public Message deleteMessage(Message message) throws Exception {
++        return null;
++    }
+ }
+Index: src/main/java/com/chatapp/business/DefaultServices.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.chatapp.business;\r\n\r\npublic class DefaultServices implements IServices {\r\n\r\n    private static DefaultServices instance = null;\r\n\r\n\r\n    private DefaultServices() {\r\n\r\n    }\r\n\r\n    public static DefaultServices getInstance(){\r\n\r\n        if(instance == null)\r\n            instance = new DefaultServices();\r\n\r\n        return instance;\r\n\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/chatapp/business/DefaultServices.java b/src/main/java/com/chatapp/business/DefaultServices.java
+--- a/src/main/java/com/chatapp/business/DefaultServices.java	(revision 952e0680c48b83201aa049607fc77e717816fd75)
++++ b/src/main/java/com/chatapp/business/DefaultServices.java	(date 1700409438312)
+@@ -1,12 +1,23 @@
+ package com.chatapp.business;
+ 
++import com.chatapp.beans.Conversation;
++import com.chatapp.beans.Message;
++import com.chatapp.beans.User;
++import com.chatapp.dao.*;
++
++import java.util.List;
++
+ public class DefaultServices implements IServices {
+ 
+     private static DefaultServices instance = null;
+-
++    private IMessage iMessage ;
++    private IUser iUser;
++    private IConversation iConversation;
+ 
+     private DefaultServices() {
+-
++        iMessage = new MessageDaoJDBC();
++        iUser = new UserDaoJDBC();
++        iConversation = new ConversationDaoJDBC();
+     }
+ 
+     public static DefaultServices getInstance(){
+@@ -18,4 +29,43 @@
+ 
+     }
+ 
++    @Override
++    public User addUser(User user) throws Exception {
++        return null;
++    }
++
++    @Override
++    public User deleteUser(User user) throws Exception {
++        return null;
++    }
++
++    @Override
++    public User updateUser(User user) throws Exception {
++        return null;
++    }
++
++    @Override
++    public List<User> getUsers() throws Exception {
++        return null;
++    }
++
++    @Override
++    public Message addMessage(Message message) throws Exception {
++        return null;
++    }
++
++    @Override
++    public Message deleteMessage(Message message) throws Exception {
++        return null;
++    }
++
++    @Override
++    public Conversation addConversation(Conversation conversation) throws Exception {
++        return null;
++    }
++
++    @Override
++    public Conversation deleteConversation(Conversation conversation) throws Exception {
++        return null;
++    }
+ }
+Index: src/main/java/com/chatapp/business/IServices.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.chatapp.business;\r\n\r\npublic interface IServices {\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/chatapp/business/IServices.java b/src/main/java/com/chatapp/business/IServices.java
+--- a/src/main/java/com/chatapp/business/IServices.java	(revision 952e0680c48b83201aa049607fc77e717816fd75)
++++ b/src/main/java/com/chatapp/business/IServices.java	(date 1700409438315)
+@@ -1,4 +1,25 @@
+ package com.chatapp.business;
+ 
++import com.chatapp.beans.Conversation;
++import com.chatapp.beans.Message;
++import com.chatapp.beans.User;
++
++import java.util.List;
++
+ public interface IServices {
++
++    // user
++    public User addUser(User user) throws  Exception;
++    public User deleteUser(User user) throws Exception;
++    public User updateUser(User user) throws Exception;
++    public List<User> getUsers() throws Exception;
++
++    // Message
++    public Message addMessage(Message message) throws  Exception;
++    public Message deleteMessage(Message message) throws Exception;
++
++
++    // Conversation
++    public Conversation addConversation(Conversation conversation) throws  Exception;
++    public Conversation deleteConversation(Conversation conversation) throws Exception;
+ }
