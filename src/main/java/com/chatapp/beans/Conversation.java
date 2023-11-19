@@ -17,7 +17,7 @@ public class Conversation {
     private PublicKey receiverPublicKey;
     private SecretKey secretKey ;
 
-    List<Message> messages;
+    private List<Message> messages;
 
 
     public Conversation(PrivateKey senderPrivateKey, PublicKey senderPublicKey, PrivateKey receiverPrivateKey, PublicKey receiverPublicKey, SecretKey secretKey) {
