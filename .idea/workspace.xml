@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbbece3f-26c5-45a6-bc5d-8659ba58e500" name="Changes" comment="`fix` : HelloApplication.java remove mysql conn test">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/User.java" afterDir="false" />
+    <list default="true" id="fbbece3f-26c5-45a6-bc5d-8659ba58e500" name="Changes" comment="`feat` : add DI">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/Message.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +148,23 @@
       <option name="project" value="LOCAL" />
       <updated>1700386249867</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="`fix` : update .gitignore">
+      <option name="closed" value="true" />
+      <created>1700413396348</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1700413396348</updated>
+    </task>
+    <task id="LOCAL-00009" summary="`feat` : add DI">
+      <option name="closed" value="true" />
+      <created>1700414819334</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1700414819334</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -173,6 +190,8 @@
     <MESSAGE value="`fix` : update README.md" />
     <MESSAGE value="`fix` : HelloApplication.java remove mysql conn test" />
     <MESSAGE value="`feat` : DefaultServices's implementation using singleton added" />
-    <option name="LAST_COMMIT_MESSAGE" value="`feat` : DefaultServices's implementation using singleton added" />
+    <MESSAGE value="`fix` : update .gitignore" />
+    <MESSAGE value="`feat` : add DI" />
+    <option name="LAST_COMMIT_MESSAGE" value="`feat` : add DI" />
   </component>
 </project>
