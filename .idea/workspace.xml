@@ -4,12 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbbece3f-26c5-45a6-bc5d-8659ba58e500" name="Changes" comment="`fix` : change models to beans">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/ConversationDaoJDBC.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IConversation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IUser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/UserDaoJDBC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IMessageDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IMessage.java" afterDir="false" />
+    <list default="true" id="fbbece3f-26c5-45a6-bc5d-8659ba58e500" name="Changes" comment="`feat` : add files to dao package">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/business/DefaultServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/business/DefaultServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/business/IServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/business/IServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/ConversationDaoJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/ConversationDaoJDBC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IConversation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IConversation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/MessageDaoJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/MessageDaoJDBC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/UserDaoJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/UserDaoJDBC.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +94,7 @@
       <option name="presentableId" value="Default" />
       <updated>1700310426536</updated>
       <workItem from="1700310427691" duration="11604000" />
-      <workItem from="1700385975343" duration="4878000" />
+      <workItem from="1700385975343" duration="6015000" />
     </task>
     <task id="LOCAL-00001" summary="setup projects">
       <option name="closed" value="true" />
@@ -156,7 +160,23 @@
       <option name="project" value="LOCAL" />
       <updated>1700403982571</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="`feat` : add files to dao package">
+      <option name="closed" value="true" />
+      <created>1700404742728</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1700404742728</updated>
+    </task>
+    <task id="LOCAL-00010" summary="`feat` : add files to dao package">
+      <option name="closed" value="true" />
+      <created>1700404784812</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1700404784812</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -183,6 +203,7 @@
     <MESSAGE value="`fix` : HelloApplication.java remove mysql conn test" />
     <MESSAGE value="`feat` : DefaultServices's implementation using singleton added" />
     <MESSAGE value="`fix` : change models to beans" />
-    <option name="LAST_COMMIT_MESSAGE" value="`fix` : change models to beans" />
+    <MESSAGE value="`feat` : add files to dao package" />
+    <option name="LAST_COMMIT_MESSAGE" value="`feat` : add files to dao package" />
   </component>
 </project>
