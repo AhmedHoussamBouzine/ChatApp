@@ -5,13 +5,22 @@ import javax.crypto.SecretKey;
 import java.util.Base64;
 
 public class Message {
+    private long id;
     private User sender, reciever ;
     private String content;
-
     public Message(User sender, User receiver,String content) {
         this.sender = sender;
         this.reciever = receiver;
         this.content = content;
+    }
+
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getContent() {
