@@ -1,4 +1,4 @@
-package com.chatapp.models;
+package com.chatapp.beans;
 
 public class Conversation {
 }
