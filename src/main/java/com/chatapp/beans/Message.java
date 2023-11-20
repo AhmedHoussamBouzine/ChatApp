@@ -3,11 +3,14 @@ package com.chatapp.beans;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import java.util.Base64;
+import java.util.Date;
 
 public class Message {
     private long id;
     private User sender, reciever ;
     private String content;
+    private Date insertedAt;
+    private Date updatedAt;
 
     public Message() {
     }
@@ -16,8 +19,26 @@ public class Message {
         this.sender = sender;
         this.reciever = receiver;
         this.content = content;
+        this.insertedAt = new Date();
+        this.updatedAt = new Date();
+
     }
 
+    public Date getInsertedAt() {
+        return insertedAt;
+    }
+
+    public void setInsertedAt(Date insertedAt) {
+        this.insertedAt = insertedAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 
     public long getId() {
         return id;

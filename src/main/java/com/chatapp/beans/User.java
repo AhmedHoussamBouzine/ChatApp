@@ -1,20 +1,30 @@
 package com.chatapp.beans;
 
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.util.Date;
+
 public class User {
     private long uid ;
-    private String username, email, password, telephone, publicKey, privateKey ;
+    private String username, email, password, telephone;
+    PublicKey publicKey;
+    PrivateKey privateKey ;
+
+    private Date insertedAt;
+    private Date updatedAt;
+
 
     public User() {
     }
 
-    public User(long uid, String username, String email, String password, String telephone, String publicKey, String privateKey) {
+    public User(long uid, String username, String email, String password, String telephone) {
         this.uid = uid;
         this.username = username;
         this.email = email;
         this.password = password;
         this.telephone = telephone;
-        this.publicKey = publicKey;
-        this.privateKey = privateKey;
+        this.insertedAt = new Date();
+        this.updatedAt = new Date();
     }
 
     public void setUid(long uid) {
@@ -37,11 +47,11 @@ public class User {
         this.telephone = telephone;
     }
 
-    public void setPublicKey(String publicKey) {
+    public void setPublicKey(PublicKey publicKey) {
         this.publicKey = publicKey;
     }
 
-    public void setPrivateKey(String privateKey) {
+    public void setPrivateKey(PrivateKey privateKey) {
         this.privateKey = privateKey;
     }
 
@@ -65,12 +75,27 @@ public class User {
         return telephone;
     }
 
-    public String getPublicKey() {
+    public PublicKey getPublicKey() {
         return publicKey;
     }
 
-    public String getPrivateKey() {
+    public PrivateKey getPrivateKey() {
         return privateKey;
     }
 
+    public Date getInsertedAt() {
+        return insertedAt;
+    }
+
+    public void setInsertedAt(Date insertedAt) {
+        this.insertedAt = insertedAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }

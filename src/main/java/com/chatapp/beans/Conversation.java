@@ -7,6 +7,7 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 
 public class Conversation {
@@ -19,6 +20,9 @@ public class Conversation {
 
     private List<Message> messages;
 
+    private Date insertedAt;
+    private Date updatedAt;
+
     public Conversation() {
     }
 
@@ -29,6 +33,8 @@ public class Conversation {
         this.receiverPrivateKey = receiverPrivateKey;
         this.receiverPublicKey = receiverPublicKey;
         this.secretKey = secretKey;
+        this.insertedAt = new Date();
+        this.updatedAt = new Date();
     }
 
 
@@ -78,6 +84,26 @@ public class Conversation {
 
     public SecretKey getSecretKey() {
         return secretKey;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
+
+    public Date getInsertedAt() {
+        return insertedAt;
+    }
+
+    public void setInsertedAt(Date insertedAt) {
+        this.insertedAt = insertedAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public void addMessage(User sender, User receiver, String content) throws Exception {
