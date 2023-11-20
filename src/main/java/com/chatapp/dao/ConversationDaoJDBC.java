@@ -19,15 +19,14 @@ public class ConversationDaoJDBC  implements  IConversation{
     }
 
     @Override
-    public Conversation deleteConversation(Conversation conversation) throws Exception {
-        return null;
+    public boolean deleteConversation(long id) throws Exception {
+        return true;
     }
 
     @Override
-    public Conversation updateConversation(Conversation conversation) throws Exception {
-        return null;
+    public boolean updateConversation(long id) throws Exception {
+        return true;
     }
-
     @Override
     public Conversation getConversation(long id) throws Exception {
         return null;

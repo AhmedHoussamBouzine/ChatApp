@@ -19,13 +19,13 @@ public class MessageDaoJDBC implements IMessage{
     }
 
     @Override
-    public Message deleteMessage(Message message) throws Exception {
-        return null;
+    public boolean deleteMessage(long id) throws Exception {
+        return true;
     }
 
     @Override
-    public Message updateMessage(Message message) throws Exception {
-        return null;
+    public boolean updateMessage(long id) throws Exception {
+        return true;
     }
 
     @Override

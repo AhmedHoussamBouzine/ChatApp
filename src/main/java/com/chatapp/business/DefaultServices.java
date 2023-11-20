@@ -35,13 +35,13 @@ public class DefaultServices implements IServices {
     }
 
     @Override
-    public Conversation deleteConversation(Conversation conversation) throws Exception {
-        return iConversation.deleteConversation(conversation);
+    public boolean deleteConversation(long id) throws Exception {
+        return iConversation.deleteConversation(id);
     }
 
     @Override
-    public Conversation updateConversation(Conversation conversation) throws Exception {
-        return iConversation.updateConversation(conversation);
+    public boolean updateConversation(long id) throws Exception {
+        return iConversation.updateConversation(id);
     }
 
     @Override
@@ -60,13 +60,13 @@ public class DefaultServices implements IServices {
     }
 
     @Override
-    public User deleteUser(User user) throws Exception {
-        return iUser.deleteUser(user);
+    public boolean deleteUser(long id) throws Exception {
+        return iUser.deleteUser(id);
     }
 
     @Override
-    public User updateUser(User user) throws Exception {
-        return iUser.updateUser(user);
+    public boolean updateUser(long id) throws Exception {
+        return iUser.updateUser(id);
     }
 
     @Override
@@ -85,13 +85,13 @@ public class DefaultServices implements IServices {
     }
 
     @Override
-    public Message deleteMessage(Message message) throws Exception {
-        return iMessage.deleteMessage(message);
+    public boolean deleteMessage(long id) throws Exception {
+        return iMessage.deleteMessage(id);
     }
 
     @Override
-    public Message updateMessage(Message message) throws Exception {
-        return iMessage.updateMessage(message);
+    public boolean updateMessage(long id) throws Exception {
+        return iMessage.updateMessage(id);
     }
 
     @Override

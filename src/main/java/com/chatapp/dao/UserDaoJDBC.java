@@ -2,7 +2,6 @@ package com.chatapp.dao;
 
 import com.chatapp.beans.User;
 import com.chatapp.utils.MysqlSession;
-import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.List;
 
@@ -21,13 +20,13 @@ public class UserDaoJDBC implements IUser{
     }
 
     @Override
-    public User deleteUser(User user) throws Exception {
-        return null;
+    public boolean deleteUser(long id) throws Exception {
+        return true;
     }
 
     @Override
-    public User updateUser(User user) throws Exception {
-        return null;
+    public boolean updateUser(long id) throws Exception {
+        return true;
     }
 
     @Override
