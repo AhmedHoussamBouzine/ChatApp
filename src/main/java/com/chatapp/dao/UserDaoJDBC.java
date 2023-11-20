@@ -2,6 +2,7 @@ package com.chatapp.dao;
 
 import com.chatapp.beans.User;
 import com.chatapp.utils.MysqlSession;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.List;
 
@@ -14,6 +15,8 @@ public class UserDaoJDBC implements IUser{
 
     @Override
     public User addUser(User user) throws Exception {
+
+
         return null;
     }
 

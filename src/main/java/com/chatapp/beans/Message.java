@@ -8,7 +8,11 @@ public class Message {
     private long id;
     private User sender, reciever ;
     private String content;
-    public Message(User sender, User receiver,String content) {
+
+    public Message() {
+    }
+
+    public Message(User sender, User receiver, String content) {
         this.sender = sender;
         this.reciever = receiver;
         this.content = content;

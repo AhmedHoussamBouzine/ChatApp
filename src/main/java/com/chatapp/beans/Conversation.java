@@ -19,6 +19,8 @@ public class Conversation {
 
     private List<Message> messages;
 
+    public Conversation() {
+    }
 
     public Conversation(PrivateKey senderPrivateKey, PublicKey senderPublicKey, PrivateKey receiverPrivateKey, PublicKey receiverPublicKey, SecretKey secretKey) {
         this.id = this.generateConversationId(senderPublicKey,receiverPublicKey);

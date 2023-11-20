@@ -4,6 +4,9 @@ public class User {
     private long uid ;
     private String username, email, password, telephone, publicKey, privateKey ;
 
+    public User() {
+    }
+
     public User(long uid, String username, String email, String password, String telephone, String publicKey, String privateKey) {
         this.uid = uid;
         this.username = username;
