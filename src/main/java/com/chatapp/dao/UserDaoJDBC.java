@@ -7,6 +7,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -62,7 +63,7 @@ public class UserDaoJDBC implements IUser{
     @Override
     public User getUser(long id) throws Exception {
         Connection connection=mysqlSession.getConnection();
-        String query="Select * from users where uid=?";
+        String query="select * from users where uid=?";
         PreparedStatement statement=connection.prepareStatement(query);
         statement.setLong(1, id);
         ResultSet resultSet=statement.executeQuery();
@@ -72,12 +73,28 @@ public class UserDaoJDBC implements IUser{
         user.setUid(resultSet.getLong("uid"));
         user.setEmail(resultSet.getString("email"));
         user.setTelephone(resultSet.getString("telephone"));
-        //etudiant.setPublicKey(resultSet.getString("publicKey"));
+        user.setPublicKeyFromString(resultSet.getString("publicKey"));
         return user;
     }
 
     @Override
     public List<User> getUsers() throws Exception {
-        return null;
+        List<User> users=new ArrayList<User>();
+
+        Connection connection=mysqlSession.getConnection();
+        String query="Select * from users";
+        PreparedStatement statement=connection.prepareStatement(query);
+        ResultSet resultSet=statement.executeQuery();
+        while(resultSet.next())
+        {
+            User user=new User();
+            user.setUid(resultSet.getLong("uid"));
+            user.setEmail(resultSet.getString("email"));
+            user.setTelephone(resultSet.getString("telephone"));
+            user.setPublicKeyFromString(resultSet.getString("publicKey"));
+            users.add(user);
+        }
+        connection.close();
+        return users;
     }
 }
