@@ -2,7 +2,12 @@ package com.chatapp.dao;
 
 import com.chatapp.beans.User;
 import com.chatapp.utils.MysqlSession;
+import org.mindrot.jbcrypt.BCrypt;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Date;
 import java.util.List;
 
 public class UserDaoJDBC implements IUser{
@@ -14,22 +19,61 @@ public class UserDaoJDBC implements IUser{
 
     @Override
     public User addUser(User user) throws Exception {
-        return null;
+        Connection connection=mysqlSession.getConnection();
+        String query="insert into users values(?,?,?,?,?,?,?)";
+        PreparedStatement statement=connection.prepareStatement(query);
+        statement.setString(1, user.getUsername());
+        statement.setString(2, user.getEmail());
+        statement.setString(3, BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+        statement.setString(4, user.getTelephone());
+        statement.setString(5, user.getPublicKey().toString());
+        statement.setString(6, user.getInsertedAt().toString());
+        statement.setString(7, user.getUpdatedAt().toString());
+        statement.execute();
+        connection.close();
+        return user;
     }
 
     @Override
     public boolean deleteUser(long id) throws Exception {
+        Connection connection=mysqlSession.getConnection();
+        String query="delete from users where uid = ?";
+        PreparedStatement statement=connection.prepareStatement(query);
+        statement.setLong(1, id);
+        statement.execute();
+        connection.close();
         return true;
     }
 
     @Override
-    public boolean updateUser(long id) throws Exception {
+    public boolean updateUser(User user) throws Exception {
+        Connection connection=mysqlSession.getConnection();
+        String query="update users set userName= ? , telephone = ? , updatedAt = ? where uid = ?;";
+        PreparedStatement statement=connection.prepareStatement(query);
+        statement.setString(1, user.getUsername());
+        statement.setString(2, user.getTelephone());
+        statement.setDate(3, (java.sql.Date) new Date());
+        statement.setLong(4, user.getUid());
+        statement.execute();
+        connection.close();
         return true;
     }
 
     @Override
     public User getUser(long id) throws Exception {
-        return null;
+        Connection connection=mysqlSession.getConnection();
+        String query="Select * from users where uid=?";
+        PreparedStatement statement=connection.prepareStatement(query);
+        statement.setLong(1, id);
+        ResultSet resultSet=statement.executeQuery();
+        if(!resultSet.next())
+            return null;
+        User user=new User();
+        user.setUid(resultSet.getLong("uid"));
+        user.setEmail(resultSet.getString("email"));
+        user.setTelephone(resultSet.getString("telephone"));
+        //etudiant.setPublicKey(resultSet.getString("publicKey"));
+        return user;
     }
 
     @Override

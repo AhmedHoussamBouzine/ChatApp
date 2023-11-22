@@ -40,8 +40,8 @@ public class DefaultServices implements IServices {
     }
 
     @Override
-    public boolean updateConversation(long id) throws Exception {
-        return iConversation.updateConversation(id);
+    public boolean updateConversation(Conversation conversation) throws Exception {
+        return iConversation.updateConversation(conversation);
     }
 
     @Override
@@ -65,8 +65,8 @@ public class DefaultServices implements IServices {
     }
 
     @Override
-    public boolean updateUser(long id) throws Exception {
-        return iUser.updateUser(id);
+    public boolean updateUser(User user) throws Exception {
+        return iUser.updateUser(user);
     }
 
     @Override
@@ -90,8 +90,8 @@ public class DefaultServices implements IServices {
     }
 
     @Override
-    public boolean updateMessage(long id) throws Exception {
-        return iMessage.updateMessage(id);
+    public boolean updateMessage(Message message) throws Exception {
+        return iMessage.updateMessage(message);
     }
 
     @Override

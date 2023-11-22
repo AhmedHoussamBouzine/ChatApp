@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbbece3f-26c5-45a6-bc5d-8659ba58e500" name="Changes" comment="`fix` : remove secretkey field">
+    <list default="true" id="fbbece3f-26c5-45a6-bc5d-8659ba58e500" name="Changes" comment="`fix` : remove privatekey field">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/Conversation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/Conversation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/business/DefaultServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/business/DefaultServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/business/IServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/business/IServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/ConversationDaoJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/ConversationDaoJDBC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IConversation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IConversation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/MessageDaoJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/MessageDaoJDBC.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/UserDaoJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/UserDaoJDBC.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -97,7 +101,7 @@
       <workItem from="1700406284442" duration="3014000" />
       <workItem from="1700466659444" duration="7205000" />
       <workItem from="1700605444610" duration="1385000" />
-      <workItem from="1700666423521" duration="1657000" />
+      <workItem from="1700666423521" duration="3808000" />
     </task>
     <task id="LOCAL-00001" summary="setup projects">
       <option name="closed" value="true" />
@@ -227,7 +231,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700667128417</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="`fix` : remove privatekey field">
+      <option name="closed" value="true" />
+      <created>1700668110818</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1700668110818</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -262,6 +274,7 @@
     <MESSAGE value="`fix` : change return type of update and delete" />
     <MESSAGE value="`fix` : add asymmetric encryption to message content" />
     <MESSAGE value="`fix` : remove secretkey field" />
-    <option name="LAST_COMMIT_MESSAGE" value="`fix` : remove secretkey field" />
+    <MESSAGE value="`fix` : remove privatekey field" />
+    <option name="LAST_COMMIT_MESSAGE" value="`fix` : remove privatekey field" />
   </component>
 </project>

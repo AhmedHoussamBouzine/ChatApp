@@ -24,7 +24,7 @@ public class ConversationDaoJDBC  implements  IConversation{
     }
 
     @Override
-    public boolean updateConversation(long id) throws Exception {
+    public boolean updateConversation(Conversation conversation) throws Exception {
         return true;
     }
     @Override

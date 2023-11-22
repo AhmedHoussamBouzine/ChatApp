@@ -24,7 +24,7 @@ public class MessageDaoJDBC implements IMessage{
     }
 
     @Override
-    public boolean updateMessage(long id) throws Exception {
+    public boolean updateMessage(Message message) throws Exception {
         return true;
     }
 
