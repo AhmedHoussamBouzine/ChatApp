@@ -14,8 +14,6 @@ public class UserDaoJDBC implements IUser{
 
     @Override
     public User addUser(User user) throws Exception {
-
-
         return null;
     }
 

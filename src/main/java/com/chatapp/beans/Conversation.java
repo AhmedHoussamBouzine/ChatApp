@@ -8,29 +8,22 @@ import java.util.List;
 
 public class Conversation {
     private String id;
-    private PrivateKey senderPrivateKey;
     private PublicKey senderPublicKey;
-    private PrivateKey receiverPrivateKey;
     private PublicKey receiverPublicKey;
-
     private List<Message> messages;
-
     private Date insertedAt;
     private Date updatedAt;
 
     public Conversation() {
     }
 
-    public Conversation(PrivateKey senderPrivateKey, PublicKey senderPublicKey, PrivateKey receiverPrivateKey, PublicKey receiverPublicKey) {
+    public Conversation(PublicKey senderPublicKey, PublicKey receiverPublicKey) {
         this.id = generateConversationId(senderPublicKey,receiverPublicKey);
-        this.senderPrivateKey = senderPrivateKey;
         this.senderPublicKey = senderPublicKey;
-        this.receiverPrivateKey = receiverPrivateKey;
         this.receiverPublicKey = receiverPublicKey;
         this.insertedAt = new Date();
         this.updatedAt = new Date();
     }
-
 
     public String getId() {
         return id;
@@ -40,32 +33,16 @@ public class Conversation {
         this.id = id;
     }
 
-    public void setSenderPrivateKey(PrivateKey senderPrivateKey) {
-        this.senderPrivateKey = senderPrivateKey;
-    }
-
     public void setSenderPublicKey(PublicKey senderPublicKey) {
         this.senderPublicKey = senderPublicKey;
-    }
-
-    public void setReceiverPrivateKey(PrivateKey receiverPrivateKey) {
-        this.receiverPrivateKey = receiverPrivateKey;
     }
 
     public void setReceiverPublicKey(PublicKey receiverPublicKey) {
         this.receiverPublicKey = receiverPublicKey;
     }
 
-    public PrivateKey getSenderPrivateKey() {
-        return senderPrivateKey;
-    }
-
     public PublicKey getSenderPublicKey() {
         return senderPublicKey;
-    }
-
-    public PrivateKey getReceiverPrivateKey() {
-        return receiverPrivateKey;
     }
 
     public PublicKey getReceiverPublicKey() {
@@ -102,8 +79,8 @@ public class Conversation {
         List<Message> decryptedMessages = new ArrayList<>();
         for (Message msg : messages) {
             // Decrypt each message content when retrieving
-            String decryptedContent = Message.decryptMessageContent(msg.getContent(), this.getReceiverPrivateKey());
-            decryptedMessages.add(new Message(msg.getSender(), msg.getReceiver(), decryptedContent));
+            //String decryptedContent = Message.decryptMessageContent(msg.getContent(), this.getReceiverPrivateKey());
+           //  decryptedMessages.add(new Message(msg.getSender(), msg.getReceiver(), decryptedContent));
         }
         return decryptedMessages;
     }
@@ -116,8 +93,9 @@ public class Conversation {
 
     private static KeyPair generateKeyPair() throws NoSuchAlgorithmException {
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-        keyPairGenerator.initialize(2048); // Adjust key size as needed
+        keyPairGenerator.initialize(2048);
         return keyPairGenerator.generateKeyPair();
     }
+
 
 }

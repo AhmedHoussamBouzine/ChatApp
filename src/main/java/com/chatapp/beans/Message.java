@@ -24,23 +24,18 @@ public class Message {
         this.updatedAt = new Date();
 
     }
-
     public Date getInsertedAt() {
         return insertedAt;
     }
-
     public void setInsertedAt(Date insertedAt) {
         this.insertedAt = insertedAt;
     }
-
     public Date getUpdatedAt() {
         return updatedAt;
     }
-
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
-
     public long getId() {
         return id;
     }

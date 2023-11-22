@@ -8,11 +8,8 @@ public class User {
     private long uid ;
     private String username, email, password, telephone;
     PublicKey publicKey;
-    PrivateKey privateKey ;
-
     private Date insertedAt;
     private Date updatedAt;
-
 
     public User() {
     }
@@ -51,10 +48,6 @@ public class User {
         this.publicKey = publicKey;
     }
 
-    public void setPrivateKey(PrivateKey privateKey) {
-        this.privateKey = privateKey;
-    }
-
     public long getUid() {
         return uid;
     }
@@ -77,10 +70,6 @@ public class User {
 
     public PublicKey getPublicKey() {
         return publicKey;
-    }
-
-    public PrivateKey getPrivateKey() {
-        return privateKey;
     }
 
     public Date getInsertedAt() {
