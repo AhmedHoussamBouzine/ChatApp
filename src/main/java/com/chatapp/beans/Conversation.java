@@ -3,8 +3,7 @@ package com.chatapp.beans;
 import javax.crypto.KeyAgreement;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import java.security.PrivateKey;
-import java.security.PublicKey;
+import java.security.*;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
@@ -108,7 +107,7 @@ public class Conversation {
 
     public void addMessage(User sender, User receiver, String content) throws Exception {
         // Encrypt the message content before adding to the conversation
-        String encryptedContent = Message.encryptMessageContent(content, this.secretKey);
+        String encryptedContent = Message.encryptMessageContent(content, this.getReceiverPublicKey());
         messages.add(new Message(sender, receiver, encryptedContent));
     }
 
@@ -116,25 +115,21 @@ public class Conversation {
         List<Message> decryptedMessages = new ArrayList<>();
         for (Message msg : messages) {
             // Decrypt each message content when retrieving
-            String decryptedContent = Message.decryptMessageContent(msg.getContent(), secretKey);
+            String decryptedContent = Message.decryptMessageContent(msg.getContent(), this.getReceiverPrivateKey());
             decryptedMessages.add(new Message(msg.getSender(), msg.getReciever(), decryptedContent));
         }
         return decryptedMessages;
     }
-    private  String generateConversationId(PublicKey senderPublicKey, PublicKey receiverPublicKey) {
+    private static String generateConversationId(PublicKey senderPublicKey, PublicKey receiverPublicKey) {
         String senderKey = Base64.getEncoder().encodeToString(senderPublicKey.getEncoded());
         String receiverKey = Base64.getEncoder().encodeToString(receiverPublicKey.getEncoded());
         return senderKey + "-" + receiverKey;
     }
-    public void performKeyExchange() throws Exception {
-        secretKey = Conversation.performKeyExchange(senderPrivateKey, receiverPublicKey);
-    }
-    private static SecretKey performKeyExchange(PrivateKey privateKey, PublicKey publicKey) throws Exception {
-        KeyAgreement keyAgreement = KeyAgreement.getInstance("ECDH");
-        keyAgreement.init(privateKey);
-        keyAgreement.doPhase(publicKey, true);
 
-        byte[] sharedSecret = keyAgreement.generateSecret();
-        return new SecretKeySpec(sharedSecret, 0, 16, "AES"); // Adjust key size as needed
+    private static KeyPair generateKeyPair() throws NoSuchAlgorithmException {
+        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+        keyPairGenerator.initialize(2048); // Adjust key size as needed
+        return keyPairGenerator.generateKeyPair();
     }
+
 }

@@ -2,6 +2,8 @@ package com.chatapp.beans;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.util.Base64;
 import java.util.Date;
 
@@ -72,18 +74,17 @@ public class Message {
         this.reciever = reciever;
     }
 
-    public static String encryptMessageContent(String content, SecretKey secretKey) throws Exception {
-        Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
-        cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+    public static String encryptMessageContent(String content, PublicKey receiverPublicKey) throws Exception {
+        Cipher cipher = Cipher.getInstance("RSA");
+        cipher.init(Cipher.ENCRYPT_MODE, receiverPublicKey);
         byte[] encryptedBytes = cipher.doFinal(content.getBytes());
         return Base64.getEncoder().encodeToString(encryptedBytes);
     }
 
-    public static String decryptMessageContent(String encryptedContent, SecretKey secretKey) throws Exception {
-        byte[] encryptedBytes = Base64.getDecoder().decode(encryptedContent);
-        Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
-        cipher.init(Cipher.DECRYPT_MODE, secretKey);
-        byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
+    public static String decryptMessageContent(String encryptedContent, PrivateKey receiverPrivateKey) throws Exception {
+        Cipher cipher = Cipher.getInstance("RSA");
+        cipher.init(Cipher.DECRYPT_MODE, receiverPrivateKey);
+        byte[] decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(encryptedContent));
         return new String(decryptedBytes);
     }
 }
