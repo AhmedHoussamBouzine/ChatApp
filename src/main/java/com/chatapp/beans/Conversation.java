@@ -1,8 +1,5 @@
 package com.chatapp.beans;
 
-import javax.crypto.KeyAgreement;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
 import java.security.*;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -15,7 +12,6 @@ public class Conversation {
     private PublicKey senderPublicKey;
     private PrivateKey receiverPrivateKey;
     private PublicKey receiverPublicKey;
-    private SecretKey secretKey ;
 
     private List<Message> messages;
 
@@ -25,13 +21,12 @@ public class Conversation {
     public Conversation() {
     }
 
-    public Conversation(PrivateKey senderPrivateKey, PublicKey senderPublicKey, PrivateKey receiverPrivateKey, PublicKey receiverPublicKey, SecretKey secretKey) {
-        this.id = this.generateConversationId(senderPublicKey,receiverPublicKey);
+    public Conversation(PrivateKey senderPrivateKey, PublicKey senderPublicKey, PrivateKey receiverPrivateKey, PublicKey receiverPublicKey) {
+        this.id = generateConversationId(senderPublicKey,receiverPublicKey);
         this.senderPrivateKey = senderPrivateKey;
         this.senderPublicKey = senderPublicKey;
         this.receiverPrivateKey = receiverPrivateKey;
         this.receiverPublicKey = receiverPublicKey;
-        this.secretKey = secretKey;
         this.insertedAt = new Date();
         this.updatedAt = new Date();
     }
@@ -61,10 +56,6 @@ public class Conversation {
         this.receiverPublicKey = receiverPublicKey;
     }
 
-    public void setSecretKey(SecretKey secretKey) {
-        this.secretKey = secretKey;
-    }
-
     public PrivateKey getSenderPrivateKey() {
         return senderPrivateKey;
     }
@@ -79,10 +70,6 @@ public class Conversation {
 
     public PublicKey getReceiverPublicKey() {
         return receiverPublicKey;
-    }
-
-    public SecretKey getSecretKey() {
-        return secretKey;
     }
 
     public void setMessages(List<Message> messages) {
@@ -116,10 +103,11 @@ public class Conversation {
         for (Message msg : messages) {
             // Decrypt each message content when retrieving
             String decryptedContent = Message.decryptMessageContent(msg.getContent(), this.getReceiverPrivateKey());
-            decryptedMessages.add(new Message(msg.getSender(), msg.getReciever(), decryptedContent));
+            decryptedMessages.add(new Message(msg.getSender(), msg.getReceiver(), decryptedContent));
         }
         return decryptedMessages;
     }
+
     private static String generateConversationId(PublicKey senderPublicKey, PublicKey receiverPublicKey) {
         String senderKey = Base64.getEncoder().encodeToString(senderPublicKey.getEncoded());
         String receiverKey = Base64.getEncoder().encodeToString(receiverPublicKey.getEncoded());

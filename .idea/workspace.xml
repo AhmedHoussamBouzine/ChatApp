@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbbece3f-26c5-45a6-bc5d-8659ba58e500" name="Changes" comment="`fix` : change return type of update and delete">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="fbbece3f-26c5-45a6-bc5d-8659ba58e500" name="Changes" comment="`fix` : add asymmetric encryption to message content">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/Conversation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/Conversation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/Message.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,6 +94,7 @@
       <workItem from="1700406284442" duration="3014000" />
       <workItem from="1700466659444" duration="7205000" />
       <workItem from="1700605444610" duration="1385000" />
+      <workItem from="1700666423521" duration="532000" />
     </task>
     <task id="LOCAL-00001" summary="setup projects">
       <option name="closed" value="true" />
@@ -206,7 +208,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700490194911</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="`fix` : add asymmetric encryption to message content">
+      <option name="closed" value="true" />
+      <created>1700666686227</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1700666686227</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -239,6 +249,7 @@
     <MESSAGE value="`feat` : add Jbcrypt dependency" />
     <MESSAGE value="`feat` : add insertedAt &amp; updatedAt fields" />
     <MESSAGE value="`fix` : change return type of update and delete" />
-    <option name="LAST_COMMIT_MESSAGE" value="`fix` : change return type of update and delete" />
+    <MESSAGE value="`fix` : add asymmetric encryption to message content" />
+    <option name="LAST_COMMIT_MESSAGE" value="`fix` : add asymmetric encryption to message content" />
   </component>
 </project>

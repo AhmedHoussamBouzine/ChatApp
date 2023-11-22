@@ -1,7 +1,6 @@
 package com.chatapp.beans;
 
 import javax.crypto.Cipher;
-import javax.crypto.SecretKey;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.Base64;
@@ -9,7 +8,7 @@ import java.util.Date;
 
 public class Message {
     private long id;
-    private User sender, reciever ;
+    private User sender, receiver;
     private String content;
     private Date insertedAt;
     private Date updatedAt;
@@ -19,7 +18,7 @@ public class Message {
 
     public Message(User sender, User receiver, String content) {
         this.sender = sender;
-        this.reciever = receiver;
+        this.receiver = receiver;
         this.content = content;
         this.insertedAt = new Date();
         this.updatedAt = new Date();
@@ -62,16 +61,16 @@ public class Message {
         return sender;
     }
 
-    public User getReciever() {
-        return reciever;
+    public User getReceiver() {
+        return receiver;
     }
 
     public void setSender(User sender) {
         this.sender = sender;
     }
 
-    public void setReciever(User reciever) {
-        this.reciever = reciever;
+    public void setReceiver(User receiver) {
+        this.receiver = receiver;
     }
 
     public static String encryptMessageContent(String content, PublicKey receiverPublicKey) throws Exception {
