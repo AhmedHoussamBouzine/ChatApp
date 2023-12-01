@@ -35,7 +35,7 @@ public class DefaultServices implements IServices {
     }
 
     @Override
-    public boolean deleteConversation(long id) throws Exception {
+    public boolean deleteConversation(String id) throws Exception {
         return iConversation.deleteConversation(id);
     }
 
@@ -45,7 +45,7 @@ public class DefaultServices implements IServices {
     }
 
     @Override
-    public Conversation getConversation(long id) throws Exception {
+    public Conversation getConversation(String id) throws Exception {
         return iConversation.getConversation(id);
     }
 
@@ -98,7 +98,6 @@ public class DefaultServices implements IServices {
     public Message getMessage(long id) throws Exception {
         return iMessage.getMessage(id);
     }
-
     @Override
     public List<Message> getMessages() throws Exception {
         return iMessage.getMessages();

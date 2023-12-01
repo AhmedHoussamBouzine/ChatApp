@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface IConversation {
     public Conversation addConversation(Conversation conversation) throws Exception ;
-    public boolean deleteConversation(long id) throws Exception;
+    public boolean deleteConversation(String id) throws Exception;
     public boolean updateConversation(Conversation conversation) throws Exception;
-    public Conversation getConversation(long id) throws Exception;
+    public Conversation getConversation(String id) throws Exception;
     public List<Conversation> getConversations() throws Exception;
 }

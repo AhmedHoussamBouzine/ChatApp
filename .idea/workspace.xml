@@ -4,16 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbbece3f-26c5-45a6-bc5d-8659ba58e500" name="Changes" comment="`fix` : remove privatekey field">
+    <list default="true" id="fbbece3f-26c5-45a6-bc5d-8659ba58e500" name="Changes" comment="`fix` : HelloApplication.java remove mysql conn test">
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_19_2023_5_07_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/business/DefaultServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/business/DefaultServices.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/business/IServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/business/IServices.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/ConversationDaoJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/ConversationDaoJDBC.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IConversation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IConversation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/MessageDaoJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/MessageDaoJDBC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/UserDaoJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/UserDaoJDBC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/utils/MysqlSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/utils/MysqlSession.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +27,10 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$PROJECT_DIR$/../../../../../../Program Files/Java/jdk-17/lib/src.zip!/java.base/java/security/Key.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$PROJECT_DIR$/../../../../../../Program Files/Java/jdk-17/lib/src.zip!/java.base/java/security/PublicKey.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -62,7 +63,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/houssam/Downloads/jar_files/bytes-0.4.6.jar&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Dell/Desktop/study/enset/cours wdkchi/s3/java/TP&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -71,7 +72,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -102,6 +103,10 @@
       <workItem from="1700466659444" duration="7205000" />
       <workItem from="1700605444610" duration="1385000" />
       <workItem from="1700666423521" duration="3808000" />
+      <workItem from="1701027275332" duration="809000" />
+      <workItem from="1701121977641" duration="7981000" />
+      <workItem from="1701385127957" duration="8349000" />
+      <workItem from="1701453324649" duration="6109000" />
     </task>
     <task id="LOCAL-00001" summary="setup projects">
       <option name="closed" value="true" />
