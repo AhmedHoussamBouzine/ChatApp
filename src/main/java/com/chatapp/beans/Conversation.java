@@ -1,6 +1,7 @@
 package com.chatapp.beans;
 
 import java.security.*;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
@@ -97,5 +98,51 @@ public class Conversation {
         return keyPairGenerator.generateKeyPair();
     }
 
+    public void setSenderPublicKeyFromString(String publicKeyString) {
+        try {
+            // Decode the Base64 encoded public key string to get the byte array
+            byte[] keyBytes = Base64.getDecoder().decode(publicKeyString);
+
+            // Create an instance of X509EncodedKeySpec to reconstruct the public key
+            X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
+
+            // Get an instance of the KeyFactory for RSA or your desired algorithm
+            // Assuming it's an RSA key
+            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+
+            // Generate the PublicKey from the key specification
+            PublicKey publicKey = keyFactory.generatePublic(keySpec);
+
+            // Set the PublicKey in the Etudiant object
+            this.senderPublicKey = publicKey;
+        } catch (Exception e) {
+            // Handle any exceptions that might occur during the conversion
+            e.printStackTrace();
+            // Optionally throw or log the exception
+        }
+    }
+    public void setReceiverPublicKeyFromString(String publicKeyString) {
+        try {
+            // Decode the Base64 encoded public key string to get the byte array
+            byte[] keyBytes = Base64.getDecoder().decode(publicKeyString);
+
+            // Create an instance of X509EncodedKeySpec to reconstruct the public key
+            X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
+
+            // Get an instance of the KeyFactory for RSA or your desired algorithm
+            // Assuming it's an RSA key
+            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+
+            // Generate the PublicKey from the key specification
+            PublicKey publicKey = keyFactory.generatePublic(keySpec);
+
+            // Set the PublicKey in the Etudiant object
+            this.receiverPublicKey = publicKey;
+        } catch (Exception e) {
+            // Handle any exceptions that might occur during the conversion
+            e.printStackTrace();
+            // Optionally throw or log the exception
+        }
+    }
 
 }

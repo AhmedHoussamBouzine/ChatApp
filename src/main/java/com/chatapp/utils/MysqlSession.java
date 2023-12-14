@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class MysqlSession {
-    private static MysqlSession mysqlsession ;
+    private static MysqlSession mysqlsession;
     private Connection connection;
     private final String url = "jdbc:mysql://localhost:3306/chatapp";
     private final String user = "root";
@@ -34,9 +34,7 @@ public class MysqlSession {
 
             if(connection == null || connection.isClosed())
                 connection = DriverManager.getConnection(url, user, password);
-
         } catch (SQLException e) {
-
             e.getMessage();
         }
 
