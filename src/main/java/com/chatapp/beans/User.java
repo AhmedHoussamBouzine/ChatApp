@@ -10,11 +10,17 @@ import java.util.Date;
 public class User {
     private long uid ;
     private String username, email, password, telephone;
-    PublicKey publicKey;
+    private PublicKey publicKey;
     private Date insertedAt;
     private Date updatedAt;
 
     public User() {
+    }
+
+    public User(long uid){
+        this.uid = uid ;
+        this.insertedAt = new Date();
+        this.updatedAt = new Date();
     }
 
     public User(long uid, String username, String email, String password, String telephone) {

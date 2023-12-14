@@ -23,52 +23,64 @@ public class ConversationDaoJDBC  implements  IConversation{
 
     @Override
     public Conversation addConversation(Conversation conversation) throws Exception {
-        Connection connection = mysqlSession.getConnection() ;
-        String query = "insert into conversations values (null,?,?,?,?)";
-        PreparedStatement statement = connection.prepareStatement(query);
-        statement.setString(1, conversation.getSenderPublicKey().toString());
-        statement.setString(2, conversation.getReceiverPublicKey().toString());
-        statement.setDate(3, (java.sql.Date) new Date());
-        statement.setDate(4, (java.sql.Date) new Date());
-        statement.execute();
-        connection.close();
-        return conversation;
+        try{
+            Connection connection = mysqlSession.getConnection();
+            String query = "insert into conversation values (null,?,?,?,?)";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, conversation.getSenderPublicKey().toString());
+            statement.setString(2, conversation.getReceiverPublicKey().toString());
+            statement.setDate(3, (java.sql.Date) new Date());
+            statement.setDate(4, (java.sql.Date) new Date());
+            statement.execute();
+            connection.close();
+            return conversation;
+        }catch (Exception e){
+            throw e ;
+        }
     }
 
     @Override
     public boolean deleteConversation(String id) throws Exception {
-        Connection connection=mysqlSession.getConnection();
-        String query="delete from conversations where id = ?";
-        PreparedStatement statement=connection.prepareStatement(query);
-        statement.setString(1, id);
-        statement.execute();
-        connection.close();
-        return true;
+        try {
+            Connection connection = mysqlSession.getConnection();
+            String query = "delete from conversation where id = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, id);
+            statement.execute();
+            connection.close();
+            return true;
+        }catch (Exception e){
+            throw e ;
+        }
     }
 
     @Override
     public boolean updateConversation(Conversation conversation) throws Exception {
-        Connection connection = mysqlSession.getConnection();
-        String query ="update conversations set senderPublicKey= ? , receiverPublicKey = ?, updatedAt=? where id = ?;";
-        PreparedStatement statement = connection.prepareStatement(query);
-        statement.setString(1, conversation.getSenderPublicKey().toString());
-        statement.setString(2, conversation.getReceiverPublicKey().toString());
-        statement.setDate(3, (java.sql.Date) new Date());
-        statement.execute();
-        connection.close();
-        return true;
+        try{
+            Connection connection = mysqlSession.getConnection();
+            String query = "update conversation set senderPublicKey= ? , receiverPublicKey = ?, updatedAt=? where id = ?;";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, conversation.getSenderPublicKey().toString());
+            statement.setString(2, conversation.getReceiverPublicKey().toString());
+            statement.setDate(3, (java.sql.Date) new Date());
+            statement.execute();
+            connection.close();
+            return true;
+        }catch (Exception e){
+            throw e ;
+        }
     }
     @Override
     public Conversation getConversation(String id) throws Exception {
         Connection connection = mysqlSession.getConnection() ;
-        String query = "select * from conversations where uid=?" ;
+        String query = "select * from conversation where uid=?" ;
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setString(1, id);
         ResultSet resultSet=statement.executeQuery();
         if(!resultSet.next())
             return null;
         Conversation conversation = new Conversation();
-        conversation.setId(resultSet.getString("uid"));
+        conversation.setId(resultSet.getString("id"));
 
         //I need a methode to transform the public key from a string to an object of class "PublicKey"
         PublicKey senderPublicKey = PublicKey.fromString(resultSet.getString("senderPublicKey"));
@@ -86,7 +98,7 @@ public class ConversationDaoJDBC  implements  IConversation{
     public List<Conversation> getConversations() throws Exception {
         List<Conversation> conversations = new ArrayList<Conversation>();
         Connection connection=mysqlSession.getConnection();
-        String query="Select * from conversations";
+        String query="Select * from conversations" ;
 
         PreparedStatement statement=connection.prepareStatement(query);
         ResultSet resultSet=statement.executeQuery();

@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fbbece3f-26c5-45a6-bc5d-8659ba58e500" name="Changes" comment="`fix` : HelloApplication.java remove mysql conn test">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_19_2023_5_07_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/business/DefaultServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/business/DefaultServices.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/business/IServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/business/IServices.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IConversation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IConversation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/utils/MysqlSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/utils/MysqlSession.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/ConversationDaoJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/ConversationDaoJDBC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/MessageDaoJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/MessageDaoJDBC.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +61,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Dell/Desktop/study/enset/cours wdkchi/s3/java/TP&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Dell/Desktop/Projects/chatApp - java/ChatApp&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -107,6 +105,10 @@
       <workItem from="1701121977641" duration="7981000" />
       <workItem from="1701385127957" duration="8349000" />
       <workItem from="1701453324649" duration="6109000" />
+      <workItem from="1701463215746" duration="356000" />
+      <workItem from="1702291453484" duration="282000" />
+      <workItem from="1702470931718" duration="1342000" />
+      <workItem from="1702493939002" duration="11821000" />
     </task>
     <task id="LOCAL-00001" summary="setup projects">
       <option name="closed" value="true" />
