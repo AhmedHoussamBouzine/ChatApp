@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
@@ -25,12 +26,11 @@ public class ConversationDaoJDBC  implements  IConversation{
     public Conversation addConversation(Conversation conversation) throws Exception {
         try{
             Connection connection = mysqlSession.getConnection();
-            String query = "insert into conversation values (null,?,?,?,?)";
+            String query = "insert into conversations (name,senderPublicKey,receiverPublicKey) values (?,?,?)";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, conversation.getSenderPublicKey().toString());
-            statement.setString(2, conversation.getReceiverPublicKey().toString());
-            statement.setDate(3, (java.sql.Date) new Date());
-            statement.setDate(4, (java.sql.Date) new Date());
+            statement.setString(1, conversation.getName());
+            statement.setString(2, Base64.getEncoder().encodeToString(conversation.getSenderPublicKey().getEncoded()));
+            statement.setString(3, Base64.getEncoder().encodeToString(conversation.getReceiverPublicKey().getEncoded()));
             statement.execute();
             connection.close();
             return conversation;
@@ -43,7 +43,7 @@ public class ConversationDaoJDBC  implements  IConversation{
     public boolean deleteConversation(String id) throws Exception {
         try {
             Connection connection = mysqlSession.getConnection();
-            String query = "delete from conversation where id = ?";
+            String query = "delete from conversations where id = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, id);
             statement.execute();
@@ -58,7 +58,7 @@ public class ConversationDaoJDBC  implements  IConversation{
     public boolean updateConversation(Conversation conversation) throws Exception {
         try{
             Connection connection = mysqlSession.getConnection();
-            String query = "update conversation set senderPublicKey= ? , receiverPublicKey = ?, updatedAt=? where id = ?;";
+            String query = "update conversations set senderPublicKey= ? , receiverPublicKey = ?, updatedAt=? where id = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, conversation.getSenderPublicKey().toString());
             statement.setString(2, conversation.getReceiverPublicKey().toString());
@@ -71,16 +71,16 @@ public class ConversationDaoJDBC  implements  IConversation{
         }
     }
     @Override
-    public Conversation getConversation(String id) throws Exception {
+    public Conversation getConversation(long id) throws Exception {
         Connection connection = mysqlSession.getConnection() ;
-        String query = "select * from conversation where uid=?" ;
+        String query = "select * from conversations where id=?" ;
         PreparedStatement statement = connection.prepareStatement(query);
-        statement.setString(1, id);
+        statement.setLong(1, id);
         ResultSet resultSet=statement.executeQuery();
         if(!resultSet.next())
             return null;
         Conversation conversation = new Conversation();
-        conversation.setId(resultSet.getString("id"));
+        conversation.setId(resultSet.getLong("id"));
 
         conversation.setSenderPublicKeyFromString(resultSet.getString("senderPublicKey"));
         conversation.setReceiverPublicKeyFromString(resultSet.getString("receiverPublicKey"));
@@ -101,7 +101,7 @@ public class ConversationDaoJDBC  implements  IConversation{
         while(resultSet.next())
         {
             Conversation conversation = new Conversation();
-            conversation.setId(resultSet.getString("uid"));
+            conversation.setId(resultSet.getLong("uid"));
 
             conversation.setSenderPublicKeyFromString(resultSet.getString("senderPublicKey"));
             conversation.setReceiverPublicKeyFromString(resultSet.getString("receiverPublicKey"));

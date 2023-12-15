@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
@@ -20,20 +21,19 @@ public class UserDaoJDBC implements IUser{
 
     @Override
     public User addUser(User user) throws Exception {
-        Connection connection=mysqlSession.getConnection();
-        String query="insert into users values(?,?,?,?,?,?,?)";
-        PreparedStatement statement=connection.prepareStatement(query);
+        Connection connection = mysqlSession.getConnection();
+        String query = "INSERT INTO users (username, email, password, telephone, publicKey) VALUES (?, ?, ?, ?, ?)";
+        PreparedStatement statement = connection.prepareStatement(query);
         statement.setString(1, user.getUsername());
         statement.setString(2, user.getEmail());
         statement.setString(3, BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
         statement.setString(4, user.getTelephone());
-        statement.setString(5, user.getPublicKey().toString());
-        statement.setString(6, user.getInsertedAt().toString());
-        statement.setString(7, user.getUpdatedAt().toString());
+        statement.setString(5, Base64.getEncoder().encodeToString(user.getPublicKey().getEncoded()));
         statement.execute();
         connection.close();
         return user;
     }
+
 
     @Override
     public boolean deleteUser(long id) throws Exception {
@@ -71,6 +71,7 @@ public class UserDaoJDBC implements IUser{
             return null;
         User user=new User();
         user.setUid(resultSet.getLong("uid"));
+        user.setUsername(resultSet.getString("username"));
         user.setEmail(resultSet.getString("email"));
         user.setTelephone(resultSet.getString("telephone"));
         user.setPublicKeyFromString(resultSet.getString("publicKey"));
@@ -89,6 +90,7 @@ public class UserDaoJDBC implements IUser{
         {
             User user=new User();
             user.setUid(resultSet.getLong("uid"));
+            user.setUsername(resultSet.getString("username"));
             user.setEmail(resultSet.getString("email"));
             user.setTelephone(resultSet.getString("telephone"));
             user.setPublicKeyFromString(resultSet.getString("publicKey"));

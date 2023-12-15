@@ -15,7 +15,7 @@ public class DefaultServices implements IServices {
     private IUser iUser;
 
 
-    private DefaultServices() {
+    public DefaultServices() {
         iMessage = new MessageDaoJDBC();
         iConversation = new ConversationDaoJDBC();
         iUser = new UserDaoJDBC();
@@ -45,7 +45,7 @@ public class DefaultServices implements IServices {
     }
 
     @Override
-    public Conversation getConversation(String id) throws Exception {
+    public Conversation getConversation(long id) throws Exception {
         return iConversation.getConversation(id);
     }
 

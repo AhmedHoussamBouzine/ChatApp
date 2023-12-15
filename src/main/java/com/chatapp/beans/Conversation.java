@@ -8,7 +8,8 @@ import java.util.Date;
 import java.util.List;
 
 public class Conversation {
-    private String id;
+    private long id;
+    private String name;
     private PublicKey senderPublicKey;
     private PublicKey receiverPublicKey;
     private List<Message> messages;
@@ -19,18 +20,16 @@ public class Conversation {
     }
 
     public Conversation(PublicKey senderPublicKey, PublicKey receiverPublicKey) {
-        this.id = generateConversationId(senderPublicKey,receiverPublicKey);
+        this.name = generateConversationId(senderPublicKey,receiverPublicKey);
         this.senderPublicKey = senderPublicKey;
         this.receiverPublicKey = receiverPublicKey;
-        this.insertedAt = new Date();
-        this.updatedAt = new Date();
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -70,6 +69,14 @@ public class Conversation {
         this.updatedAt = updatedAt;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public void addMessage(User sender, User receiver, String content) throws Exception {
         // Encrypt the message content before adding to the conversation
         String encryptedContent = Message.encryptMessageContent(content, this.getReceiverPublicKey());
@@ -92,7 +99,7 @@ public class Conversation {
         return senderKey + "-" + receiverKey;
     }
 
-    private static KeyPair generateKeyPair() throws NoSuchAlgorithmException {
+    public static KeyPair generateKeyPair() throws NoSuchAlgorithmException {
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
         keyPairGenerator.initialize(2048);
         return keyPairGenerator.generateKeyPair();
@@ -145,4 +152,16 @@ public class Conversation {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Conversation{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", senderPublicKey=" +  Base64.getEncoder().encodeToString(senderPublicKey.getEncoded())+
+                ", receiverPublicKey=" + Base64.getEncoder().encodeToString(receiverPublicKey.getEncoded())+
+                ", messages=" + messages +
+                ", insertedAt=" + insertedAt +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
 }

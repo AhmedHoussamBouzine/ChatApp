@@ -19,8 +19,6 @@ public class User {
 
     public User(long uid){
         this.uid = uid ;
-        this.insertedAt = new Date();
-        this.updatedAt = new Date();
     }
 
     public User(long uid, String username, String email, String password, String telephone) {
@@ -29,8 +27,6 @@ public class User {
         this.email = email;
         this.password = password;
         this.telephone = telephone;
-        this.insertedAt = new Date();
-        this.updatedAt = new Date();
     }
 
     public void setUid(long uid) {
@@ -97,6 +93,20 @@ public class User {
         this.updatedAt = updatedAt;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "uid=" + uid +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", publicKey=" + Base64.getEncoder().encodeToString(publicKey.getEncoded()) +
+                ", insertedAt=" + insertedAt +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
+
     public void setPublicKeyFromString(String publicKeyString) {
         try {
             // Decode the Base64 encoded public key string to get the byte array
@@ -120,4 +130,5 @@ public class User {
             // Optionally throw or log the exception
         }
     }
+
 }
