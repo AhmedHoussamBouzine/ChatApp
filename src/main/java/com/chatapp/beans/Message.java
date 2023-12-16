@@ -13,6 +13,8 @@ public class Message {
     private Date insertedAt;
     private Date updatedAt;
 
+    private Conversation conversation;
+
     public Message() {
     }
 
@@ -68,6 +70,16 @@ public class Message {
         this.receiver = receiver;
     }
 
+    public Conversation getConversation() {
+        return conversation;
+    }
+
+    public void setConversation(Conversation conversation) {
+        this.conversation = conversation;
+    }
+
+
+
     public static String encryptMessageContent(String content, PublicKey receiverPublicKey) throws Exception {
         Cipher cipher = Cipher.getInstance("RSA");
         cipher.init(Cipher.ENCRYPT_MODE, receiverPublicKey);
@@ -80,5 +92,18 @@ public class Message {
         cipher.init(Cipher.DECRYPT_MODE, receiverPrivateKey);
         byte[] decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(encryptedContent));
         return new String(decryptedBytes);
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                ", sender=" + sender +
+                ", receiver=" + receiver +
+                ", content='" + content + '\'' +
+                ", insertedAt=" + insertedAt +
+                ", updatedAt=" + updatedAt +
+                ", conversation=" + conversation +
+                '}';
     }
 }

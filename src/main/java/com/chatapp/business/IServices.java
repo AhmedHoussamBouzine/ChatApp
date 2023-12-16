@@ -12,7 +12,7 @@ public interface IServices {
     public boolean deleteConversation(String id) throws Exception;
     boolean updateConversation(Conversation conversation) throws Exception;
 
-    public Conversation getConversation(String id) throws Exception;
+    public Conversation getConversation(long id) throws Exception;
     public List<Conversation> getConversations() throws Exception;
 
 

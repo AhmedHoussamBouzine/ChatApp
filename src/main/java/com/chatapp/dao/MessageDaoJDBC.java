@@ -1,7 +1,10 @@
 package com.chatapp.dao;
 
+import com.chatapp.beans.Conversation;
 import com.chatapp.beans.Message;
 import com.chatapp.beans.User;
+import com.chatapp.business.DefaultServices;
+import com.chatapp.business.IServices;
 import com.chatapp.utils.MysqlSession;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -26,19 +29,12 @@ public class MessageDaoJDBC implements IMessage{
 
         try{
             Connection connection = mysqlSession.getConnection();
-            String query = "insert into message values(?,?,?,?,?,?)";
+            String query = "insert into messages (senderId, receiverId, content,conversationId) values(?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setLong(1, message.getId());
-            statement.setLong(2, message.getSender().getUid()); //getSender() should return a long (our database mu )
-            statement.setLong(3, message.getReceiver().getUid()); //getSender() should return a long (our database mu )
-
-            // Convert java.util.Date to java.sql.Date
-            java.sql.Date sqlInsertedAt = new java.sql.Date(message.getInsertedAt().getTime());
-            java.sql.Date sqlUpdatedAt = new java.sql.Date(message.getUpdatedAt().getTime());
-
-            // Set the converted dates in the statement
-            statement.setDate(4, sqlInsertedAt);
-            statement.setDate(5, sqlUpdatedAt);
+            statement.setLong(1, message.getSender().getUid());
+            statement.setLong(2, message.getReceiver().getUid());
+            statement.setString(3, message.getContent());
+            statement.setLong(4, message.getConversation().getId());
 
             statement.execute();
             connection.close();
@@ -51,7 +47,7 @@ public class MessageDaoJDBC implements IMessage{
     @Override
     public boolean deleteMessage(long id) throws Exception {
         Connection connection=mysqlSession.getConnection();
-        String query="delete from message where id = ?";
+        String query="delete from messages where id = ?";
         PreparedStatement statement=connection.prepareStatement(query);
         /*
         //this code is replaced with the one bellow
@@ -78,7 +74,7 @@ public class MessageDaoJDBC implements IMessage{
     public boolean updateMessage(Message message) throws Exception {
         try{
         Connection connection=mysqlSession.getConnection();
-        String query="update message set sender = ?, reciever=?, content=?, updatedAt = ? where uid = ?;";
+        String query="update messages set sender = ?, reciever=?, content=?, updatedAt = ? where uid = ?;";
         PreparedStatement statement=connection.prepareStatement(query);
         statement.setLong(1, message.getSender().getUid());
         statement.setLong(2, message.getReceiver().getUid());
@@ -95,8 +91,9 @@ public class MessageDaoJDBC implements IMessage{
 
     @Override
     public Message getMessage(long id) throws Exception {
+        IServices iServices = new DefaultServices();
         Connection connection=mysqlSession.getConnection();
-        String query="select * from message where id=?";
+        String query="select * from messages where id=?";
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setLong(1, id);
 
@@ -106,13 +103,14 @@ public class MessageDaoJDBC implements IMessage{
         Message message=new Message();
         message.setId(resultSet.getLong("id"));
 
-        User sender = new User(resultSet.getLong("Sender"));
-        User receiver = new User(resultSet.getLong("Receiver"));
+        User sender = iServices.getUser(resultSet.getLong("senderId"));
+        User receiver = iServices.getUser(resultSet.getLong("receiverId"));
+        Conversation conversation = iServices.getConversation(resultSet.getLong("conversationId"));
 
-        message.setSender( sender ); //<resultSet.getLong("Sender")> returns the id of the sender. but the methode take only user objects. I can use the id later to request the user object and replace it here.
+        message.setSender( sender );
         message.setReceiver( receiver );
-
-        message.setContent(resultSet.getString("EncryptedContent"));
+        message.setConversation(conversation);
+        message.setContent(resultSet.getString("content"));
         return message;
     }
 
@@ -121,7 +119,7 @@ public class MessageDaoJDBC implements IMessage{
         List<Message> messages=new ArrayList<Message>();
 
         Connection connection = mysqlSession.getConnection();
-        String query = "Select * from message";
+        String query = "Select * from messages";
         PreparedStatement statement=connection.prepareStatement(query);
         ResultSet resultSet=statement.executeQuery();
 
