@@ -35,6 +35,8 @@ public class Test {
 //        user.setPublicKey(publicKey);
 //        iServices.addUser(user);
 
+
+
         User user1 =  iServices.getUser(1);
         User user2 =  iServices.getUser(1);
         Conversation conversation = iServices.getConversation(1);
