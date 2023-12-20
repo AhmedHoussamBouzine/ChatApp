@@ -24,31 +24,31 @@ public class Test {
 //            System.out.println(user);
 //        }
 
-     //     User user = iServices.getUser(1);
+        User user = iServices.getUser(1);
 //        User user = new User();
 //        user.setTelephone("4343");
 //        user.setPassword("fhjkshfsd");
-//        user.setUsername("srhjfas");
-//        user.setEmail("hfjs");
+//        user.setUsername("houssam");
+//        user.setEmail("houssam@houssam");
 //        KeyPair keyPair = generateKeyPair();
 //        PublicKey publicKey = keyPair.getPublic();
 //        user.setPublicKey(publicKey);
 //        iServices.addUser(user);
 
-//        User user1 =  iServices.getUser(1);
-//        User user2 =  iServices.getUser(1);
-//        Conversation conversation = iServices.getConversation(1);
-//        Message message = new Message(user1,user2,"hjkshdfs");
-//        message.setConversation(conversation);
-//        iServices.addMessage(message);
+        User user1 =  iServices.getUser(1);
+        User user2 =  iServices.getUser(1);
+        Conversation conversation = iServices.getConversation(1);
+        Message message = new Message(user1,user2,"hjkshdfs");
+        message.setConversation(conversation);
+        iServices.addMessage(message);
 
 //        iServices.deleteMessage(1);
 
-//        Conversation conversation = new Conversation(user.getPublicKey(),user.getPublicKey());
+//        Conversation conversation = new Conversation(user,user);
 //        System.out.println(conversation);
 //        iServices.addConversation(conversation);
 
-        System.out.println(iServices.getConversation(1));
+//       System.out.println(iServices.getConversation(1));
 
 
 

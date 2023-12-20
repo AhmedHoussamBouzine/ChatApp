@@ -11,6 +11,8 @@ public class User {
     private long uid ;
     private String username, email, password, telephone;
     private PublicKey publicKey;
+
+    byte[] derivedKey;
     private Date insertedAt;
     private Date updatedAt;
 
@@ -19,6 +21,14 @@ public class User {
 
     public User(long uid){
         this.uid = uid ;
+    }
+
+    public byte[] getDerivedKey() {
+        return derivedKey;
+    }
+
+    public void setDerivedKey(byte[] derivedKey) {
+        this.derivedKey = derivedKey;
     }
 
     public User(long uid, String username, String email, String password, String telephone) {

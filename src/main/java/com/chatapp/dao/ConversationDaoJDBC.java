@@ -26,11 +26,11 @@ public class ConversationDaoJDBC  implements  IConversation{
     public Conversation addConversation(Conversation conversation) throws Exception {
         try{
             Connection connection = mysqlSession.getConnection();
-            String query = "insert into conversations (name,senderPublicKey,receiverPublicKey) values (?,?,?)";
+            String query = "insert into conversations (name,senderId,receiverId) values (?,?,?)";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, conversation.getName());
-            statement.setString(2, Base64.getEncoder().encodeToString(conversation.getSenderPublicKey().getEncoded()));
-            statement.setString(3, Base64.getEncoder().encodeToString(conversation.getReceiverPublicKey().getEncoded()));
+            statement.setLong(2, conversation.getSender().getUid());
+            statement.setLong(3, conversation.getReceiver().getUid());
             statement.execute();
             connection.close();
             return conversation;
@@ -58,10 +58,10 @@ public class ConversationDaoJDBC  implements  IConversation{
     public boolean updateConversation(Conversation conversation) throws Exception {
         try{
             Connection connection = mysqlSession.getConnection();
-            String query = "update conversations set senderPublicKey= ? , receiverPublicKey = ?, updatedAt=? where id = ?;";
+            String query = "update conversations set senderId= ? , receiverId = ?, updatedAt=? where id = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, conversation.getSenderPublicKey().toString());
-            statement.setString(2, conversation.getReceiverPublicKey().toString());
+            statement.setLong(1, conversation.getSender().getUid());
+            statement.setLong(2, conversation.getReceiver().getUid());
             statement.setDate(3, (java.sql.Date) new Date());
             statement.execute();
             connection.close();
@@ -81,10 +81,33 @@ public class ConversationDaoJDBC  implements  IConversation{
             return null;
         Conversation conversation = new Conversation();
         conversation.setId(resultSet.getLong("id"));
-
-        conversation.setSenderPublicKeyFromString(resultSet.getString("senderPublicKey"));
-        conversation.setReceiverPublicKeyFromString(resultSet.getString("receiverPublicKey"));
-
+        conversation.setName(resultSet.getString("name"));
+        String querySender="select * from users where uid=?";
+        PreparedStatement statementSender=connection.prepareStatement(querySender);
+        statementSender.setLong(1, resultSet.getLong("senderId"));
+        ResultSet resultSetSender=statementSender.executeQuery();
+        if(!resultSetSender.next())
+            return null;
+        User sender=new User();
+        sender.setUid(resultSetSender.getLong("uid"));
+        sender.setUsername(resultSetSender.getString("username"));
+        sender.setEmail(resultSetSender.getString("email"));
+        sender.setTelephone(resultSetSender.getString("telephone"));
+        sender.setPublicKeyFromString(resultSetSender.getString("publicKey"));
+        conversation.setSender(sender);
+        String queryReceiver="select * from users where uid=?";
+        PreparedStatement statementReceiver=connection.prepareStatement(queryReceiver);
+        statementReceiver.setLong(1, resultSet.getLong("receiverId"));
+        ResultSet resultSetReceiver=statementReceiver.executeQuery();
+        if(!resultSetReceiver.next())
+            return null;
+        User receiver=new User();
+        receiver.setUid(resultSetReceiver.getLong("uid"));
+        receiver.setUsername(resultSetReceiver.getString("username"));
+        receiver.setEmail(resultSetReceiver.getString("email"));
+        receiver.setTelephone(resultSetReceiver.getString("telephone"));
+        receiver.setPublicKeyFromString(resultSetReceiver.getString("publicKey"));
+        conversation.setReceiver(receiver);
         conversation.setInsertedAt(resultSet.getDate("insertedAt"));
         conversation.setInsertedAt(resultSet.getDate("insertedAt"));
         return conversation;
@@ -101,13 +124,35 @@ public class ConversationDaoJDBC  implements  IConversation{
         while(resultSet.next())
         {
             Conversation conversation = new Conversation();
-            conversation.setId(resultSet.getLong("uid"));
-
-            conversation.setSenderPublicKeyFromString(resultSet.getString("senderPublicKey"));
-            conversation.setReceiverPublicKeyFromString(resultSet.getString("receiverPublicKey"));
-
+            conversation.setId(resultSet.getLong("id"));
+            String querySender="select * from users where uid=?";
+            PreparedStatement statementSender=connection.prepareStatement(querySender);
+            statementSender.setLong(1, resultSet.getLong("senderId"));
+            ResultSet resultSetSender=statementSender.executeQuery();
+            if(!resultSetSender.next())
+                return null;
+            User sender=new User();
+            sender.setUid(resultSet.getLong("uid"));
+            sender.setUsername(resultSet.getString("username"));
+            sender.setEmail(resultSet.getString("email"));
+            sender.setTelephone(resultSet.getString("telephone"));
+            sender.setPublicKeyFromString(resultSet.getString("publicKey"));
+            conversation.setSender(sender);
+            String queryReceiver="select * from users where uid=?";
+            PreparedStatement statementReceiver=connection.prepareStatement(queryReceiver);
+            statementReceiver.setLong(1, resultSet.getLong("receiverId"));
+            ResultSet resultSetReceiver=statementReceiver.executeQuery();
+            if(!resultSetReceiver.next())
+                return null;
+            User receiver=new User();
+            receiver.setUid(resultSet.getLong("uid"));
+            receiver.setUsername(resultSet.getString("username"));
+            receiver.setEmail(resultSet.getString("email"));
+            receiver.setTelephone(resultSet.getString("telephone"));
+            receiver.setPublicKeyFromString(resultSet.getString("publicKey"));
+            conversation.setSender(receiver);
             conversation.setInsertedAt(resultSet.getDate("insertedAt"));
-            conversation.setUpdatedAt(resultSet.getDate("updatedAt"));
+            conversation.setInsertedAt(resultSet.getDate("insertedAt"));
             conversations.add(conversation);
         }
         connection.close();

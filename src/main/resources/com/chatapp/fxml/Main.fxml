@@ -14,9 +14,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<FlowPane fx:controller="com.chatapp.presentation.controllers.MainController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="613.0" prefWrapLength="650.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <MenuBar prefHeight="22.0" prefWidth="602.0">
+        <MenuBar prefHeight="22.0" prefWidth="613.0">
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
@@ -35,103 +35,20 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="375.0" prefWidth="600.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="375.0" prefWidth="635.0">
             <children>
-                <ScrollPane prefHeight="376.0" prefWidth="200.0" vbarPolicy="ALWAYS">
+                <ScrollPane fx:id="sidebar" hbarPolicy="NEVER" prefHeight="376.0" prefWidth="200.0">
                     <content>
-                        <VBox prefHeight="506.0" prefWidth="188.0">
-                            <children>
-                                <Label text="conversation1">
-                                    <VBox.margin>
-                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                    </VBox.margin>
-                                </Label>
-                                <Label text="conversation2">
-                                    <VBox.margin>
-                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                    </VBox.margin>
-                                </Label>
-                                <Label text="conversation3">
-                                    <VBox.margin>
-                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                    </VBox.margin>
-                                </Label>
-                                <Label text="conversation4">
-                                    <VBox.margin>
-                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                    </VBox.margin>
-                                </Label>
-                                <Label text="conversation1">
-                                    <VBox.margin>
-                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                    </VBox.margin>
-                                </Label>
-                                <Label text="conversation2">
-                                    <VBox.margin>
-                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                    </VBox.margin>
-                                </Label>
-                                <Label text="conversation3">
-                                    <VBox.margin>
-                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                    </VBox.margin>
-                                </Label>
-                                <Label text="conversation4">
-                                    <VBox.margin>
-                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                    </VBox.margin>
-                                </Label>
-                                <Label text="conversation1">
-                                    <VBox.margin>
-                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                    </VBox.margin>
-                                </Label>
-                                <Label text="conversation2">
-                                    <VBox.margin>
-                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                    </VBox.margin>
-                                </Label>
-                                <Label text="conversation3">
-                                    <VBox.margin>
-                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                    </VBox.margin>
-                                </Label>
-                                <Label text="conversation4">
-                                    <VBox.margin>
-                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                    </VBox.margin>
-                                </Label>
-                                <Label text="conversation1">
-                                    <VBox.margin>
-                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                    </VBox.margin>
-                                </Label>
-                                <Label text="conversation2">
-                                    <VBox.margin>
-                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                    </VBox.margin>
-                                </Label>
-                                <Label text="conversation3">
-                                    <VBox.margin>
-                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                    </VBox.margin>
-                                </Label>
-                                <Label text="conversation4">
-                                    <VBox.margin>
-                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                    </VBox.margin>
-                                </Label>
-                            </children>
-                        </VBox>
+                        <VBox fx:id="vboxConversations" prefHeight="506.0" prefWidth="188.0" />
                     </content>
                 </ScrollPane>
-                <ScrollPane layoutX="208.0" layoutY="57.0" prefHeight="246.0" prefWidth="378.0">
+                <ScrollPane hbarPolicy="NEVER" layoutX="208.0" layoutY="57.0" prefHeight="246.0" prefWidth="378.0">
                     <content>
                         <VBox prefHeight="393.0" prefWidth="365.0">
                             <children>
                                 <HBox prefHeight="393.0" prefWidth="365.0">
                                     <children>
-                                        <VBox prefHeight="306.0" prefWidth="188.0">
+                                        <VBox fx:id="dispayedMessages" prefHeight="306.0" prefWidth="188.0">
                                             <children>
                                                 <Label text="Message 1">
                                                     <VBox.margin>
@@ -185,9 +102,9 @@
                         </VBox>
                     </content>
                 </ScrollPane>
-                <HBox layoutX="208.0" layoutY="324.0" prefHeight="37.0" prefWidth="378.0">
+                <HBox layoutX="208.0" layoutY="324.0" prefHeight="37.0" prefWidth="395.0">
                <children>
-                  <TextField prefHeight="26.0" prefWidth="298.0">
+                  <TextField fx:id="inputMessage" prefHeight="26.0" prefWidth="277.0">
                      <opaqueInsets>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </opaqueInsets>
@@ -195,7 +112,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" />
                      </HBox.margin>
                   </TextField>
-                  <Button mnemonicParsing="false" text="send">
+                  <Button fx:id="sendButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="85.0" style="-fx-background-color: #B0C4DE;" text="Send">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
