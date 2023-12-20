@@ -23,6 +23,7 @@ public class Conversation {
         this.name = generateConversationId(sender.getPublicKey(),receiver.getPublicKey());
         this.receiver = receiver;
         this.sender = sender;
+        this.messages = new ArrayList<>();
     }
 
     public long getId() {
@@ -84,13 +85,13 @@ public class Conversation {
     }
 
     public List<Message> getMessages() throws Exception {
-        List<Message> decryptedMessages = new ArrayList<>();
-        for (Message msg : messages) {
-            // Decrypt each message content when retrieving
-            //String decryptedContent = Message.decryptMessageContent(msg.getContent(), this.getReceiverPrivateKey());
-           //  decryptedMessages.add(new Message(msg.getSender(), msg.getReceiver(), decryptedContent));
-        }
-        return decryptedMessages;
+//        List<Message> decryptedMessages = new ArrayList<>();
+//        for (Message msg : messages) {
+//            // Decrypt each message content when retrieving
+//            //String decryptedContent = Message.decryptMessageContent(msg.getContent(), this.getReceiverPrivateKey());
+//           //  decryptedMessages.add(new Message(msg.getSender(), msg.getReceiver(), decryptedContent));
+//        }
+        return messages;
     }
 
     private static String generateConversationId(PublicKey senderPublicKey, PublicKey receiverPublicKey) {

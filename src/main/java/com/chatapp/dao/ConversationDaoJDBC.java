@@ -1,7 +1,10 @@
 package com.chatapp.dao;
 
 import com.chatapp.beans.Conversation;
+import com.chatapp.beans.Message;
 import com.chatapp.beans.User;
+import com.chatapp.business.DefaultServices;
+import com.chatapp.business.IServices;
 import com.chatapp.utils.MysqlSession;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -17,6 +20,7 @@ import java.util.List;
 public class ConversationDaoJDBC  implements  IConversation{
 
     private MysqlSession mysqlSession;
+
 
     public ConversationDaoJDBC() {
         mysqlSession = MysqlSession.getInstance();
@@ -72,6 +76,7 @@ public class ConversationDaoJDBC  implements  IConversation{
     }
     @Override
     public Conversation getConversation(long id) throws Exception {
+        IServices iServices = new DefaultServices();
         Connection connection = mysqlSession.getConnection() ;
         String query = "select * from conversations where id=?" ;
         PreparedStatement statement = connection.prepareStatement(query);
@@ -82,39 +87,36 @@ public class ConversationDaoJDBC  implements  IConversation{
         Conversation conversation = new Conversation();
         conversation.setId(resultSet.getLong("id"));
         conversation.setName(resultSet.getString("name"));
-        String querySender="select * from users where uid=?";
-        PreparedStatement statementSender=connection.prepareStatement(querySender);
-        statementSender.setLong(1, resultSet.getLong("senderId"));
-        ResultSet resultSetSender=statementSender.executeQuery();
-        if(!resultSetSender.next())
-            return null;
-        User sender=new User();
-        sender.setUid(resultSetSender.getLong("uid"));
-        sender.setUsername(resultSetSender.getString("username"));
-        sender.setEmail(resultSetSender.getString("email"));
-        sender.setTelephone(resultSetSender.getString("telephone"));
-        sender.setPublicKeyFromString(resultSetSender.getString("publicKey"));
-        conversation.setSender(sender);
-        String queryReceiver="select * from users where uid=?";
-        PreparedStatement statementReceiver=connection.prepareStatement(queryReceiver);
-        statementReceiver.setLong(1, resultSet.getLong("receiverId"));
-        ResultSet resultSetReceiver=statementReceiver.executeQuery();
-        if(!resultSetReceiver.next())
-            return null;
-        User receiver=new User();
-        receiver.setUid(resultSetReceiver.getLong("uid"));
-        receiver.setUsername(resultSetReceiver.getString("username"));
-        receiver.setEmail(resultSetReceiver.getString("email"));
-        receiver.setTelephone(resultSetReceiver.getString("telephone"));
-        receiver.setPublicKeyFromString(resultSetReceiver.getString("publicKey"));
-        conversation.setReceiver(receiver);
+        conversation.setSender(iServices.getUser(resultSet.getLong("senderId")));
+        conversation.setReceiver(iServices.getUser(resultSet.getLong("receiverId")));
         conversation.setInsertedAt(resultSet.getDate("insertedAt"));
         conversation.setInsertedAt(resultSet.getDate("insertedAt"));
+        String queryMessages = "Select * from messages";
+        PreparedStatement statementMessages=connection.prepareStatement(queryMessages);
+        ResultSet resultSetMessages=statementMessages.executeQuery();
+        List<Message> messages = new ArrayList<>();
+        while(resultSetMessages.next())
+        {
+            Message message=new Message();
+            message.setId(resultSetMessages.getLong("id"));
+            User sender = new User(resultSetMessages.getLong("senderId"));
+            User receiver = new User(resultSetMessages.getLong("receiverId"));
+            message.setSender(sender);
+            message.setReceiver(receiver);
+            message.setContent(resultSetMessages.getString("content"));
+            message.setInsertedAt(resultSet.getDate("insertedAt"));
+            message.setInsertedAt(resultSet.getDate("insertedAt"));
+            messages.add(message);
+        }
+        conversation.setInsertedAt(resultSet.getDate("insertedAt"));
+        conversation.setInsertedAt(resultSet.getDate("insertedAt"));
+        conversation.setMessages(messages);
         return conversation;
     }
 
     @Override
     public List<Conversation> getConversations() throws Exception {
+        IServices iServices = new DefaultServices();
         List<Conversation> conversations = new ArrayList<Conversation>();
         Connection connection=mysqlSession.getConnection();
         String query="Select * from conversations" ;
@@ -125,34 +127,31 @@ public class ConversationDaoJDBC  implements  IConversation{
         {
             Conversation conversation = new Conversation();
             conversation.setId(resultSet.getLong("id"));
-            String querySender="select * from users where uid=?";
-            PreparedStatement statementSender=connection.prepareStatement(querySender);
-            statementSender.setLong(1, resultSet.getLong("senderId"));
-            ResultSet resultSetSender=statementSender.executeQuery();
-            if(!resultSetSender.next())
-                return null;
-            User sender=new User();
-            sender.setUid(resultSet.getLong("uid"));
-            sender.setUsername(resultSet.getString("username"));
-            sender.setEmail(resultSet.getString("email"));
-            sender.setTelephone(resultSet.getString("telephone"));
-            sender.setPublicKeyFromString(resultSet.getString("publicKey"));
-            conversation.setSender(sender);
-            String queryReceiver="select * from users where uid=?";
-            PreparedStatement statementReceiver=connection.prepareStatement(queryReceiver);
-            statementReceiver.setLong(1, resultSet.getLong("receiverId"));
-            ResultSet resultSetReceiver=statementReceiver.executeQuery();
-            if(!resultSetReceiver.next())
-                return null;
-            User receiver=new User();
-            receiver.setUid(resultSet.getLong("uid"));
-            receiver.setUsername(resultSet.getString("username"));
-            receiver.setEmail(resultSet.getString("email"));
-            receiver.setTelephone(resultSet.getString("telephone"));
-            receiver.setPublicKeyFromString(resultSet.getString("publicKey"));
-            conversation.setSender(receiver);
+            conversation.setName(resultSet.getString("name"));
+            conversation.setSender(iServices.getUser(resultSet.getLong("senderId")));
+            conversation.setReceiver(iServices.getUser(resultSet.getLong("receiverId")));
             conversation.setInsertedAt(resultSet.getDate("insertedAt"));
             conversation.setInsertedAt(resultSet.getDate("insertedAt"));
+            String queryMessages = "Select * from messages";
+            PreparedStatement statementMessages=connection.prepareStatement(queryMessages);
+            ResultSet resultSetMessages=statementMessages.executeQuery();
+            List<Message> messages = new ArrayList<>();
+            while(resultSetMessages.next())
+            {
+                Message message=new Message();
+                message.setId(resultSetMessages.getLong("id"));
+                User sender = new User(resultSetMessages.getLong("senderId"));
+                User receiver = new User(resultSetMessages.getLong("receiverId"));
+                message.setSender(sender);
+                message.setReceiver(receiver);
+                message.setContent(resultSetMessages.getString("content"));
+                message.setInsertedAt(resultSet.getDate("insertedAt"));
+                message.setInsertedAt(resultSet.getDate("insertedAt"));
+                messages.add(message);
+            }
+            conversation.setInsertedAt(resultSet.getDate("insertedAt"));
+            conversation.setInsertedAt(resultSet.getDate("insertedAt"));
+            conversation.setMessages(messages);
             conversations.add(conversation);
         }
         connection.close();

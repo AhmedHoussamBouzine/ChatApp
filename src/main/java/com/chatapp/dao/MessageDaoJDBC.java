@@ -106,11 +106,12 @@ public class MessageDaoJDBC implements IMessage{
         User sender = iServices.getUser(resultSet.getLong("senderId"));
         User receiver = iServices.getUser(resultSet.getLong("receiverId"));
         Conversation conversation = iServices.getConversation(resultSet.getLong("conversationId"));
-
         message.setSender( sender );
         message.setReceiver( receiver );
         message.setConversation(conversation);
         message.setContent(resultSet.getString("content"));
+        message.setInsertedAt(resultSet.getDate("insertedAt"));
+        message.setInsertedAt(resultSet.getDate("insertedAt"));
         return message;
     }
 
@@ -134,6 +135,8 @@ public class MessageDaoJDBC implements IMessage{
             message.setSender( sender );
             message.setReceiver( receiver );
             message.setContent(resultSet.getString("EncryptedContent"));
+            message.setInsertedAt(resultSet.getDate("insertedAt"));
+            message.setInsertedAt(resultSet.getDate("insertedAt"));
             messages.add(message);
         }
         connection.close();

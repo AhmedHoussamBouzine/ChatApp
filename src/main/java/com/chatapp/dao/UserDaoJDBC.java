@@ -75,6 +75,8 @@ public class UserDaoJDBC implements IUser{
         user.setEmail(resultSet.getString("email"));
         user.setTelephone(resultSet.getString("telephone"));
         user.setPublicKeyFromString(resultSet.getString("publicKey"));
+        user.setInsertedAt(resultSet.getDate("insertedAt"));
+        user.setInsertedAt(resultSet.getDate("insertedAt"));
         return user;
     }
 
@@ -94,6 +96,8 @@ public class UserDaoJDBC implements IUser{
             user.setEmail(resultSet.getString("email"));
             user.setTelephone(resultSet.getString("telephone"));
             user.setPublicKeyFromString(resultSet.getString("publicKey"));
+            user.setInsertedAt(resultSet.getDate("insertedAt"));
+            user.setInsertedAt(resultSet.getDate("insertedAt"));
             users.add(user);
         }
         connection.close();
