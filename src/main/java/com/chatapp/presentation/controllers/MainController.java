@@ -37,6 +37,8 @@ public class MainController implements Initializable {
 
     Conversation selectedConversation;
 
+    List<Message> messages = new ArrayList<>();
+
     private void getMessages(){
         vboxMessages.setStyle(" -fx-background-color: #ECEFF1; \n" +
                 "    -fx-width: 100%;\n");
@@ -82,15 +84,14 @@ public class MainController implements Initializable {
                         "-fx-border-width: 1px 0px 1px 0px; " +
                         "-fx-border-color: #CCCCCC; " +
                         "-fx-padding: 10px 0px;");
+
                 System.out.println(conversation.toString());
                 rowLabel.setUserData(conversation.getId());
 
                 vboxConversations.getChildren().add(rowLabel);
-
             }
             conversationReceiver.setText(selectedConversation.getReceiver().getUsername());
             vboxConversations.getChildren().add(newConversation);
-            getMessages();
 
             for (Node node : vboxConversations.getChildren()) {
                 if (node instanceof Label) {
@@ -110,6 +111,8 @@ public class MainController implements Initializable {
                         }
                     });
                 }
+                vboxMessages.getChildren().clear();
+                getMessages();
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
