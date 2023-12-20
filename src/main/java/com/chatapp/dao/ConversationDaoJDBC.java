@@ -91,8 +91,9 @@ public class ConversationDaoJDBC  implements  IConversation{
         conversation.setReceiver(iServices.getUser(resultSet.getLong("receiverId")));
         conversation.setInsertedAt(resultSet.getDate("insertedAt"));
         conversation.setInsertedAt(resultSet.getDate("insertedAt"));
-        String queryMessages = "Select * from messages";
+        String queryMessages = "Select * from messages where id = ?";
         PreparedStatement statementMessages=connection.prepareStatement(queryMessages);
+        statementMessages.setLong(1, conversation.getId());
         ResultSet resultSetMessages=statementMessages.executeQuery();
         List<Message> messages = new ArrayList<>();
         while(resultSetMessages.next())
@@ -132,8 +133,9 @@ public class ConversationDaoJDBC  implements  IConversation{
             conversation.setReceiver(iServices.getUser(resultSet.getLong("receiverId")));
             conversation.setInsertedAt(resultSet.getDate("insertedAt"));
             conversation.setInsertedAt(resultSet.getDate("insertedAt"));
-            String queryMessages = "Select * from messages";
+            String queryMessages = "Select * from messages where id = ?";
             PreparedStatement statementMessages=connection.prepareStatement(queryMessages);
+            statementMessages.setLong(1, conversation.getId());
             ResultSet resultSetMessages=statementMessages.executeQuery();
             List<Message> messages = new ArrayList<>();
             while(resultSetMessages.next())
