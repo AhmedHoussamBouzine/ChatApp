@@ -100,7 +100,7 @@
       <workItem from="1700666423521" duration="3808000" />
       <workItem from="1702673709250" duration="6783000" />
       <workItem from="1702842042375" duration="14311000" />
-      <workItem from="1703091606045" duration="19131000" />
+      <workItem from="1703091606045" duration="19516000" />
     </task>
     <task id="LOCAL-00001" summary="setup projects">
       <option name="closed" value="true" />
@@ -278,7 +278,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703113763914</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="`feat` : create labels dynamically">
+      <option name="closed" value="true" />
+      <created>1703114582203</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1703114582203</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -33,9 +33,9 @@ public class MainController implements Initializable {
     @FXML
     private Label conversationReceiver;
     Button newConversation = new Button("New");
-    long loggedUserId = 1;
 
     Conversation selectedConversation;
+    long loggedUserId = 1;
 
     List<Message> messages = new ArrayList<>();
 
