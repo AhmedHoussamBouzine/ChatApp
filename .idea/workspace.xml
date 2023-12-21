@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbbece3f-26c5-45a6-bc5d-8659ba58e500" name="Changes" comment="`feat` : create labels dynamically" />
+    <list default="true" id="fbbece3f-26c5-45a6-bc5d-8659ba58e500" name="Changes" comment="`fix` : change the get messages query">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/ConversationDaoJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/ConversationDaoJDBC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/presentation/controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/presentation/controllers/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/chatapp/fxml/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/chatapp/fxml/Main.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -98,7 +103,8 @@
       <workItem from="1700666423521" duration="3808000" />
       <workItem from="1702673709250" duration="6783000" />
       <workItem from="1702842042375" duration="14311000" />
-      <workItem from="1703091606045" duration="19833000" />
+      <workItem from="1703091606045" duration="20584000" />
+      <workItem from="1703168136429" duration="1940000" />
     </task>
     <task id="LOCAL-00001" summary="setup projects">
       <option name="closed" value="true" />
@@ -292,7 +298,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703114731407</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="`fix` : change the get messages query">
+      <option name="closed" value="true" />
+      <created>1703115466214</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1703115466214</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -333,6 +347,7 @@
     <MESSAGE value="`fix` : fix gluon problem" />
     <MESSAGE value="`fix` : fix conversation problem" />
     <MESSAGE value="`feat` : create labels dynamically" />
-    <option name="LAST_COMMIT_MESSAGE" value="`feat` : create labels dynamically" />
+    <MESSAGE value="`fix` : change the get messages query" />
+    <option name="LAST_COMMIT_MESSAGE" value="`fix` : change the get messages query" />
   </component>
 </project>

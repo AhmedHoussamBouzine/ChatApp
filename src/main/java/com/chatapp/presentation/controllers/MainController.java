@@ -2,8 +2,11 @@ package com.chatapp.presentation.controllers;
 
 import com.chatapp.beans.Conversation;
 import com.chatapp.beans.Message;
+import com.chatapp.beans.User;
 import com.chatapp.business.DefaultServices;
 import com.chatapp.business.IServices;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -25,11 +28,15 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
     IServices iServices;
-    List<Conversation> conversations = new ArrayList<Conversation>();
+    ObservableList<Conversation> conversations = FXCollections.observableArrayList();
     @FXML
     private VBox vboxConversations ;
     @FXML
     private VBox vboxMessages ;
+    @FXML
+    private Button sendButton;
+    @FXML
+    private TextField inputMessage;
     @FXML
     private Label conversationReceiver;
     Button newConversation = new Button("New");
@@ -37,7 +44,23 @@ public class MainController implements Initializable {
     Conversation selectedConversation;
     long loggedUserId = 1;
 
-    List<Message> messages = new ArrayList<>();
+    User loggedUser;
+
+    ObservableList<Message> messages = FXCollections.observableArrayList();
+
+    public void sendMessage() throws Exception {
+        Message message = new Message();
+        message.setContent(inputMessage.getText());
+        message.setConversation(selectedConversation);
+        message.setSender(loggedUser);
+        message.setReceiver(loggedUser);
+        System.out.println(message);
+        iServices.addMessage(message);
+        inputMessage.clear();
+        messages.clear();
+        messages.setAll(selectedConversation.getMessages());
+        getMessages();
+    }
 
     private void getMessages(){
         vboxMessages.setStyle(" -fx-background-color: #ECEFF1; \n" +
@@ -72,9 +95,10 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         iServices = new DefaultServices();
         try {
-            conversations = iServices.getConversations();
-            selectedConversation  = iServices.getConversation(1);
-
+            loggedUser = iServices.getUser(loggedUserId);
+            conversations.setAll(iServices.getConversations());
+            selectedConversation  = iServices.getConversation(3);
+            messages.setAll(selectedConversation.getMessages());
             for (Conversation conversation: conversations) {
                 String conversationName = conversation.getName();
                 Label rowLabel = new Label(conversationName);
