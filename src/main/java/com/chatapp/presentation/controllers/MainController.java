@@ -10,16 +10,18 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -39,14 +41,61 @@ public class MainController implements Initializable {
     private TextField inputMessage;
     @FXML
     private Label conversationReceiver;
+    @FXML
+    private ScrollPane divMessages;
+    @FXML
+    private ScrollPane sidebar;
     Button newConversation = new Button("New");
-
     Conversation selectedConversation;
     long loggedUserId = 1;
 
     User loggedUser;
 
     ObservableList<Message> messages = FXCollections.observableArrayList();
+
+    public void addConversation(){
+        Stage formStage = new Stage();
+        formStage.initModality(Modality.APPLICATION_MODAL); // Block interactions with other windows
+        formStage.setTitle("Add Data Form");
+
+        VBox formRoot = new VBox(10);
+        formRoot.setPadding(new Insets(20));
+
+        ComboBox<User> comboBox = new ComboBox<>();
+        try {
+            comboBox.getItems().addAll(iServices.getUsers());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        Label label = new Label("Choose a receiver:");
+        Button submitButton = new Button("Message");
+
+        submitButton.setOnAction(e -> {
+            User receiver = comboBox.getSelectionModel().getSelectedItem();
+            Conversation conversation = new Conversation(comboBox.getSelectionModel().getSelectedItem(),comboBox.getSelectionModel().getSelectedItem());
+            selectedConversation = conversation;
+            try {
+                iServices.addConversation(conversation);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+            System.out.println("Added to database: " + receiver.getUsername());
+            formStage.close();
+        });
+
+        formRoot.getChildren().addAll(label, comboBox, submitButton);
+
+        Scene formScene = new Scene(formRoot, 300, 200);
+        formStage.setScene(formScene);
+        formStage.setOnShown(event -> formStage.centerOnScreen());
+        formStage.showAndWait();
+        conversations.clear();
+        conversationReceiver.setText(selectedConversation.getReceiver().getUsername());
+        getMessages();
+        getMessages();
+        getConversations();
+        displayMessages();
+    }
 
     public void sendMessage() throws Exception {
         Message message = new Message();
@@ -58,15 +107,17 @@ public class MainController implements Initializable {
         iServices.addMessage(message);
         inputMessage.clear();
         messages.clear();
-        messages.setAll(selectedConversation.getMessages());
         getMessages();
     }
 
     private void getMessages(){
         vboxMessages.setStyle(" -fx-background-color: #ECEFF1; \n" +
                 "    -fx-width: 100%;\n");
+        vboxMessages.getChildren().clear();
         try {
-
+            System.out.println(selectedConversation.toString());
+            selectedConversation.getMessages().clear();
+            selectedConversation.setMessages(iServices.getMessagesByConversation(selectedConversation.getId()));
             for (Message message: selectedConversation.getMessages()) {
                 String messageContent = message.getContent();
                 Label rowMessage = new Label(messageContent);
@@ -76,7 +127,6 @@ public class MainController implements Initializable {
                         "-fx-font-weight: bold; -fx-alignment: center-left; " +
                         "-fx-padding: 10px 0px;" +
                         "-fx-width: 100%;");
-                System.out.println(selectedConversation.toString());
                 boolean isSentByLoggedUser = (message.getSender().getUid() == loggedUserId);
                 if (isSentByLoggedUser) {
                     rowMessage.setStyle("-fx-font-size: 11px; -fx-text-fill: #333333; " +
@@ -85,10 +135,69 @@ public class MainController implements Initializable {
                             "-fx-width: 100%;");
                 }
                 vboxMessages.getChildren().add(rowMessage);
-
+                vboxMessages.heightProperty().addListener((observable, oldValue, newValue) -> {
+                    divMessages.setVvalue(1.0); // Scroll to the bottom
+                });
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private void getConversations(){
+        vboxConversations.setStyle("-fx-width: 100%;\n");
+        vboxConversations.setAlignment(Pos.CENTER);
+        vboxConversations.getChildren().clear();
+        try {
+            conversations.setAll(iServices.getConversations());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        for (Conversation conversation: conversations) {
+            String conversationName = conversation.getName();
+            Label rowLabel = new Label(conversation.getReceiver().getUsername());
+
+            rowLabel.setStyle(
+                    "-fx-font-size: 11px; " +
+                    "-fx-font-weight: bold;"+
+                    "-fx-border-width: 1px 0px 1px 0px; " +
+                    "-fx-padding: 10px 0px;"+
+                    "-fx-width: 100%;"
+            );
+            System.out.println(conversation.toString());
+            rowLabel.setUserData(conversation.getId());
+
+            vboxConversations.getChildren().add(rowLabel);
+        }
+        vboxConversations.heightProperty().addListener((observable, oldValue, newValue) -> {
+            sidebar.setVvalue(1.0); // Scroll to the bottom
+        });
+        newConversation.setId("newConversation");
+        vboxConversations.getChildren().add(newConversation);
+
+    }
+    public void displayMessages(){
+        for (Node node : vboxConversations.getChildren()) {
+            if (node instanceof Label) {
+                Label label = (Label) node;
+                label.setOnMouseClicked(event -> {
+
+                    long clickedConversationId = (long) label.getUserData();
+
+                    for (Conversation conv : conversations) {
+                        if (conv.getId() == clickedConversationId) {
+                            selectedConversation = conv;
+                            conversationReceiver.setText(selectedConversation.getReceiver().getUsername());
+                            vboxMessages.getChildren().clear();
+                            getMessages();
+                            break;
+                        }
+                    }
+                });
+            }
+            vboxMessages.getChildren().clear();
+            getMessages();
+            newConversation.setOnAction(e -> addConversation());
         }
     }
     @Override
@@ -99,45 +208,11 @@ public class MainController implements Initializable {
             conversations.setAll(iServices.getConversations());
             selectedConversation  = iServices.getConversation(3);
             messages.setAll(selectedConversation.getMessages());
-            for (Conversation conversation: conversations) {
-                String conversationName = conversation.getName();
-                Label rowLabel = new Label(conversationName);
-
-                rowLabel.setStyle("-fx-font-size: 11px; -fx-text-fill: #333333; " +
-                        "-fx-font-weight: bold; -fx-alignment: center; " +
-                        "-fx-border-width: 1px 0px 1px 0px; " +
-                        "-fx-border-color: #CCCCCC; " +
-                        "-fx-padding: 10px 0px;");
-
-                System.out.println(conversation.toString());
-                rowLabel.setUserData(conversation.getId());
-
-                vboxConversations.getChildren().add(rowLabel);
-            }
+            getConversations();
+            displayMessages();
             conversationReceiver.setText(selectedConversation.getReceiver().getUsername());
-            vboxConversations.getChildren().add(newConversation);
 
-            for (Node node : vboxConversations.getChildren()) {
-                if (node instanceof Label) {
-                    Label label = (Label) node;
-                    label.setOnMouseClicked(event -> {
 
-                        long clickedConversationId = (long) label.getUserData();
-
-                        for (Conversation conv : conversations) {
-                            if (conv.getId() == clickedConversationId) {
-                                selectedConversation = conv;
-                                conversationReceiver.setText(selectedConversation.getReceiver().getUsername());
-                                vboxMessages.getChildren().clear();
-                                getMessages();
-                                break;
-                            }
-                        }
-                    });
-                }
-                vboxMessages.getChildren().clear();
-                getMessages();
-            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

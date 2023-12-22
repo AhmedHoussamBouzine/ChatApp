@@ -102,4 +102,9 @@ public class DefaultServices implements IServices {
     public List<Message> getMessages() throws Exception {
         return iMessage.getMessages();
     }
+
+    @Override
+    public List<Message> getMessagesByConversation(long id) throws Exception {
+        return iMessage.getMessagesByConversation(id);
+    }
 }

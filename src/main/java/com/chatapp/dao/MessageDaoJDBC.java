@@ -117,6 +117,8 @@ public class MessageDaoJDBC implements IMessage{
 
     @Override
     public List<Message> getMessages() throws Exception {
+        IServices iServices = new DefaultServices();
+
         List<Message> messages=new ArrayList<Message>();
 
         Connection connection = mysqlSession.getConnection();
@@ -129,12 +131,45 @@ public class MessageDaoJDBC implements IMessage{
             Message message=new Message();
             message.setId(resultSet.getLong("id"));
 
-            User sender = new User(resultSet.getLong("Sender"));
-            User receiver = new User(resultSet.getLong("Receiver"));
-
+            User sender = iServices.getUser(resultSet.getLong("senderId"));
+            User receiver = iServices.getUser(resultSet.getLong("receiverId"));
+            Conversation conversation = iServices.getConversation(resultSet.getLong("conversationId"));
             message.setSender( sender );
             message.setReceiver( receiver );
-            message.setContent(resultSet.getString("EncryptedContent"));
+            message.setConversation(conversation);
+            message.setContent(resultSet.getString("content"));
+            message.setInsertedAt(resultSet.getDate("insertedAt"));
+            message.setInsertedAt(resultSet.getDate("insertedAt"));
+            messages.add(message);
+        }
+        connection.close();
+        return messages;
+    }
+
+    @Override
+    public List<Message> getMessagesByConversation(long id) throws Exception {
+        IServices iServices = new DefaultServices();
+
+        List<Message> messages=new ArrayList<Message>();
+
+        Connection connection = mysqlSession.getConnection();
+        String query = "Select * from messages where conversationId = ?";
+        PreparedStatement statement=connection.prepareStatement(query);
+        statement.setLong(1, id);
+        ResultSet resultSet=statement.executeQuery();
+
+        while(resultSet.next())
+        {
+            Message message=new Message();
+            message.setId(resultSet.getLong("id"));
+
+            User sender = iServices.getUser(resultSet.getLong("senderId"));
+            User receiver = iServices.getUser(resultSet.getLong("receiverId"));
+            Conversation conversation = iServices.getConversation(resultSet.getLong("conversationId"));
+            message.setSender( sender );
+            message.setReceiver( receiver );
+            message.setConversation(conversation);
+            message.setContent(resultSet.getString("content"));
             message.setInsertedAt(resultSet.getDate("insertedAt"));
             message.setInsertedAt(resultSet.getDate("insertedAt"));
             messages.add(message);

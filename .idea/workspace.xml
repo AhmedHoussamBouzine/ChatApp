@@ -4,10 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbbece3f-26c5-45a6-bc5d-8659ba58e500" name="Changes" comment="`fix` : change the get messages query">
+    <list default="true" id="fbbece3f-26c5-45a6-bc5d-8659ba58e500" name="Changes" comment="`feat` : send message works">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/server/ChatServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/ConversationDaoJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/ConversationDaoJDBC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/business/DefaultServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/business/DefaultServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/business/IServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/business/IServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/MessageDaoJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/MessageDaoJDBC.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/presentation/controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/presentation/controllers/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/presentation/views/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/presentation/views/MainApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/chatapp/fxml/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/chatapp/fxml/Main.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -104,7 +112,9 @@
       <workItem from="1702673709250" duration="6783000" />
       <workItem from="1702842042375" duration="14311000" />
       <workItem from="1703091606045" duration="20584000" />
-      <workItem from="1703168136429" duration="1940000" />
+      <workItem from="1703168136429" duration="6547000" />
+      <workItem from="1703232849716" duration="699000" />
+      <workItem from="1703254067152" duration="10622000" />
     </task>
     <task id="LOCAL-00001" summary="setup projects">
       <option name="closed" value="true" />
@@ -306,7 +316,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703115466214</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="`feat` : send message works">
+      <option name="closed" value="true" />
+      <created>1703170209535</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1703170209535</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -348,6 +366,18 @@
     <MESSAGE value="`fix` : fix conversation problem" />
     <MESSAGE value="`feat` : create labels dynamically" />
     <MESSAGE value="`fix` : change the get messages query" />
-    <option name="LAST_COMMIT_MESSAGE" value="`fix` : change the get messages query" />
+    <MESSAGE value="`feat` : send message works" />
+    <option name="LAST_COMMIT_MESSAGE" value="`feat` : send message works" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/chatapp/presentation/controllers/MainController.java</url>
+          <line>113</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

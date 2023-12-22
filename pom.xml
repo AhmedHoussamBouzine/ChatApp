@@ -11,7 +11,9 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-<junit.version>5.9.2</junit.version>  </properties>
+<junit.version>5.9.2</junit.version>
+    <javafx.version>17.0.6</javafx.version>
+  </properties>
 
   <dependencies>
     <dependency>
@@ -46,11 +48,6 @@
       <artifactId>junit-jupiter-engine</artifactId>
       <version>${junit.version}</version>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>gluonhq</groupId>
-      <artifactId>your-artifact-id</artifactId>
-      <version>4.1.1</version>
     </dependency>
 
 

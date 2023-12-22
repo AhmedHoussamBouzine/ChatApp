@@ -10,4 +10,5 @@ public interface IMessage {
     public boolean updateMessage(Message message) throws Exception;
     public Message getMessage(long id) throws Exception;
     public List<Message> getMessages() throws Exception;
+    public List<Message> getMessagesByConversation(long id) throws Exception;
 }

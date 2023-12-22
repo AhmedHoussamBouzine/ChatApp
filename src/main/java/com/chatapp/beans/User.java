@@ -105,16 +105,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "uid=" + uid +
-                ", username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", telephone='" + telephone + '\'' +
-                ", publicKey=" + Base64.getEncoder().encodeToString(publicKey.getEncoded()) +
-                ", insertedAt=" + insertedAt +
-                ", updatedAt=" + updatedAt +
-                '}';
+        return username;
     }
 
     public void setPublicKeyFromString(String publicKeyString) {
