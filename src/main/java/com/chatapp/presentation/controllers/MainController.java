@@ -5,9 +5,9 @@ import com.chatapp.beans.Message;
 import com.chatapp.beans.User;
 import com.chatapp.business.DefaultServices;
 import com.chatapp.business.IServices;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -15,26 +15,19 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+import java.security.PrivateKey;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
     IServices iServices;
+    Socket socket;
     ObservableList<Conversation> conversations = FXCollections.observableArrayList();
     @FXML
     private VBox vboxConversations ;
@@ -52,8 +45,7 @@ public class MainController implements Initializable {
     private ScrollPane sidebar;
     Button newConversation = new Button("New");
     Conversation selectedConversation;
-    long loggedUserId = 1;
-
+    long loggedUserId = 6;
     User loggedUser;
     private static final String SERVER_IP = "127.0.0.1";
     private static final int PORT = 9090;
@@ -63,7 +55,7 @@ public class MainController implements Initializable {
     public void addConversation(){
         Stage formStage = new Stage();
         formStage.initModality(Modality.APPLICATION_MODAL); // Block interactions with other windows
-        formStage.setTitle("Add Data Form");
+        formStage.setTitle("Create new Conversation");
 
         VBox formRoot = new VBox(10);
         formRoot.setPadding(new Insets(20));
@@ -79,10 +71,12 @@ public class MainController implements Initializable {
 
         submitButton.setOnAction(e -> {
             User receiver = comboBox.getSelectionModel().getSelectedItem();
-            Conversation conversation = new Conversation(comboBox.getSelectionModel().getSelectedItem(),comboBox.getSelectionModel().getSelectedItem());
-            selectedConversation = conversation;
+            Conversation conversation = new Conversation(loggedUser,comboBox.getSelectionModel().getSelectedItem());
             try {
                 iServices.addConversation(conversation);
+                selectedConversation = conversation;
+                selectedConversation.setId(iServices.getLastConversation().getId());
+                System.out.println(selectedConversation);
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
@@ -105,36 +99,39 @@ public class MainController implements Initializable {
     }
 
     public void sendMessage() throws Exception {
+        socket = new Socket(SERVER_IP, PORT);
         Message message = new Message();
-        message.setContent(inputMessage.getText());
+        message.setContent(Message.encryptMessageContent(inputMessage.getText(),selectedConversation.getReceiver().getPublicKey()));
         message.setConversation(selectedConversation);
         message.setSender(loggedUser);
-        message.setReceiver(loggedUser);
+        message.setReceiver(selectedConversation.getReceiver());
         System.out.println(message);
-        Socket socket = new Socket(SERVER_IP, PORT);
-        BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
-        PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
+        ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
+        ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
+        try {
+            outputStream.writeObject(message);
+            outputStream.flush();
+            Object receivedObject = inputStream.readObject();
+            if (receivedObject instanceof Message) {
+                Message confirmationMessage = (Message) receivedObject;
+                if (confirmationMessage.getReceiver().getUid() == loggedUserId){
+                    System.out.println("Confirmation received from server: " + confirmationMessage.getContent());
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
 
-
-        User user = loggedUser;
-        output.println(loggedUser.getUsername()); // Send username to server
-
-        new Thread(() -> {
             try {
-                BufferedReader serverInput = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-                String messageToSend = inputMessage.getText();
-
-                while ((messageToSend = serverInput.readLine()) != null) {
-                    System.out.println(messageToSend);
+                if (outputStream != null) {
+                    outputStream.close();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }).start();
-
-        String input = inputMessage.getText(); // Get message from your JavaFX text field
-        output.println(input); // Send the message to the server
+        }
 
         iServices.addMessage(message);
         inputMessage.clear();
@@ -150,26 +147,41 @@ public class MainController implements Initializable {
             System.out.println(selectedConversation.toString());
             selectedConversation.getMessages().clear();
             selectedConversation.setMessages(iServices.getMessagesByConversation(selectedConversation.getId()));
-            for (Message message: selectedConversation.getMessages()) {
-                String messageContent = message.getContent();
-                Label rowMessage = new Label(messageContent);
-                rowMessage.setPrefWidth(360);
-                rowMessage.setPrefHeight(20);
-                rowMessage.setStyle("-fx-font-size: 11px; -fx-text-fill: #333333; " +
-                        "-fx-font-weight: bold; -fx-alignment: center-left; " +
-                        "-fx-padding: 10px 0px;" +
-                        "-fx-width: 100%;");
-                boolean isSentByLoggedUser = (message.getSender().getUid() == loggedUserId);
-                if (isSentByLoggedUser) {
+            if(!selectedConversation.getMessages().isEmpty()){
+                for (Message message: selectedConversation.getMessages()) {
+                    PrivateKey privateKey = null;
+                    try {
+                        ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(message.getReceiver().getUsername()+".bin"));
+                        Object obj = inputStream.readObject();
+
+                        if (obj instanceof PrivateKey) {
+                            privateKey = (PrivateKey) obj;
+                        } else {
+                            System.out.println("Unexpected object type in file.");
+                        }
+                    }catch (Exception e){
+
+                    }
+                    String messageContent = Message.decryptMessageContent(message.getContent(),privateKey);
+                    Label rowMessage = new Label(messageContent);
+                    rowMessage.setPrefWidth(360);
+                    rowMessage.setPrefHeight(20);
                     rowMessage.setStyle("-fx-font-size: 11px; -fx-text-fill: #333333; " +
-                    "-fx-font-weight: bold; -fx-alignment: center-right; " +
+                            "-fx-font-weight: bold; -fx-alignment: center-left; " +
                             "-fx-padding: 10px 0px;" +
                             "-fx-width: 100%;");
+                    boolean isSentByLoggedUser = (message.getSender().getUid() == loggedUserId);
+                    if (isSentByLoggedUser) {
+                        rowMessage.setStyle("-fx-font-size: 11px; -fx-text-fill: #333333; " +
+                                "-fx-font-weight: bold; -fx-alignment: center-right; " +
+                                "-fx-padding: 10px 0px;" +
+                                "-fx-width: 100%;");
+                    }
+                    vboxMessages.getChildren().add(rowMessage);
+                    vboxMessages.heightProperty().addListener((observable, oldValue, newValue) -> {
+                        divMessages.setVvalue(1.0); // Scroll to the bottom
+                    });
                 }
-                vboxMessages.getChildren().add(rowMessage);
-                vboxMessages.heightProperty().addListener((observable, oldValue, newValue) -> {
-                    divMessages.setVvalue(1.0); // Scroll to the bottom
-                });
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -206,7 +218,6 @@ public class MainController implements Initializable {
         });
         newConversation.setId("newConversation");
         vboxConversations.getChildren().add(newConversation);
-
     }
     public void displayMessages(){
         for (Node node : vboxConversations.getChildren()) {
@@ -232,18 +243,31 @@ public class MainController implements Initializable {
             newConversation.setOnAction(e -> addConversation());
         }
     }
+    private void handleServerMessages() {
+        try {
+            Socket socket = new Socket(SERVER_IP, PORT);
+            ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
+
+            while (true) {
+                Message receivedMessage = (Message) inputStream.readObject();
+
+                System.out.println("Received message: " + receivedMessage.getContent());
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         iServices = new DefaultServices();
         try {
             loggedUser = iServices.getUser(loggedUserId);
             conversations.setAll(iServices.getConversations());
-            selectedConversation  = iServices.getConversation(3);
+            selectedConversation  = iServices.getConversation(21);
             messages.setAll(selectedConversation.getMessages());
             getConversations();
             displayMessages();
             conversationReceiver.setText(selectedConversation.getReceiver().getUsername());
-
 
         } catch (Exception e) {
             throw new RuntimeException(e);

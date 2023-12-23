@@ -11,4 +11,5 @@ public interface IConversation {
     public boolean updateConversation(Conversation conversation) throws Exception;
     public Conversation getConversation(long id) throws Exception;
     public List<Conversation> getConversations() throws Exception;
+    public Conversation getLastConversation() throws Exception;
 }

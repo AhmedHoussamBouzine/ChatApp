@@ -114,6 +114,46 @@ public class ConversationDaoJDBC  implements  IConversation{
         conversation.setMessages(messages);
         return conversation;
     }
+    public Conversation getLastConversation() throws Exception {
+        IServices iServices = new DefaultServices();
+        Connection connection = mysqlSession.getConnection() ;
+        String query = "select * from conversations ORDER BY id desc limit 1;" ;
+        PreparedStatement statement = connection.prepareStatement(query);
+        ResultSet resultSet=statement.executeQuery();
+        if(!resultSet.next())
+            return null;
+        Conversation conversation = new Conversation();
+        conversation.setId(resultSet.getLong("id"));
+        conversation.setName(resultSet.getString("name"));
+        conversation.setSender(iServices.getUser(resultSet.getLong("senderId")));
+        conversation.setReceiver(iServices.getUser(resultSet.getLong("receiverId")));
+        conversation.setInsertedAt(resultSet.getDate("insertedAt"));
+        conversation.setInsertedAt(resultSet.getDate("insertedAt"));
+        String queryMessages = "Select * from messages where id = ?";
+        PreparedStatement statementMessages=connection.prepareStatement(queryMessages);
+        statementMessages.setLong(1, conversation.getId());
+        ResultSet resultSetMessages=statementMessages.executeQuery();
+        List<Message> messages = new ArrayList<>();
+        while(resultSetMessages.next())
+        {
+            Message message=new Message();
+            message.setId(resultSetMessages.getLong("id"));
+            User sender = new User(resultSetMessages.getLong("senderId"));
+            User receiver = new User(resultSetMessages.getLong("receiverId"));
+            message.setSender(sender);
+            message.setReceiver(receiver);
+            message.setContent(resultSetMessages.getString("content"));
+            message.setInsertedAt(resultSet.getDate("insertedAt"));
+            message.setInsertedAt(resultSet.getDate("insertedAt"));
+            messages.add(message);
+        }
+        conversation.setInsertedAt(resultSet.getDate("insertedAt"));
+        conversation.setInsertedAt(resultSet.getDate("insertedAt"));
+        conversation.setMessages(messages);
+        return conversation;
+    }
+
+
 
     @Override
     public List<Conversation> getConversations() throws Exception {

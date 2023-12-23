@@ -1,12 +1,13 @@
 package com.chatapp.beans;
 
 import javax.crypto.Cipher;
+import java.io.Serializable;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.Base64;
 import java.util.Date;
 
-public class Message {
+public class Message implements Serializable {
     private long id;
     private User sender, receiver;
     private String content;
@@ -93,6 +94,7 @@ public class Message {
         byte[] decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(encryptedContent));
         return new String(decryptedBytes);
     }
+
 
     @Override
     public String toString() {

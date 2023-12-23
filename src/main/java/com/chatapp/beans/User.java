@@ -1,13 +1,16 @@
 package com.chatapp.beans;
 
-import java.security.KeyFactory;
-import java.security.PrivateKey;
-import java.security.PublicKey;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.security.*;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 import java.util.Date;
 
-public class User {
+import static com.chatapp.beans.Conversation.generateKeyPair;
+
+public class User implements Serializable {
     private long uid ;
     private String username, email, password, telephone;
     private PublicKey publicKey;
@@ -31,12 +34,28 @@ public class User {
         this.derivedKey = derivedKey;
     }
 
-    public User(long uid, String username, String email, String password, String telephone) {
-        this.uid = uid;
+    public User(String username, String email, String password, String telephone) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.telephone = telephone;
+
+        KeyPair keyPair = null;
+        try {
+            keyPair = generateKeyPair();
+            PrivateKey privateKey = keyPair.getPrivate();
+            this.publicKey = keyPair.getPublic();
+            String filePath = username+".bin";
+            try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(filePath))) {
+                outputStream.writeObject(privateKey);
+                System.out.println("Object saved to " + filePath);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public void setUid(long uid) {

@@ -4,6 +4,7 @@ module com.chatapp {
     requires java.sql;
     requires mysql.connector.j;
     requires jbcrypt;
+    requires org.slf4j;
 
     opens com.chatapp.presentation.controllers to javafx.fxml;
     exports com.chatapp.presentation.controllers;

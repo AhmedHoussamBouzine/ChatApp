@@ -1,5 +1,8 @@
 package com.chatapp.beans;
 
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.security.*;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.ArrayList;
@@ -7,7 +10,7 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
-public class Conversation {
+public class Conversation implements Serializable {
     private long id;
     private String name;
     private List<Message> messages;
@@ -85,12 +88,22 @@ public class Conversation {
     }
 
     public List<Message> getMessages() throws Exception {
-//        List<Message> decryptedMessages = new ArrayList<>();
-//        for (Message msg : messages) {
-//            // Decrypt each message content when retrieving
-//            //String decryptedContent = Message.decryptMessageContent(msg.getContent(), this.getReceiverPrivateKey());
-//           //  decryptedMessages.add(new Message(msg.getSender(), msg.getReceiver(), decryptedContent));
-//        }
+        List<Message> decryptedMessages = new ArrayList<>();
+        PrivateKey privateKey = null;
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(receiver.getUsername()+".bin"))) {
+            // Read the object from the file
+            Object obj = inputStream.readObject();
+
+            if (obj instanceof PrivateKey) {
+                privateKey = (PrivateKey) obj;
+            } else {
+                System.out.println("Unexpected object type in file.");
+            }
+        for (Message msg : messages) {
+           String decryptedContent = Message.decryptMessageContent(msg.getContent(), privateKey);
+             decryptedMessages.add(new Message(msg.getSender(), msg.getReceiver(), decryptedContent));
+        }
+        }
         return messages;
     }
 

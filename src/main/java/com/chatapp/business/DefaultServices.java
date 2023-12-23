@@ -53,6 +53,9 @@ public class DefaultServices implements IServices {
     public List<Conversation> getConversations() throws Exception {
         return iConversation.getConversations();
     }
+    public Conversation getLastConversation() throws Exception{
+        return iConversation.getLastConversation();
+    }
 
     @Override
     public User addUser(User user) throws Exception {
@@ -107,4 +110,5 @@ public class DefaultServices implements IServices {
     public List<Message> getMessagesByConversation(long id) throws Exception {
         return iMessage.getMessagesByConversation(id);
     }
+
 }

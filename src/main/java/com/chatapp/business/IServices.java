@@ -30,4 +30,5 @@ public interface IServices {
     public Message getMessage(long id) throws Exception;
     public List<Message> getMessages() throws Exception;
     public List<Message> getMessagesByConversation(long id) throws Exception;
+    public Conversation getLastConversation() throws Exception;
 }

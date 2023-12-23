@@ -14,7 +14,7 @@ public class MainApplication extends Application {
         Platform.setImplicitExit(true);
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("/com/chatapp/fxml/Main.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-        stage.setTitle("Hello!");
+        stage.setTitle("ChatApp");
         stage.setScene(scene);
         stage.show();
     }
