@@ -15,9 +15,7 @@ public class ChatServer {
 
     private static IServices iServices;
 
-    public ChatServer(){
-        iServices = new DefaultServices();
-    }
+
     public static void main(String[] args) {
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             System.out.println("Server is running. Waiting for clients...");
@@ -38,13 +36,15 @@ public class ChatServer {
 
             String username = input.readLine(); // Receive the username from client
             System.out.println(username + " has connected.");
-
+            iServices = new DefaultServices();
             User user = iServices.getUser(1);
             users.put(username, user);
             connectedClients.put(username, clientSocket);
 
             String message;
             while ((message = input.readLine()) != null) {
+                System.out.println(username + ": " + message); // Display messages in server console
+
                 String[] parts = message.split(":", 2);
                 if (parts.length >= 2) {
                     String recipient = parts[0].trim();
@@ -59,6 +59,7 @@ public class ChatServer {
                     }
                 }
             }
+
 
             clientSocket.close();
             connectedClients.remove(username);
