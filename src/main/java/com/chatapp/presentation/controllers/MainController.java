@@ -73,6 +73,15 @@ public class MainController implements Initializable {
             User receiver = comboBox.getSelectionModel().getSelectedItem();
             Conversation conversation = new Conversation(loggedUser,comboBox.getSelectionModel().getSelectedItem());
             try {
+                for (Conversation conv : conversations) {
+                    if (conv.getReceiver() == conversation.getReceiver() && conv.getSender()== conversation.getSender()) {
+                        selectedConversation = conversation;
+                        conversationReceiver.setText(selectedConversation.getReceiver().getUsername());
+                        getMessages();
+                        displayMessages();
+                        return;
+                    }
+                }
                 iServices.addConversation(conversation);
                 selectedConversation = conversation;
                 selectedConversation.setId(iServices.getLastConversation().getId());
@@ -268,7 +277,6 @@ public class MainController implements Initializable {
             getConversations();
             displayMessages();
             conversationReceiver.setText(selectedConversation.getReceiver().getUsername());
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
