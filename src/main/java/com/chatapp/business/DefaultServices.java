@@ -78,6 +78,11 @@ public class DefaultServices implements IServices {
     }
 
     @Override
+    public User getUserByUsername(String username) throws Exception {
+        return iUser.getUserByUsername(username);
+    }
+
+    @Override
     public List<User> getUsers() throws Exception {
         return iUser.getUsers();
     }

@@ -81,6 +81,26 @@ public class UserDaoJDBC implements IUser{
     }
 
     @Override
+    public User getUserByUsername(String username) throws Exception {
+        Connection connection=mysqlSession.getConnection();
+        String query="select * from users where username=?";
+        PreparedStatement statement=connection.prepareStatement(query);
+        statement.setString(1, username);
+        ResultSet resultSet=statement.executeQuery();
+        if(!resultSet.next())
+            return null;
+        User user=new User();
+        user.setUid(resultSet.getLong("uid"));
+        user.setUsername(resultSet.getString("username"));
+        user.setEmail(resultSet.getString("email"));
+        user.setTelephone(resultSet.getString("telephone"));
+        user.setPublicKeyFromString(resultSet.getString("publicKey"));
+        user.setInsertedAt(resultSet.getDate("insertedAt"));
+        user.setInsertedAt(resultSet.getDate("insertedAt"));
+        return user;
+    }
+
+    @Override
     public List<User> getUsers() throws Exception {
         List<User> users=new ArrayList<User>();
 

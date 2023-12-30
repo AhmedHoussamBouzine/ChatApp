@@ -12,26 +12,22 @@ import java.net.Socket;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.MessageDigest;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
+
 public class Server {
 
     /* Setting up variables */
     private static final int PORT = 9090;
-    private static final HashMap<String, User> names = new HashMap<>();
-    private static HashSet<ObjectOutputStream> writers = new HashSet<>();
-    private static ArrayList<User> users = new ArrayList<>();
     static Logger logger = LoggerFactory.getLogger(Server.class);
 
     public static void main(String[] args) throws Exception {
         logger.info("The chat server is running.");
+        Map<String,Socket> users = new HashMap<>();
         ServerSocket listener = new ServerSocket(PORT);
-
         try {
             while (true) {
-                new Handler(listener.accept()).start();
+                Socket socket = listener.accept();
+                new Handler(socket,users).start();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -79,115 +75,54 @@ public class Server {
         private Socket socket;
         private Logger logger = LoggerFactory.getLogger(Handler.class);
         private User user;
-        private ObjectInputStream input;
-        private OutputStream os;
-        private ObjectOutputStream output;
-        private InputStream is;
-
-        public Handler(Socket socket) throws IOException {
+        Map<String,Socket> users = new HashMap<>();
+        public Handler(Socket socket,Map<String,Socket> users){
             this.socket = socket;
+            this.users = users;
         }
+        public void receiveUsername(){
+            InputStream inputStream = null;
+            try {
+                inputStream = socket.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                String user = bufferedReader.readLine();
+                logger.info("Attempting to connect a user..." + user);
+                name = user;
+                users.put(user,socket);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        private void sendMessage(Message message) {
 
+            Socket destSocket = users.get(message.getReceiver().getUsername());
+            try {
+                OutputStream outputStream = destSocket.getOutputStream();
+                ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+                objectOutputStream.writeObject(message);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
         public void run() {
             logger.info("Attempting to connect a user...");
-
                 try {
-                    is = socket.getInputStream();
-                    input = new ObjectInputStream(is);
-                    os = socket.getOutputStream();
-                    output = new ObjectOutputStream(os);
-                    while (!socket.isClosed() && !socket.isInputShutdown()) {
-
-                        Object receivedObject = input.readObject();
-                        if (receivedObject instanceof Message) {
-                            Message receivedMessage = (Message) receivedObject;
-                            System.out.println("Received message from user: " + receivedMessage.getContent());
-                            addToList(receivedMessage);
-                            String recipientUsername = receivedMessage.getReceiver().getUsername();
-                            output.writeObject(receivedMessage);
-                            output.close();
-                            System.out.println("Message sent to user " + recipientUsername);
-                        }
-                        if (socket.isClosed() || socket.isInputShutdown()) {
-                            break;
-                        }
+                    InputStream inputStream = null;
+                    OutputStream outputStream = null;
+                    ObjectInputStream ois = null;
+                    receiveUsername();
+                    while (true) {
+                        System.out.println(socket);
+                        inputStream = socket.getInputStream();
+                        System.out.println(inputStream);
+                        ois = new ObjectInputStream(inputStream);
+                        Message message = (Message) ois.readObject();
+                        System.out.println("Received message from user: " + message.getSender().getUsername() + message.getContent());
+                        sendMessage(message);
                     }
                 } catch (Exception e) {
                     logger.error("Exception in run() method for user: " + name, e);
                 }
             }
-
-
-        private Message removeFromList() throws IOException {
-            logger.debug("removeFromList() method Enter");
-            Message msg = new Message();
-            msg.setContent("has left the chat.");
-            write(msg);
-            logger.debug("removeFromList() method Exit");
-            return msg;
         }
-
-        /*
-         * For displaying that a user has joined the server
-         */
-        private Message addToList(Message msg) throws IOException {
-            write(msg);
-            return msg;
-        }
-
-        /*
-         * Creates and sends a Message type to the listeners.
-         */
-        private void write(Message msg) throws IOException {
-            for (ObjectOutputStream writer : writers) {
-                writer.writeObject(msg);
-                writer.reset();
-            }
-        }
-
-        private synchronized void closeConnections()  {
-            logger.debug("closeConnections() method Enter");
-            logger.info("HashMap names:" + names.size() + " writers:" + writers.size() + " usersList size:" + users.size());
-            if (name != null) {
-                names.remove(name);
-                logger.info("User: " + name + " has been removed!");
-            }
-            if (user != null){
-                users.remove(user);
-                logger.info("User object: " + user + " has been removed!");
-            }
-            if (output != null){
-                writers.remove(output);
-                logger.info("Writer object: " + user + " has been removed!");
-            }
-            if (is != null){
-                try {
-                    is.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (os != null){
-                try {
-                    os.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (input != null){
-                try {
-                    input.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            try {
-                removeFromList();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            logger.info("HashMap names:" + names.size() + " writers:" + writers.size() + " usersList size:" + users.size());
-            logger.debug("closeConnections() method Exit");
-        }
-    }
 }

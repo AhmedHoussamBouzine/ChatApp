@@ -48,6 +48,13 @@
       <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>io.github.palexdev</groupId>
+      <artifactId>materialfx</artifactId>
+      <version>11.17.0</version>
+    </dependency>
+
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>

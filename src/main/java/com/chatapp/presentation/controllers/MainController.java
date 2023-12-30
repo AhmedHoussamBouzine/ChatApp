@@ -5,6 +5,7 @@ import com.chatapp.beans.Message;
 import com.chatapp.beans.User;
 import com.chatapp.business.DefaultServices;
 import com.chatapp.business.IServices;
+import com.chatapp.presentation.views.MainApplication;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,8 +27,8 @@ import java.security.PrivateKey;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
-    IServices iServices;
-    Socket socket;
+    private IServices iServices;
+    private Socket socket;
     ObservableList<Conversation> conversations = FXCollections.observableArrayList();
     @FXML
     private VBox vboxConversations ;
@@ -43,10 +44,10 @@ public class MainController implements Initializable {
     private ScrollPane divMessages;
     @FXML
     private ScrollPane sidebar;
-    Button newConversation = new Button("New");
-    Conversation selectedConversation;
-    long loggedUserId = 6;
-    User loggedUser;
+    private Button newConversation = new Button("New");
+    private Conversation selectedConversation;
+    public static long loggedUserId;
+    private  User loggedUser;
     private static final String SERVER_IP = "127.0.0.1";
     private static final int PORT = 9090;
 
@@ -76,7 +77,11 @@ public class MainController implements Initializable {
                 for (Conversation conv : conversations) {
                     if (conv.getReceiver() == conversation.getReceiver() && conv.getSender()== conversation.getSender()) {
                         selectedConversation = conversation;
-                        conversationReceiver.setText(selectedConversation.getReceiver().getUsername());
+                        if(selectedConversation.getSender().getUid()==loggedUserId) {
+                            conversationReceiver.setText(selectedConversation.getReceiver().getUsername());
+                        }else{
+                            conversationReceiver.setText(selectedConversation.getSender().getUsername());
+                        }
                         getMessages();
                         displayMessages();
                         return;
@@ -85,11 +90,9 @@ public class MainController implements Initializable {
                 iServices.addConversation(conversation);
                 selectedConversation = conversation;
                 selectedConversation.setId(iServices.getLastConversation().getId());
-                System.out.println(selectedConversation);
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
-            System.out.println("Added to database: " + receiver.getUsername());
             formStage.close();
         });
 
@@ -100,7 +103,11 @@ public class MainController implements Initializable {
         formStage.setOnShown(event -> formStage.centerOnScreen());
         formStage.showAndWait();
         conversations.clear();
-        conversationReceiver.setText(selectedConversation.getReceiver().getUsername());
+        if(selectedConversation.getSender().getUid()==loggedUserId) {
+            conversationReceiver.setText(selectedConversation.getReceiver().getUsername());
+        }else{
+            conversationReceiver.setText(selectedConversation.getSender().getUsername());
+        }
         getMessages();
         getMessages();
         getConversations();
@@ -113,47 +120,32 @@ public class MainController implements Initializable {
         message.setContent(Message.encryptMessageContent(inputMessage.getText(),selectedConversation.getReceiver().getPublicKey()));
         message.setConversation(selectedConversation);
         message.setSender(loggedUser);
-        message.setReceiver(selectedConversation.getReceiver());
-        System.out.println(message);
-        ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
-        ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
+        if (selectedConversation.getSender().getUid()==loggedUserId) {
+            message.setReceiver(selectedConversation.getReceiver());
+        }else{
+            message.setReceiver(selectedConversation.getSender());
+        }
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(MainApplication.socket.getOutputStream());
         try {
-            outputStream.writeObject(message);
-            outputStream.flush();
-            Object receivedObject = inputStream.readObject();
-            if (receivedObject instanceof Message) {
-                Message confirmationMessage = (Message) receivedObject;
-                if (confirmationMessage.getReceiver().getUid() == loggedUserId){
-                    System.out.println("Confirmation received from server: " + confirmationMessage.getContent());
-                }
-            }
+            objectOutputStream.writeObject(message);
+            objectOutputStream.flush();
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } finally {
 
-            try {
-                if (outputStream != null) {
-                    outputStream.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
-
-        iServices.addMessage(message);
         inputMessage.clear();
-        messages.clear();
+        iServices.addMessage(message);
         getMessages();
+
     }
 
     private void getMessages(){
+        messages.clear();
         vboxMessages.setStyle(" -fx-background-color: #ECEFF1; \n" +
                 "    -fx-width: 100%;\n");
         vboxMessages.getChildren().clear();
         try {
-            System.out.println(selectedConversation.toString());
             selectedConversation.getMessages().clear();
             selectedConversation.setMessages(iServices.getMessagesByConversation(selectedConversation.getId()));
             if(!selectedConversation.getMessages().isEmpty()){
@@ -162,7 +154,6 @@ public class MainController implements Initializable {
                     try {
                         ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(message.getReceiver().getUsername()+".bin"));
                         Object obj = inputStream.readObject();
-
                         if (obj instanceof PrivateKey) {
                             privateKey = (PrivateKey) obj;
                         } else {
@@ -207,9 +198,12 @@ public class MainController implements Initializable {
             throw new RuntimeException(e);
         }
         for (Conversation conversation: conversations) {
-            String conversationName = conversation.getName();
-            Label rowLabel = new Label(conversation.getReceiver().getUsername());
-
+            Label rowLabel = null;
+            if (conversation.getSender().getUid() == loggedUserId){
+                rowLabel = new Label(conversation.getReceiver().getUsername());
+            }else{
+                rowLabel = new Label(conversation.getSender().getUsername());
+            }
             rowLabel.setStyle(
                     "-fx-font-size: 11px; " +
                     "-fx-font-weight: bold;"+
@@ -217,7 +211,6 @@ public class MainController implements Initializable {
                     "-fx-padding: 10px 0px;"+
                     "-fx-width: 100%;"
             );
-            System.out.println(conversation.toString());
             rowLabel.setUserData(conversation.getId());
 
             vboxConversations.getChildren().add(rowLabel);
@@ -239,7 +232,11 @@ public class MainController implements Initializable {
                     for (Conversation conv : conversations) {
                         if (conv.getId() == clickedConversationId) {
                             selectedConversation = conv;
-                            conversationReceiver.setText(selectedConversation.getReceiver().getUsername());
+                            if(selectedConversation.getSender().getUid()==loggedUserId) {
+                                conversationReceiver.setText(selectedConversation.getReceiver().getUsername());
+                            }else{
+                                conversationReceiver.setText(selectedConversation.getSender().getUsername());
+                            }
                             vboxMessages.getChildren().clear();
                             getMessages();
                             break;
@@ -252,35 +249,155 @@ public class MainController implements Initializable {
             newConversation.setOnAction(e -> addConversation());
         }
     }
-    private void handleServerMessages() {
-        try {
-            Socket socket = new Socket(SERVER_IP, PORT);
-            ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
 
-            while (true) {
-                Message receivedMessage = (Message) inputStream.readObject();
-
-                System.out.println("Received message: " + receivedMessage.getContent());
-            }
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         iServices = new DefaultServices();
         try {
-            loggedUser = iServices.getUser(loggedUserId);
             conversations.setAll(iServices.getConversations());
-            selectedConversation  = iServices.getConversation(21);
+            selectedConversation  = (Conversation) (iServices.getConversations()).get(0);
+            loggedUser = iServices.getUser(loggedUserId);
             messages.setAll(selectedConversation.getMessages());
             getConversations();
             displayMessages();
-            conversationReceiver.setText(selectedConversation.getReceiver().getUsername());
+            if(selectedConversation.getSender().getUid()==loggedUserId) {
+                conversationReceiver.setText(selectedConversation.getReceiver().getUsername());
+            }else{
+                conversationReceiver.setText(selectedConversation.getSender().getUsername());
+            }
+            startMessageReceiver();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
+    }
 
+    private void startMessageReceiver() {
+        Runnable r = () -> {
+            while (true) {
+                try {
+                    ObjectInputStream objectInputStream = new ObjectInputStream(MainApplication.socket.getInputStream());
+                    Message receivedMsg = (Message) objectInputStream.readObject();
+                    Platform.runLater(this::getMessages);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        };
+        new Thread(r).start();
+    }
+
+    public IServices getiServices() {
+        return iServices;
+    }
+
+    public void setiServices(IServices iServices) {
+        this.iServices = iServices;
+    }
+
+    public Socket getSocket() {
+        return socket;
+    }
+
+    public void setSocket(Socket socket) {
+        this.socket = socket;
+    }
+
+    public void setConversations(ObservableList<Conversation> conversations) {
+        this.conversations = conversations;
+    }
+
+    public VBox getVboxConversations() {
+        return vboxConversations;
+    }
+
+    public void setVboxConversations(VBox vboxConversations) {
+        this.vboxConversations = vboxConversations;
+    }
+
+    public VBox getVboxMessages() {
+        return vboxMessages;
+    }
+
+    public void setVboxMessages(VBox vboxMessages) {
+        this.vboxMessages = vboxMessages;
+    }
+
+    public Button getSendButton() {
+        return sendButton;
+    }
+
+    public void setSendButton(Button sendButton) {
+        this.sendButton = sendButton;
+    }
+
+    public TextField getInputMessage() {
+        return inputMessage;
+    }
+
+    public void setInputMessage(TextField inputMessage) {
+        this.inputMessage = inputMessage;
+    }
+
+    public Label getConversationReceiver() {
+        return conversationReceiver;
+    }
+
+    public void setConversationReceiver(Label conversationReceiver) {
+        this.conversationReceiver = conversationReceiver;
+    }
+
+    public ScrollPane getDivMessages() {
+        return divMessages;
+    }
+
+    public void setDivMessages(ScrollPane divMessages) {
+        this.divMessages = divMessages;
+    }
+
+    public ScrollPane getSidebar() {
+        return sidebar;
+    }
+
+    public void setSidebar(ScrollPane sidebar) {
+        this.sidebar = sidebar;
+    }
+
+    public Button getNewConversation() {
+        return newConversation;
+    }
+
+    public void setNewConversation(Button newConversation) {
+        this.newConversation = newConversation;
+    }
+
+    public Conversation getSelectedConversation() {
+        return selectedConversation;
+    }
+
+    public void setSelectedConversation(Conversation selectedConversation) {
+        this.selectedConversation = selectedConversation;
+    }
+
+    public long getLoggedUserId() {
+        return loggedUserId;
+    }
+
+    public void setLoggedUserId(long loggedUserId) {
+        this.loggedUserId = loggedUserId;
+    }
+
+    public User getLoggedUser() {
+        return loggedUser;
+    }
+
+    public void setLoggedUser(User loggedUser) {
+        this.loggedUser = loggedUser;
+    }
+
+    public void setMessages(ObservableList<Message> messages) {
+        this.messages = messages;
     }
 }
