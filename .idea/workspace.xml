@@ -4,21 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbbece3f-26c5-45a6-bc5d-8659ba58e500" name="Changes" comment="`feat` : add ChatThread.java">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/presentation/controllers/LoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/chatapp/fxml/Login.fxml" afterDir="false" />
+    <list default="true" id="fbbece3f-26c5-45a6-bc5d-8659ba58e500" name="Changes" comment="`feat` : send message works">
+      <change afterPath="$PROJECT_DIR$/amine.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/business/DefaultServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/business/DefaultServices.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/business/IServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/business/IServices.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/business/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/business/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/IUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/UserDaoJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/UserDaoJDBC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/presentation/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/presentation/controllers/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/presentation/controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/presentation/controllers/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/presentation/views/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/presentation/views/MainApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/server/ChatThread.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/server/ServerStart.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,7 +194,8 @@
       <workItem from="1703673800313" duration="2056000" />
       <workItem from="1703865451878" duration="17564000" />
       <workItem from="1703930535684" duration="1010000" />
-      <workItem from="1703931560807" duration="13200000" />
+      <workItem from="1703931560807" duration="15698000" />
+      <workItem from="1704047721185" duration="13619000" />
     </task>
     <task id="LOCAL-00001" summary="setup projects">
       <option name="closed" value="true" />
@@ -444,7 +437,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703675842906</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="`feat` : send message works">
+      <option name="closed" value="true" />
+      <created>1703945198270</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1703945198270</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -483,11 +484,11 @@
     <MESSAGE value="`fix` : fix conversation problem" />
     <MESSAGE value="`feat` : create labels dynamically" />
     <MESSAGE value="`fix` : change the get messages query" />
-    <MESSAGE value="`feat` : send message works" />
     <MESSAGE value="`feat` : add conversation works &amp; add server side" />
     <MESSAGE value="`feat` : add client &amp; server receive the message successfully" />
     <MESSAGE value="`feat` : manage message exchange" />
     <MESSAGE value="`feat` : add ChatThread.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="`feat` : add ChatThread.java" />
+    <MESSAGE value="`feat` : send message works" />
+    <option name="LAST_COMMIT_MESSAGE" value="`feat` : send message works" />
   </component>
 </project>

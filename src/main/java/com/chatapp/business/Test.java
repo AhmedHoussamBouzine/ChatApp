@@ -25,26 +25,26 @@ public class Test {
 //        }
 
   //    User user = iServices.getUser(6);
-//        User user = new User("abdelouahad", "String email", "String password", "String telephone");
-//        KeyPair keyPair = generateKeyPair();
-//        PublicKey publicKey = keyPair.getPublic();
-//        user.setPublicKey(publicKey);
-//        iServices.addUser(user);
+        User user = new User("amine", "String email", "String password", "String telephone");
+        KeyPair keyPair = generateKeyPair();
+        PublicKey publicKey = keyPair.getPublic();
+        user.setPublicKey(publicKey);
+        iServices.addUser(user);
 
 
 //
-        User user1 =  iServices.getUser(6);
-        User user2 =  iServices.getUser(7);
+//        User user1 =  iServices.getUser(6);
+//        User user2 =  iServices.getUser(7);
 //        Conversation conversation = iServices.getConversation(1);
 //        Message message = new Message(user1,user2,"hjkshdfs");
 //        message.setConversation(conversation);
 //        iServices.addMessage(message);
 
 //        iServices.deleteMessage(1);
-
-        Conversation conversation = new Conversation(user1,user2);
-        System.out.println(conversation);
-        iServices.addConversation(conversation);
+//
+//        Conversation conversation = new Conversation(user1,user2);
+//        System.out.println(conversation);
+//        iServices.addConversation(conversation);
 
 //       System.out.println(iServices.getConversation(1));
 

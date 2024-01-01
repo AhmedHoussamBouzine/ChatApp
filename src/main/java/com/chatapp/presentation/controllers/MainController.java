@@ -16,7 +16,11 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -24,6 +28,7 @@ import java.io.*;
 import java.net.Socket;
 import java.net.URL;
 import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -45,9 +50,9 @@ public class MainController implements Initializable {
     @FXML
     private ScrollPane sidebar;
     private Button newConversation = new Button("New");
-    private Conversation selectedConversation;
+    public static Conversation selectedConversation;
     public static long loggedUserId;
-    private  User loggedUser;
+    public static User loggedUser;
     private static final String SERVER_IP = "127.0.0.1";
     private static final int PORT = 9090;
 
@@ -117,14 +122,17 @@ public class MainController implements Initializable {
     public void sendMessage() throws Exception {
         socket = new Socket(SERVER_IP, PORT);
         Message message = new Message();
-        message.setContent(Message.encryptMessageContent(inputMessage.getText(),selectedConversation.getReceiver().getPublicKey()));
+
+//        if (selectedConversation.getSender().getUid()==loggedUserId) {
+            message.setReceiver(selectedConversation.getReceiver());
+            message.setContent(Message.encryptMessageContent(inputMessage.getText(),selectedConversation.getReceiver().getPublicKey()));
+//        }else{
+//            message.setReceiver(selectedConversation.getSender());
+//            message.setContent(Message.encryptMessageContent(inputMessage.getText(),selectedConversation.getSender().getPublicKey()));
+//        }
+
         message.setConversation(selectedConversation);
         message.setSender(loggedUser);
-        if (selectedConversation.getSender().getUid()==loggedUserId) {
-            message.setReceiver(selectedConversation.getReceiver());
-        }else{
-            message.setReceiver(selectedConversation.getSender());
-        }
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(MainApplication.socket.getOutputStream());
         try {
             objectOutputStream.writeObject(message);
@@ -148,19 +156,25 @@ public class MainController implements Initializable {
         try {
             selectedConversation.getMessages().clear();
             selectedConversation.setMessages(iServices.getMessagesByConversation(selectedConversation.getId()));
+
             if(!selectedConversation.getMessages().isEmpty()){
                 for (Message message: selectedConversation.getMessages()) {
+
                     PrivateKey privateKey = null;
+                    FileInputStream fileInputStream;
+                    String keyFileName = message.getReceiver().getUsername() + ".bin";
                     try {
-                        ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(message.getReceiver().getUsername()+".bin"));
+                        fileInputStream = new FileInputStream(keyFileName);
+                        ObjectInputStream inputStream = new ObjectInputStream(fileInputStream);
                         Object obj = inputStream.readObject();
                         if (obj instanceof PrivateKey) {
                             privateKey = (PrivateKey) obj;
                         } else {
                             System.out.println("Unexpected object type in file.");
                         }
+                        fileInputStream.close();
                     }catch (Exception e){
-
+                        e.printStackTrace();
                     }
                     String messageContent = Message.decryptMessageContent(message.getContent(),privateKey);
                     Label rowMessage = new Label(messageContent);
@@ -172,10 +186,17 @@ public class MainController implements Initializable {
                             "-fx-width: 100%;");
                     boolean isSentByLoggedUser = (message.getSender().getUid() == loggedUserId);
                     if (isSentByLoggedUser) {
-                        rowMessage.setStyle("-fx-font-size: 11px; -fx-text-fill: #333333; " +
-                                "-fx-font-weight: bold; -fx-alignment: center-right; " +
-                                "-fx-padding: 10px 0px;" +
-                                "-fx-width: 100%;");
+                        rowMessage.setStyle(
+                                "-fx-font-size: 11px; " +
+                                        "-fx-text-fill: #333333; " +
+                                        "-fx-font-weight: bold; " +
+                                        "-fx-padding: 10px 10px;" +
+                                        "-fx-alignment: center-right;"
+                        );
+
+                        BackgroundFill backgroundFill = new BackgroundFill(Color.LIGHTBLUE, new CornerRadii(8), Insets.EMPTY);
+                        Background background = new Background(backgroundFill);
+                        rowMessage.setBackground(background);
                     }
                     vboxMessages.getChildren().add(rowMessage);
                     vboxMessages.heightProperty().addListener((observable, oldValue, newValue) -> {
@@ -269,7 +290,6 @@ public class MainController implements Initializable {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
     }
 
     private void startMessageReceiver() {

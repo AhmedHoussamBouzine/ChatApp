@@ -2,6 +2,9 @@ package com.chatapp.server;
 
 import com.chatapp.beans.Message;
 import com.chatapp.beans.User;
+import com.chatapp.business.DefaultServices;
+import com.chatapp.business.IServices;
+import com.chatapp.presentation.controllers.MainController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +22,7 @@ public class Server {
     /* Setting up variables */
     private static final int PORT = 9090;
     static Logger logger = LoggerFactory.getLogger(Server.class);
-
+    static IServices services = new DefaultServices();
     public static void main(String[] args) throws Exception {
         logger.info("The chat server is running.");
         Map<String,Socket> users = new HashMap<>();
@@ -94,15 +97,30 @@ public class Server {
             }
         }
         private void sendMessage(Message message) {
-
-            Socket destSocket = users.get(message.getReceiver().getUsername());
-            try {
-                OutputStream outputStream = destSocket.getOutputStream();
-                ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-                objectOutputStream.writeObject(message);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            if (message.getSender().getUid() == message.getReceiver().getUid()){
+                users.keySet().forEach(key -> {
+                    if (!Objects.equals(key, message.getReceiver().getUsername())) {
+                        Socket destSocket = users.get(key);
+                        try {
+                            OutputStream outputStream = destSocket.getOutputStream();
+                            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+                            objectOutputStream.writeObject(message);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                });
+            }else{
+                Socket destSocket = users.get(message.getReceiver().getUsername());
+                try {
+                    OutputStream outputStream = destSocket.getOutputStream();
+                    ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+                    objectOutputStream.writeObject(message);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
+
         }
         public void run() {
             logger.info("Attempting to connect a user...");

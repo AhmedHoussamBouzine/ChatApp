@@ -55,6 +55,7 @@ public class LoginController {
             loggedUser = iServices.getUserByUsername(username);
             OutputStreamWriter input = new OutputStreamWriter(MainApplication.socket.getOutputStream());
             MainController.loggedUserId = loggedUser.getUid();
+            MainController.loggedUser = loggedUser;
             PrintWriter printWriter = new PrintWriter(input, true);
             printWriter.println(loggedUser.getUsername());
 
