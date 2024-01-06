@@ -120,7 +120,6 @@ public class Server {
                     throw new RuntimeException(e);
                 }
             }
-
         }
         public void run() {
             logger.info("Attempting to connect a user...");

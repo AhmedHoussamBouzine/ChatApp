@@ -14,9 +14,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="613.0" prefWrapLength="650.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chatapp.presentation.controllers.MainController">
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="447.0" prefWidth="800.0" prefWrapLength="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chatapp.presentation.controllers.MainController">
     <children>
-        <MenuBar prefHeight="22.0" prefWidth="613.0">
+        <MenuBar prefHeight="22.0" prefWidth="800.0">
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
@@ -35,29 +35,22 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="375.0" prefWidth="635.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="375.0" prefWidth="800.0">
             <children>
-                <ScrollPane fx:id="sidebar" hbarPolicy="NEVER" prefHeight="376.0" prefWidth="200.0">
+                <ScrollPane fx:id="sidebar" hbarPolicy="NEVER" prefHeight="426.0" prefWidth="200.0">
                     <content>
                         <VBox fx:id="vboxConversations" prefHeight="506.0" prefWidth="188.0" />
                     </content>
                 </ScrollPane>
-                <ScrollPane fx:id="divMessages" hbarPolicy="NEVER" layoutX="208.0" layoutY="57.0" prefHeight="246.0" prefWidth="378.0">
+                <ScrollPane fx:id="divMessages" hbarPolicy="NEVER" layoutX="208.0" layoutY="57.0" prefHeight="290.0" prefWidth="569.0">
                     <content>
-                        <VBox fx:id="vboxMessages" prefHeight="393.0" prefWidth="365.0" />
+                        <VBox fx:id="vboxMessages" prefHeight="292.0" prefWidth="554.0" style="-fx-border-radius: 10px;" />
                     </content>
                 </ScrollPane>
-                <HBox layoutX="208.0" layoutY="324.0" prefHeight="37.0" prefWidth="395.0">
+                <HBox layoutX="208.0" layoutY="363.0" prefHeight="50.0" prefWidth="569.0">
                <children>
-                  <TextField fx:id="inputMessage" prefHeight="26.0" prefWidth="277.0" style="-fx-border-radius: 30px;">
-                     <opaqueInsets>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </opaqueInsets>
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" />
-                     </HBox.margin>
-                  </TextField>
-                  <Button fx:id="sendButton" mnemonicParsing="false" onAction="#sendMessage" prefHeight="31.0" prefWidth="85.0" style="-fx-background-color: #B0C4DE; -fx-border-radius: 30px;" text="Send">
+                  <TextField prefHeight="32.0" prefWidth="495.0" style="-fx-background-color: transparent; -fx-border-color: #2196F3; -fx-border-width: 2px; -fx-border-radius: 8px;" />
+                  <Button fx:id="sendButton" mnemonicParsing="false" onAction="#sendMessage" prefHeight="33.0" prefWidth="56.0" style="-fx-background-color: #2196F3; -fx-background-radius: 10px;" text="Send" textFill="#fffdfd">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
@@ -66,8 +59,11 @@
                 </HBox>
                 <Label fx:id="conversationReceiver" layoutX="206.0" layoutY="7.0" prefHeight="37.0" prefWidth="378.0" textAlignment="CENTER" textFill="#088fdd">
                     <font>
-                        <Font name="Arial Black" size="23.0" />
+                        <Font name="Arial Black" size="20.0" />
                     </font>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
                 </Label>
             </children>
         </AnchorPane>

@@ -89,8 +89,8 @@ public class ConversationDaoJDBC  implements  IConversation{
         conversation.setName(resultSet.getString("name"));
         conversation.setSender(iServices.getUser(resultSet.getLong("senderId")));
         conversation.setReceiver(iServices.getUser(resultSet.getLong("receiverId")));
-        conversation.setInsertedAt(resultSet.getDate("insertedAt"));
-        conversation.setInsertedAt(resultSet.getDate("insertedAt"));
+        conversation.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
+        conversation.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
         String queryMessages = "Select * from messages where id = ?";
         PreparedStatement statementMessages=connection.prepareStatement(queryMessages);
         statementMessages.setLong(1, conversation.getId());
@@ -105,12 +105,12 @@ public class ConversationDaoJDBC  implements  IConversation{
             message.setSender(sender);
             message.setReceiver(receiver);
             message.setContent(resultSetMessages.getString("content"));
-            message.setInsertedAt(resultSet.getDate("insertedAt"));
-            message.setInsertedAt(resultSet.getDate("insertedAt"));
+            message.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
+            message.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
             messages.add(message);
         }
-        conversation.setInsertedAt(resultSet.getDate("insertedAt"));
-        conversation.setInsertedAt(resultSet.getDate("insertedAt"));
+        conversation.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
+        conversation.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
         conversation.setMessages(messages);
         return conversation;
     }
@@ -127,8 +127,8 @@ public class ConversationDaoJDBC  implements  IConversation{
         conversation.setName(resultSet.getString("name"));
         conversation.setSender(iServices.getUser(resultSet.getLong("senderId")));
         conversation.setReceiver(iServices.getUser(resultSet.getLong("receiverId")));
-        conversation.setInsertedAt(resultSet.getDate("insertedAt"));
-        conversation.setInsertedAt(resultSet.getDate("insertedAt"));
+        conversation.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
+        conversation.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
         String queryMessages = "Select * from messages where id = ?";
         PreparedStatement statementMessages=connection.prepareStatement(queryMessages);
         statementMessages.setLong(1, conversation.getId());
@@ -143,12 +143,12 @@ public class ConversationDaoJDBC  implements  IConversation{
             message.setSender(sender);
             message.setReceiver(receiver);
             message.setContent(resultSetMessages.getString("content"));
-            message.setInsertedAt(resultSet.getDate("insertedAt"));
-            message.setInsertedAt(resultSet.getDate("insertedAt"));
+            message.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
+            message.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
             messages.add(message);
         }
-        conversation.setInsertedAt(resultSet.getDate("insertedAt"));
-        conversation.setInsertedAt(resultSet.getDate("insertedAt"));
+        conversation.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
+        conversation.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
         conversation.setMessages(messages);
         return conversation;
     }
@@ -171,8 +171,8 @@ public class ConversationDaoJDBC  implements  IConversation{
             conversation.setName(resultSet.getString("name"));
             conversation.setSender(iServices.getUser(resultSet.getLong("senderId")));
             conversation.setReceiver(iServices.getUser(resultSet.getLong("receiverId")));
-            conversation.setInsertedAt(resultSet.getDate("insertedAt"));
-            conversation.setInsertedAt(resultSet.getDate("insertedAt"));
+            conversation.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
+            conversation.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
             String queryMessages = "Select * from messages where conversationId = ? ORDER BY insertedAt DESC;";
             PreparedStatement statementMessages=connection.prepareStatement(queryMessages);
             statementMessages.setLong(1, conversation.getId());
@@ -187,12 +187,12 @@ public class ConversationDaoJDBC  implements  IConversation{
                 message.setSender(sender);
                 message.setReceiver(receiver);
                 message.setContent(resultSetMessages.getString("content"));
-                message.setInsertedAt(resultSet.getDate("insertedAt"));
-                message.setInsertedAt(resultSet.getDate("insertedAt"));
+                message.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
+                message.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
                 messages.add(message);
             }
-            conversation.setInsertedAt(resultSet.getDate("insertedAt"));
-            conversation.setInsertedAt(resultSet.getDate("insertedAt"));
+            conversation.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
+            conversation.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
             conversation.setMessages(messages);
             conversations.add(conversation);
         }

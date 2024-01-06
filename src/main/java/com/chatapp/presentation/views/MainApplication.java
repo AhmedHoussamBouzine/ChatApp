@@ -23,17 +23,11 @@ public class MainApplication extends Application {
         Platform.setImplicitExit(true);
         FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("/com/chatapp/fxml/Login.fxml"));
         FXMLLoader mainControllerloader = new FXMLLoader(MainApplication.class.getResource("/com/chatapp/fxml/Main.fxml"));
-//        objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-//        objectInputStream = new ObjectInputStream(socket.getInputStream());
-//        MainController controller = mainControllerloader.getController();
-//        LoginController logincontroller = loader.getController();
-//        controller.setObjectOutputStream(objectOutputStream);
-//        controller.setObjectInputStream(objectInputStream);
+
         try {
             Parent root = loader.load();
-//            mainControllerloader.load();
-
             Scene scene = new Scene(root);
+            scene.getStylesheets().add(MainApplication.class.getResource("/com/chatapp/css/styles.css").toExternalForm());
             primaryStage.setScene(scene);
             primaryStage.setTitle("Login");
             primaryStage.show();

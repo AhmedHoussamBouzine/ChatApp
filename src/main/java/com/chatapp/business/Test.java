@@ -24,12 +24,13 @@ public class Test {
 //            System.out.println(user);
 //        }
 
-  //    User user = iServices.getUser(6);
-        User user = new User("amine", "String email", "String password", "String telephone");
-        KeyPair keyPair = generateKeyPair();
-        PublicKey publicKey = keyPair.getPublic();
-        user.setPublicKey(publicKey);
-        iServices.addUser(user);
+        User user = iServices.getUser(6);
+        System.out.println(user.getInsertedAt().getHour());
+//        User user = new User("amine", "String email", "String password", "String telephone");
+//        KeyPair keyPair = generateKeyPair();
+//        PublicKey publicKey = keyPair.getPublic();
+//        user.setPublicKey(publicKey);
+//        iServices.addUser(user);
 
 
 //

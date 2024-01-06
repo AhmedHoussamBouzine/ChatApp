@@ -102,7 +102,6 @@ public class MessageDaoJDBC implements IMessage{
             return null;
         Message message=new Message();
         message.setId(resultSet.getLong("id"));
-
         User sender = iServices.getUser(resultSet.getLong("senderId"));
         User receiver = iServices.getUser(resultSet.getLong("receiverId"));
         Conversation conversation = iServices.getConversation(resultSet.getLong("conversationId"));
@@ -110,8 +109,8 @@ public class MessageDaoJDBC implements IMessage{
         message.setReceiver( receiver );
         message.setConversation(conversation);
         message.setContent(resultSet.getString("content"));
-        message.setInsertedAt(resultSet.getDate("insertedAt"));
-        message.setInsertedAt(resultSet.getDate("insertedAt"));
+        message.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
+        message.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
         return message;
     }
 
@@ -138,8 +137,8 @@ public class MessageDaoJDBC implements IMessage{
             message.setReceiver( receiver );
             message.setConversation(conversation);
             message.setContent(resultSet.getString("content"));
-            message.setInsertedAt(resultSet.getDate("insertedAt"));
-            message.setInsertedAt(resultSet.getDate("insertedAt"));
+            message.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
+            message.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
             messages.add(message);
         }
         connection.close();
@@ -170,8 +169,8 @@ public class MessageDaoJDBC implements IMessage{
             message.setReceiver( receiver );
             message.setConversation(conversation);
             message.setContent(resultSet.getString("content"));
-            message.setInsertedAt(resultSet.getDate("insertedAt"));
-            message.setInsertedAt(resultSet.getDate("insertedAt"));
+            message.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
+            message.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
             messages.add(message);
         }
         connection.close();

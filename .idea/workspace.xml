@@ -4,13 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbbece3f-26c5-45a6-bc5d-8659ba58e500" name="Changes" comment="`feat` : send message works">
-      <change afterPath="$PROJECT_DIR$/amine.bin" afterDir="false" />
+    <list default="true" id="fbbece3f-26c5-45a6-bc5d-8659ba58e500" name="Changes" comment="`feat` : send message works successfully">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/chatapp/css/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/Conversation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/Conversation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/beans/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/business/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/business/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/presentation/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/presentation/controllers/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/ConversationDaoJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/ConversationDaoJDBC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/MessageDaoJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/MessageDaoJDBC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/UserDaoJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/dao/UserDaoJDBC.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/presentation/controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/presentation/controllers/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/presentation/views/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/presentation/views/MainApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/chatapp/fxml/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/chatapp/fxml/Login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/chatapp/fxml/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/chatapp/fxml/Main.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +31,7 @@
         <option value="Interface" />
         <option value="FxmlFile" />
         <option value="Class" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -64,6 +73,7 @@
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/houssam/Downloads/charm-glisten-4.4.1-javadoc.jar&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -195,7 +205,9 @@
       <workItem from="1703865451878" duration="17564000" />
       <workItem from="1703930535684" duration="1010000" />
       <workItem from="1703931560807" duration="15698000" />
-      <workItem from="1704047721185" duration="13619000" />
+      <workItem from="1704047721185" duration="14095000" />
+      <workItem from="1704536597889" duration="12875000" />
+      <workItem from="1704552734652" duration="5416000" />
     </task>
     <task id="LOCAL-00001" summary="setup projects">
       <option name="closed" value="true" />
@@ -445,7 +457,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703945198270</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="`feat` : send message works successfully">
+      <option name="closed" value="true" />
+      <created>1704067203730</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1704067203730</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -464,7 +484,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="`feat` : add connection to database" />
     <MESSAGE value="`fix` : update README.md" />
     <MESSAGE value="`fix` : HelloApplication.java remove mysql conn test" />
     <MESSAGE value="`feat` : DefaultServices's implementation using singleton added" />
@@ -489,6 +508,7 @@
     <MESSAGE value="`feat` : manage message exchange" />
     <MESSAGE value="`feat` : add ChatThread.java" />
     <MESSAGE value="`feat` : send message works" />
-    <option name="LAST_COMMIT_MESSAGE" value="`feat` : send message works" />
+    <MESSAGE value="`feat` : send message works successfully" />
+    <option name="LAST_COMMIT_MESSAGE" value="`feat` : send message works successfully" />
   </component>
 </project>

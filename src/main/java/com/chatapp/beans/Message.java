@@ -4,6 +4,7 @@ import javax.crypto.Cipher;
 import java.io.Serializable;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.Date;
 
@@ -11,8 +12,8 @@ public class Message implements Serializable {
     private long id;
     private User sender, receiver;
     private String content;
-    private Date insertedAt;
-    private Date updatedAt;
+    private LocalDateTime insertedAt;
+    private LocalDateTime updatedAt;
 
     private Conversation conversation;
 
@@ -23,20 +24,18 @@ public class Message implements Serializable {
         this.sender = sender;
         this.receiver = receiver;
         this.content = content;
-        this.insertedAt = new Date();
-        this.updatedAt = new Date();
 
     }
-    public Date getInsertedAt() {
+    public LocalDateTime getInsertedAt() {
         return insertedAt;
     }
-    public void setInsertedAt(Date insertedAt) {
+    public void setInsertedAt(LocalDateTime insertedAt) {
         this.insertedAt = insertedAt;
     }
-    public Date getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
     public long getId() {

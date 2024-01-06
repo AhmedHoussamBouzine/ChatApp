@@ -16,10 +16,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -29,6 +26,8 @@ import java.net.Socket;
 import java.net.URL;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -150,8 +149,7 @@ public class MainController implements Initializable {
 
     private void getMessages(){
         messages.clear();
-        vboxMessages.setStyle(" -fx-background-color: #ECEFF1; \n" +
-                "    -fx-width: 100%;\n");
+        vboxMessages.setStyle("-fx-background-color: #ECEFF1;");
         vboxMessages.getChildren().clear();
         try {
             selectedConversation.getMessages().clear();
@@ -176,29 +174,40 @@ public class MainController implements Initializable {
                     }catch (Exception e){
                         e.printStackTrace();
                     }
-                    String messageContent = Message.decryptMessageContent(message.getContent(),privateKey);
+                    String messageContent = Message.decryptMessageContent(message.getContent(),privateKey) ;
+                    String time = message.getInsertedAt().getHour() + ":" + message.getInsertedAt().getMinute();
+                    HBox hBox = new HBox();
+                    hBox.setPrefWidth(360);
+                    hBox.setPrefHeight(20);
+                    hBox.setPadding(new Insets(4, 0, 4, 0));
                     Label rowMessage = new Label(messageContent);
-                    rowMessage.setPrefWidth(360);
+                    Label labelTime = new Label(time);
                     rowMessage.setPrefHeight(20);
-                    rowMessage.setStyle("-fx-font-size: 11px; -fx-text-fill: #333333; " +
-                            "-fx-font-weight: bold; -fx-alignment: center-left; " +
-                            "-fx-padding: 10px 0px;" +
-                            "-fx-width: 100%;");
                     boolean isSentByLoggedUser = (message.getSender().getUid() == loggedUserId);
+                    rowMessage.setStyle("-fx-font-size: 11px; -fx-text-fill: #333333; " +
+                            "-fx-font-weight: bold;" +
+                            "-fx-padding: 10px 10px;"+
+                            "-fx-margin: 5px 5px;");
+                    labelTime.setStyle("-fx-font-size: 7px; -fx-text-fill: #333333; " +
+                            "-fx-font-weight: bold;" +
+                            "-fx-padding: 10px 2px;" +
+                            "-fx-text-alignment: center;");
                     if (isSentByLoggedUser) {
-                        rowMessage.setStyle(
-                                "-fx-font-size: 11px; " +
-                                        "-fx-text-fill: #333333; " +
-                                        "-fx-font-weight: bold; " +
-                                        "-fx-padding: 10px 10px;" +
-                                        "-fx-alignment: center-right;"
-                        );
-
-                        BackgroundFill backgroundFill = new BackgroundFill(Color.LIGHTBLUE, new CornerRadii(8), Insets.EMPTY);
+                        hBox.setAlignment(Pos.BASELINE_RIGHT);
+                        BackgroundFill backgroundFill = new BackgroundFill(Color.LIGHTGREEN, new CornerRadii(14), Insets.EMPTY);
                         Background background = new Background(backgroundFill);
                         rowMessage.setBackground(background);
+                        hBox.getChildren().add(rowMessage);
+                        hBox.getChildren().add(labelTime);
+                    }else{
+                        hBox.setAlignment(Pos.TOP_LEFT);
+                        BackgroundFill backgroundFill = new BackgroundFill(Color.WHITE, new CornerRadii(14), Insets.EMPTY);
+                        Background background = new Background(backgroundFill);
+                        rowMessage.setBackground(background);
+                        hBox.getChildren().add(labelTime);
+                        hBox.getChildren().add(rowMessage);
                     }
-                    vboxMessages.getChildren().add(rowMessage);
+                    vboxMessages.getChildren().add(hBox);
                     vboxMessages.heightProperty().addListener((observable, oldValue, newValue) -> {
                         divMessages.setVvalue(1.0); // Scroll to the bottom
                     });

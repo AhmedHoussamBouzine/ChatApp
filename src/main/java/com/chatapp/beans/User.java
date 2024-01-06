@@ -5,6 +5,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.security.*;
 import java.security.spec.X509EncodedKeySpec;
+import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.Date;
 
@@ -16,8 +17,8 @@ public class User implements Serializable {
     private PublicKey publicKey;
 
     byte[] derivedKey;
-    private Date insertedAt;
-    private Date updatedAt;
+    private LocalDateTime insertedAt;
+    private LocalDateTime updatedAt;
 
     public User() {
     }
@@ -106,19 +107,19 @@ public class User implements Serializable {
         return publicKey;
     }
 
-    public Date getInsertedAt() {
+    public LocalDateTime getInsertedAt() {
         return insertedAt;
     }
 
-    public void setInsertedAt(Date insertedAt) {
+    public void setInsertedAt(LocalDateTime insertedAt) {
         this.insertedAt = insertedAt;
     }
 
-    public Date getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 

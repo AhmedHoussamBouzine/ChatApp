@@ -75,8 +75,8 @@ public class UserDaoJDBC implements IUser{
         user.setEmail(resultSet.getString("email"));
         user.setTelephone(resultSet.getString("telephone"));
         user.setPublicKeyFromString(resultSet.getString("publicKey"));
-        user.setInsertedAt(resultSet.getDate("insertedAt"));
-        user.setInsertedAt(resultSet.getDate("insertedAt"));
+        user.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
+        user.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
         return user;
     }
 
@@ -95,8 +95,8 @@ public class UserDaoJDBC implements IUser{
         user.setEmail(resultSet.getString("email"));
         user.setTelephone(resultSet.getString("telephone"));
         user.setPublicKeyFromString(resultSet.getString("publicKey"));
-        user.setInsertedAt(resultSet.getDate("insertedAt"));
-        user.setInsertedAt(resultSet.getDate("insertedAt"));
+        user.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
+        user.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
         return user;
     }
 
@@ -116,8 +116,8 @@ public class UserDaoJDBC implements IUser{
             user.setEmail(resultSet.getString("email"));
             user.setTelephone(resultSet.getString("telephone"));
             user.setPublicKeyFromString(resultSet.getString("publicKey"));
-            user.setInsertedAt(resultSet.getDate("insertedAt"));
-            user.setInsertedAt(resultSet.getDate("insertedAt"));
+            user.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
+            user.setInsertedAt(resultSet.getTimestamp("insertedAt").toLocalDateTime());
             users.add(user);
         }
         connection.close();
