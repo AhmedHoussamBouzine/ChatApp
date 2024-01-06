@@ -48,7 +48,7 @@ public class MainController implements Initializable {
     private ScrollPane divMessages;
     @FXML
     private ScrollPane sidebar;
-    private Button newConversation = new Button("New");
+    private Button newConversation = new Button("Start new conversation");
     public static Conversation selectedConversation;
     public static long loggedUserId;
     public static User loggedUser;
@@ -208,8 +208,16 @@ public class MainController implements Initializable {
 
     private void getConversations(){
         vboxConversations.setStyle("-fx-width: 100%;\n");
-        vboxConversations.setAlignment(Pos.CENTER);
         vboxConversations.getChildren().clear();
+        newConversation.setId("newConversation");
+        newConversation.setPrefWidth(188);
+        newConversation.setStyle("-fx-background-color: #2196F3; " +
+                "-fx-text-fill: #FFFFFF;" +
+                " -fx-font-weight: bold;" +
+                " -fx-font-size: 11px; " +
+                "-fx-padding: 10px 20px; " +
+                " -fx-border-color: #2196F3;");
+        vboxConversations.getChildren().add(newConversation);
         try {
             conversations.setAll(iServices.getConversations());
         } catch (Exception e) {
@@ -222,13 +230,15 @@ public class MainController implements Initializable {
             }else{
                 rowLabel = new Label(conversation.getSender().getUsername());
             }
+            rowLabel.setPrefWidth(188);
+
             rowLabel.setStyle(
                     "-fx-font-size: 11px; " +
                     "-fx-font-weight: bold;"+
-                    "-fx-border-width: 1px 0px 1px 0px; " +
-                    "-fx-padding: 10px 0px;"+
-                    "-fx-width: 100%;" +
-                    "-fx-border-color: #ECEFF1;" +
+                    "-fx-border-width: 0px 0px 1.3px 0px; " +
+                    "-fx-padding: 10px 20px;"+
+                    "-fx-width: 100%;"+
+                    "-fx-border-color: #2196F3;" +
                     "-fx-text-fill: #333333;"
             );
             rowLabel.setUserData(conversation.getId());
@@ -238,8 +248,6 @@ public class MainController implements Initializable {
         vboxConversations.heightProperty().addListener((observable, oldValue, newValue) -> {
             sidebar.setVvalue(1.0); // Scroll to the bottom
         });
-        newConversation.setId("newConversation");
-        vboxConversations.getChildren().add(newConversation);
     }
     public void displayMessages(){
         for (Node node : vboxConversations.getChildren()) {

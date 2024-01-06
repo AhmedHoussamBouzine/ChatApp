@@ -34,8 +34,8 @@ public class Test {
 
 
 //
-//        User user1 =  iServices.getUser(6);
-//        User user2 =  iServices.getUser(7);
+        User user1 =  iServices.getUser(6);
+        User user2 =  iServices.getUser(9);
 //        Conversation conversation = iServices.getConversation(1);
 //        Message message = new Message(user1,user2,"hjkshdfs");
 //        message.setConversation(conversation);
@@ -43,9 +43,9 @@ public class Test {
 
 //        iServices.deleteMessage(1);
 //
-//        Conversation conversation = new Conversation(user1,user2);
-//        System.out.println(conversation);
-//        iServices.addConversation(conversation);
+        Conversation conversation = new Conversation(user1,user2);
+        System.out.println(conversation);
+        iServices.addConversation(conversation);
 
 //       System.out.println(iServices.getConversation(1));
 
