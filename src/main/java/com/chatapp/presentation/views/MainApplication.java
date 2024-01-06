@@ -15,21 +15,16 @@ import java.net.Socket;
 
 public class MainApplication extends Application {
     public static Socket socket ;
-    public static ObjectOutputStream objectOutputStream ;
-    private static ObjectInputStream objectInputStream;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
         Platform.setImplicitExit(true);
         FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("/com/chatapp/fxml/Login.fxml"));
-        FXMLLoader mainControllerloader = new FXMLLoader(MainApplication.class.getResource("/com/chatapp/fxml/Main.fxml"));
-
         try {
             Parent root = loader.load();
             Scene scene = new Scene(root);
-            scene.getStylesheets().add(MainApplication.class.getResource("/com/chatapp/css/styles.css").toExternalForm());
             primaryStage.setScene(scene);
-            primaryStage.setTitle("Login");
+            primaryStage.setTitle("Login to ChatApp");
             primaryStage.show();
 
         } catch (IOException e) {

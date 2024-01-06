@@ -49,7 +49,7 @@
                 </ScrollPane>
                 <HBox layoutX="208.0" layoutY="363.0" prefHeight="50.0" prefWidth="569.0">
                <children>
-                  <TextField prefHeight="32.0" prefWidth="495.0" style="-fx-background-color: transparent; -fx-border-color: #2196F3; -fx-border-width: 2px; -fx-border-radius: 8px;" />
+                  <TextField fx:id="inputMessage" prefHeight="32.0" prefWidth="495.0" style="-fx-background-color: transparent; -fx-border-color: #2196F3; -fx-border-width: 2px; -fx-border-radius: 8px;" />
                   <Button fx:id="sendButton" mnemonicParsing="false" onAction="#sendMessage" prefHeight="33.0" prefWidth="56.0" style="-fx-background-color: #2196F3; -fx-background-radius: 10px;" text="Send" textFill="#fffdfd">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />

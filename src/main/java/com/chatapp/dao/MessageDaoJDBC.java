@@ -35,7 +35,6 @@ public class MessageDaoJDBC implements IMessage{
             statement.setLong(2, message.getReceiver().getUid());
             statement.setString(3, message.getContent());
             statement.setLong(4, message.getConversation().getId());
-
             statement.execute();
             connection.close();
             return message;
@@ -49,20 +48,12 @@ public class MessageDaoJDBC implements IMessage{
         Connection connection=mysqlSession.getConnection();
         String query="delete from messages where id = ?";
         PreparedStatement statement=connection.prepareStatement(query);
-        /*
-        //this code is replaced with the one bellow
-        statement.setLong(1, id);
-        statement.execute();
-        connection.close();
-        return true;
-        */
         try {
             statement.setLong(1, id);
             int rowsAffected = statement.executeUpdate();
 
             return rowsAffected > 0; // Return true if at least one row was deleted
         } catch (SQLException e) {
-            // Handle the exception, log it, or throw a custom exception
             throw new Exception("Error deleting message with ID " + id, e);
         } finally {
             statement.close();
@@ -96,7 +87,6 @@ public class MessageDaoJDBC implements IMessage{
         String query="select * from messages where id=?";
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setLong(1, id);
-
         ResultSet resultSet=statement.executeQuery();
         if(!resultSet.next())
             return null;
@@ -117,19 +107,15 @@ public class MessageDaoJDBC implements IMessage{
     @Override
     public List<Message> getMessages() throws Exception {
         IServices iServices = new DefaultServices();
-
         List<Message> messages=new ArrayList<Message>();
-
         Connection connection = mysqlSession.getConnection();
         String query = "Select * from messages";
         PreparedStatement statement=connection.prepareStatement(query);
         ResultSet resultSet=statement.executeQuery();
-
         while(resultSet.next())
         {
             Message message=new Message();
             message.setId(resultSet.getLong("id"));
-
             User sender = iServices.getUser(resultSet.getLong("senderId"));
             User receiver = iServices.getUser(resultSet.getLong("receiverId"));
             Conversation conversation = iServices.getConversation(resultSet.getLong("conversationId"));
@@ -148,20 +134,16 @@ public class MessageDaoJDBC implements IMessage{
     @Override
     public List<Message> getMessagesByConversation(long id) throws Exception {
         IServices iServices = new DefaultServices();
-
         List<Message> messages=new ArrayList<Message>();
-
         Connection connection = mysqlSession.getConnection();
         String query = "Select * from messages where conversationId = ?";
         PreparedStatement statement=connection.prepareStatement(query);
         statement.setLong(1, id);
         ResultSet resultSet=statement.executeQuery();
-
         while(resultSet.next())
         {
             Message message=new Message();
             message.setId(resultSet.getLong("id"));
-
             User sender = iServices.getUser(resultSet.getLong("senderId"));
             User receiver = iServices.getUser(resultSet.getLong("receiverId"));
             Conversation conversation = iServices.getConversation(resultSet.getLong("conversationId"));

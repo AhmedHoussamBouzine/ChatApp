@@ -12,8 +12,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.*;
+import java.util.Objects;
 
 public class LoginController {
     @FXML
@@ -24,13 +26,6 @@ public class LoginController {
     private Button loginButton;
     User loggedUser;
     private IServices iServices;
-    private ObjectInputStream objectInputStream;
-    private ObjectOutputStream objectOutputStream;
-
-    public void initStreams(ObjectInputStream inputStream, ObjectOutputStream outputStream) {
-        this.objectInputStream = inputStream;
-        this.objectOutputStream = outputStream;
-    }
 
     public LoginController() {
         iServices = new DefaultServices();
@@ -61,32 +56,32 @@ public class LoginController {
 
             if (loggedUser == null) {
                 return false;
+            } else {
+//                if (Objects.equals(loggedUser.getUsername(), username) && Objects.equals(loggedUser.getPassword(), BCrypt.hashpw(password, BCrypt.gensalt()))) {
+//                    return true;
+//                }
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
         return true;
     }
 
     private void openMainInterface(User loggedUser) {
         try {
-            // Load the MainInterface.fxml file
             FXMLLoader loader =  new FXMLLoader(MainApplication.class.getResource("/com/chatapp/fxml/Main.fxml"));
             Parent root = loader.load();
             MainController mainController = loader.getController();
 
-            // Set the logged-in user in the MainController
             mainController.setLoggedUser(loggedUser);
             mainController.setLoggedUserId(loggedUser.getUid());
 
             // Create a new stage for the main interface
             Stage mainStage = new Stage();
             mainStage.setScene(new Scene(root));
-            mainStage.setTitle("Main Interface");
+            mainStage.setTitle("ChatApp");
             mainStage.show();
 
-            // Close the login window (if needed)
             Stage loginStage = (Stage) usernameField.getScene().getWindow();
             loginStage.close();
         } catch (IOException e) {

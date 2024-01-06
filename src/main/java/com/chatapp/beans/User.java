@@ -15,7 +15,6 @@ public class User implements Serializable {
     private long uid ;
     private String username, email, password, telephone;
     private PublicKey publicKey;
-
     byte[] derivedKey;
     private LocalDateTime insertedAt;
     private LocalDateTime updatedAt;

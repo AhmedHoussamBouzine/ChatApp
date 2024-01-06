@@ -14,7 +14,6 @@ public class Message implements Serializable {
     private String content;
     private LocalDateTime insertedAt;
     private LocalDateTime updatedAt;
-
     private Conversation conversation;
 
     public Message() {
@@ -24,7 +23,6 @@ public class Message implements Serializable {
         this.sender = sender;
         this.receiver = receiver;
         this.content = content;
-
     }
     public LocalDateTime getInsertedAt() {
         return insertedAt;

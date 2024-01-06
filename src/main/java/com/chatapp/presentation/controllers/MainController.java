@@ -59,19 +59,17 @@ public class MainController implements Initializable {
 
     public void addConversation(){
         Stage formStage = new Stage();
-        formStage.initModality(Modality.APPLICATION_MODAL); // Block interactions with other windows
-        formStage.setTitle("Create new Conversation");
-
+        formStage.initModality(Modality.APPLICATION_MODAL); // Prevents user from accessing other windows
+        formStage.setTitle("Start new Conversation");
         VBox formRoot = new VBox(10);
         formRoot.setPadding(new Insets(20));
-
         ComboBox<User> comboBox = new ComboBox<>();
         try {
             comboBox.getItems().addAll(iServices.getUsers());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        Label label = new Label("Choose a receiver:");
+        Label label = new Label("Choose the receiver:");
         Button submitButton = new Button("Message");
 
         submitButton.setOnAction(e -> {
@@ -102,7 +100,7 @@ public class MainController implements Initializable {
 
         formRoot.getChildren().addAll(label, comboBox, submitButton);
 
-        Scene formScene = new Scene(formRoot, 300, 200);
+        Scene formScene = new Scene(formRoot, 200, 150);
         formStage.setScene(formScene);
         formStage.setOnShown(event -> formStage.centerOnScreen());
         formStage.showAndWait();
@@ -113,7 +111,6 @@ public class MainController implements Initializable {
             conversationReceiver.setText(selectedConversation.getSender().getUsername());
         }
         getMessages();
-        getMessages();
         getConversations();
         displayMessages();
     }
@@ -121,15 +118,8 @@ public class MainController implements Initializable {
     public void sendMessage() throws Exception {
         socket = new Socket(SERVER_IP, PORT);
         Message message = new Message();
-
-//        if (selectedConversation.getSender().getUid()==loggedUserId) {
-            message.setReceiver(selectedConversation.getReceiver());
-            message.setContent(Message.encryptMessageContent(inputMessage.getText(),selectedConversation.getReceiver().getPublicKey()));
-//        }else{
-//            message.setReceiver(selectedConversation.getSender());
-//            message.setContent(Message.encryptMessageContent(inputMessage.getText(),selectedConversation.getSender().getPublicKey()));
-//        }
-
+        message.setReceiver(selectedConversation.getReceiver());
+        message.setContent(Message.encryptMessageContent(inputMessage.getText(),selectedConversation.getReceiver().getPublicKey()));
         message.setConversation(selectedConversation);
         message.setSender(loggedUser);
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(MainApplication.socket.getOutputStream());
@@ -138,8 +128,6 @@ public class MainController implements Initializable {
             objectOutputStream.flush();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-
         }
         inputMessage.clear();
         iServices.addMessage(message);
@@ -239,7 +227,9 @@ public class MainController implements Initializable {
                     "-fx-font-weight: bold;"+
                     "-fx-border-width: 1px 0px 1px 0px; " +
                     "-fx-padding: 10px 0px;"+
-                    "-fx-width: 100%;"
+                    "-fx-width: 100%;" +
+                    "-fx-border-color: #ECEFF1;" +
+                    "-fx-text-fill: #333333;"
             );
             rowLabel.setUserData(conversation.getId());
 

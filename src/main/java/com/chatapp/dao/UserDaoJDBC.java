@@ -103,7 +103,6 @@ public class UserDaoJDBC implements IUser{
     @Override
     public List<User> getUsers() throws Exception {
         List<User> users=new ArrayList<User>();
-
         Connection connection=mysqlSession.getConnection();
         String query="Select * from users";
         PreparedStatement statement=connection.prepareStatement(query);
