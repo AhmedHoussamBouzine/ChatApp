@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbbece3f-26c5-45a6-bc5d-8659ba58e500" name="Changes" comment="`refactor` : refactoring">
+    <list default="true" id="fbbece3f-26c5-45a6-bc5d-8659ba58e500" name="Changes" comment="`fix` : fix some designs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/business/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/business/Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/presentation/controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/presentation/controllers/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chatapp/server/Handler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chatapp/server/Handler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,7 +196,7 @@
       <workItem from="1703931560807" duration="15698000" />
       <workItem from="1704047721185" duration="14095000" />
       <workItem from="1704536597889" duration="12875000" />
-      <workItem from="1704552734652" duration="10416000" />
+      <workItem from="1704552734652" duration="15249000" />
     </task>
     <task id="LOCAL-00001" summary="setup projects">
       <option name="closed" value="true" />
@@ -471,7 +470,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704575993208</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="`fix` : fix some designs">
+      <option name="closed" value="true" />
+      <created>1704577536268</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1704577536268</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -490,7 +497,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="`feat` : DefaultServices's implementation using singleton added" />
     <MESSAGE value="`fix` : update .gitignore" />
     <MESSAGE value="`feat` : add DI" />
     <MESSAGE value="`feat` : add encrypt and decrypt methods" />
@@ -515,6 +521,7 @@
     <MESSAGE value="`feat` : send message works successfully" />
     <MESSAGE value="`fix` : fix designs" />
     <MESSAGE value="`refactor` : refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="`refactor` : refactoring" />
+    <MESSAGE value="`fix` : fix some designs" />
+    <option name="LAST_COMMIT_MESSAGE" value="`fix` : fix some designs" />
   </component>
 </project>

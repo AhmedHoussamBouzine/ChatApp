@@ -21,11 +21,11 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.crypto.KeyAgreement;
 import java.io.*;
 import java.net.Socket;
 import java.net.URL;
-import java.security.PrivateKey;
-import java.security.PublicKey;
+import java.security.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
@@ -122,6 +122,7 @@ public class MainController implements Initializable {
         message.setContent(Message.encryptMessageContent(inputMessage.getText(),selectedConversation.getReceiver().getPublicKey()));
         message.setConversation(selectedConversation);
         message.setSender(loggedUser);
+        performKeyExchange(message.getSender(), message.getReceiver());
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(MainApplication.socket.getOutputStream());
         try {
             objectOutputStream.writeObject(message);
@@ -314,6 +315,35 @@ public class MainController implements Initializable {
             }
         };
         new Thread(r).start();
+    }
+    private static void performKeyExchange(User sender, User receiver) throws Exception {
+        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("DH");
+        keyPairGenerator.initialize(2048); // Adjust key size as needed
+
+        KeyPair senderKeyPair = keyPairGenerator.generateKeyPair();
+        KeyPair receiverKeyPair = keyPairGenerator.generateKeyPair();
+
+        KeyAgreement senderKeyAgreement = KeyAgreement.getInstance("DH");
+        senderKeyAgreement.init(senderKeyPair.getPrivate());
+        senderKeyAgreement.doPhase(receiverKeyPair.getPublic(), true);
+
+        KeyAgreement receiverKeyAgreement = KeyAgreement.getInstance("DH");
+        receiverKeyAgreement.init(receiverKeyPair.getPrivate());
+        receiverKeyAgreement.doPhase(senderKeyPair.getPublic(), true);
+
+        byte[] senderSharedSecret = senderKeyAgreement.generateSecret();
+        byte[] receiverSharedSecret = receiverKeyAgreement.generateSecret();
+
+        byte[] senderDerivedKey = performKDF(senderSharedSecret);
+        byte[] receiverDerivedKey = performKDF(receiverSharedSecret);
+
+        sender.setDerivedKey(senderDerivedKey);
+        receiver.setDerivedKey(receiverDerivedKey);
+    }
+
+    private static byte[] performKDF(byte[] sharedSecret) throws Exception {
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        return digest.digest(sharedSecret);
     }
 
     public IServices getiServices() {

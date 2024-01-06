@@ -77,7 +77,6 @@ public class Handler extends Thread{
                     System.out.println(inputStream);
                     ois = new ObjectInputStream(inputStream);
                     Message message = (Message) ois.readObject();
-                    performKeyExchange(message.getSender(), message.getReceiver());
                     logger.info("Received message from user: " + message.getSender().getUsername() + message.getContent());
                     sendMessage(message);
                 }
@@ -85,38 +84,6 @@ public class Handler extends Thread{
                 logger.error("Exception in run() method for user: " + name, e);
             }
         }
-    private static void performKeyExchange(User sender, User receiver) throws Exception {
-        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("DH");
-        keyPairGenerator.initialize(2048); // Adjust key size as needed
 
-        KeyPair senderKeyPair = keyPairGenerator.generateKeyPair();
-        KeyPair receiverKeyPair = keyPairGenerator.generateKeyPair();
-
-        KeyAgreement senderKeyAgreement = KeyAgreement.getInstance("DH");
-        senderKeyAgreement.init(senderKeyPair.getPrivate());
-        senderKeyAgreement.doPhase(receiverKeyPair.getPublic(), true);
-
-        KeyAgreement receiverKeyAgreement = KeyAgreement.getInstance("DH");
-        receiverKeyAgreement.init(receiverKeyPair.getPrivate());
-        receiverKeyAgreement.doPhase(senderKeyPair.getPublic(), true);
-
-        byte[] senderSharedSecret = senderKeyAgreement.generateSecret();
-        byte[] receiverSharedSecret = receiverKeyAgreement.generateSecret();
-
-        // Use a key derivation function (KDF) ratchet here (e.g., HKDF) to derive keys
-        byte[] senderDerivedKey = performKDF(senderSharedSecret);
-        byte[] receiverDerivedKey = performKDF(receiverSharedSecret);
-
-        // Store derived keys in sender and receiver objects
-        sender.setDerivedKey(senderDerivedKey);
-        receiver.setDerivedKey(receiverDerivedKey);
-    }
-
-    private static byte[] performKDF(byte[] sharedSecret) throws Exception {
-        // Implement a Key Derivation Function (KDF) here (e.g., HKDF)
-        // Example using a simple hash function (SHA-256)
-        MessageDigest digest = MessageDigest.getInstance("SHA-256");
-        return digest.digest(sharedSecret);
-    }
 
 }
